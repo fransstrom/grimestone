@@ -20,4 +20,5 @@ class BattleLogicTest {
     @Test
     void attack() {
     }
+
 }
