@@ -10,6 +10,13 @@ import static org.mockito.Mockito.*;
 
 class GameEngineTest{
 
+    GameEngine gameEngine;
+
+    @BeforeAll
+    void SetUp(){
+        gameEngine = new GameEngine();
+    }
+
     @Test
     void setUpNewGame(){
         Player player1 = mock(Player.class);

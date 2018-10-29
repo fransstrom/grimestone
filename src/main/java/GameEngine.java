@@ -1,4 +1,7 @@
 public class GameEngine {
+    private Player player1;
+    private Player player2;
+
     private boolean gameOver;
 
     public GameEngine() {
@@ -23,8 +26,8 @@ public class GameEngine {
     }
 
     public void setUpNewGame() {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        player1 = new Player();
+        player2 = new Player();
         player1.drawInitialHand();
         player2.drawInitialHand();
 
