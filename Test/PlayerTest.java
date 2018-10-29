@@ -37,6 +37,8 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
+        assertTrue( player1.deckIsEmpty());
+
     }
 
     @Test
