@@ -2,17 +2,17 @@ import java.util.ArrayList;
 
 public class Player {
     private int hp;
-   private ArrayList<Card> hand;
-   private ArrayList<Card> deck;
-   private ArrayList<Card> graveyard;
-   private ArrayList<Card> table;
+    private ArrayList<Card> hand;
+    private ArrayList<Card> deck;
+    private ArrayList<Card> graveyard;
+    private ArrayList<Card> table;
 
     public Player() {
         this.hp = 10;
-        this.hand = new ArrayList<Card>( );
-        this.deck = new ArrayList<Card>(  );
-        this.graveyard = new ArrayList<Card>(  );
-        this.table = new ArrayList<Card>(  );
+        this.hand = new ArrayList<Card>();
+        this.deck = new ArrayList<Card>();
+        this.graveyard = new ArrayList<Card>();
+        this.table = new ArrayList<Card>();
     }
 
     public boolean isAlive() {
@@ -36,9 +36,9 @@ public class Player {
     }
 
     public boolean drawCard() {
-        if(getDeck().size() == 0){
+        if (getDeck().size() == 0) {
             return false;
-        }else{
+        } else {
             hand.add(deck.get(1));
             deck.remove(1);
             return true;

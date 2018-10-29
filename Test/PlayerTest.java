@@ -19,16 +19,16 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player1=new Player();
+        player1 = new Player();
     }
 
     @Test
     void isAlive() {
-        assertTrue( player1.isAlive() );
-        player1.setHp( 0 );
-        assertFalse( player1.isAlive());
-        player1.setHp( 5 );
-        assertTrue( player1.isAlive() );
+        assertTrue(player1.isAlive());
+        player1.setHp(0);
+        assertFalse(player1.isAlive());
+        player1.setHp(5);
+        assertTrue(player1.isAlive());
     }
 
     @Test
@@ -64,7 +64,7 @@ class PlayerTest {
     }
 
     @Test
-    void drawCardWhenDeckIsEmpty(){
+    void drawCardWhenDeckIsEmpty() {
         assertEquals(0, player1.getDeck().size());
 
         player1.drawCard();
@@ -79,6 +79,14 @@ class PlayerTest {
 
     @Test
     void drawInitialHand() {
+        for (int i = 0; i < 10; i++) {
+            player1.getDeck().add(card);
+        }
+        assertEquals(10, player1.getDeck().size());
+        assertEquals(0, player1.getHand().size());
+        player1.drawInitialHand();
+        assertEquals(5, player1.getHand().size());
+        assertEquals(5, player1.getDeck().size());
     }
 
     @Test
