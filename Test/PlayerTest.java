@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -13,22 +14,9 @@ class PlayerTest {
 
     private Player player1;
 
-    @Mock
-    ArrayList<Card> handMock;
-    @Mock
-    ArrayList<Card> deckMock;
-    @Mock
-    ArrayList<Card> graveyardMock;
-    @Mock
-    ArrayList<Card> tableMock;
-
     @BeforeEach
     void setUp() {
         player1=new Player();
-        player1.setGraveyard(graveyardMock);
-        player1.setDeck(deckMock);
-        player1.setHand(handMock);
-        player1.setTable(tableMock);
     }
 
     @Test
