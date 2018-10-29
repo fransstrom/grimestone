@@ -20,10 +20,8 @@ public class Player {
     }
 
     public boolean deckIsEmpty() {
-        if (deck.isEmpty()) {
-            return true;
-        }
-        return false;
+        return (deck.isEmpty());
+
     }
 
     public boolean tableIsEmpty() {
