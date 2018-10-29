@@ -31,12 +31,12 @@ public class Player {
 
     }
 
-    public boolean placeCardOnTable() {
-        if (getHand().size() == 0) {
+    public boolean placeCardOnTable(int indexOfCard) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size()) {
             return false;
         } else {
-            this.table.add(hand.get(0));
-            hand.remove(0);
+            this.table.add(hand.get(indexOfCard));
+            hand.remove(indexOfCard);
             return true;
         }
     }
