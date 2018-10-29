@@ -9,10 +9,10 @@ public class Player {
 
     public Player() {
         this.hp = 10;
-        this.hand = new ArrayList<Card>( );
-        this.deck = new ArrayList<Card>(  );
-        this.graveyard = new ArrayList<Card>(  );
-        this.table = new ArrayList<Card>(  );
+        this.hand = new ArrayList<Card>();
+        this.deck = new ArrayList<Card>();
+        this.graveyard = new ArrayList<Card>();
+        this.table = new ArrayList<Card>();
     }
 
     public boolean isAlive() {
@@ -43,7 +43,7 @@ public class Player {
     }
 
     public boolean drawCard() {
-        if(getDeck().size() == 0){
+        if (getDeck().size() == 0) {
             return false;
         }else{
             hand.add(deck.get(0));
@@ -53,7 +53,10 @@ public class Player {
     }
 
     public void drawInitialHand() {
-
+        for (int i = 0; i < 5; i++) {
+            hand.add(deck.get(deck.size() - 1));
+            deck.remove((deck.size() - 1));
+        }
     }
 
     public void generateDeck() {
