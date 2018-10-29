@@ -45,18 +45,21 @@ class PlayerTest {
 
     @Test
     void placeCardOnTable() {
+        int index = 0;
+
         assertEquals(0, player1.getHand().size());
         player1.placeCardOnTable();
-        assertTrue(player1.getHand().isEmpty());
-        assertTrue(player1.getTable().isEmpty());
+        assertEquals(0, player1.getTable().size());
+        assertEquals(0, player1.getHand().size());
         assertFalse(player1.placeCardOnTable());
 
         player1.getHand().add(card);
         assertEquals(1, player1.getHand().size());
-        player1.placeCardOnTable();
+        assertTrue(player1.placeCardOnTable());
         assertEquals(1, player1.getTable().size());
         assertEquals(0, player1.getHand().size());
-        assertTrue(player1.placeCardOnTable());
+        assertFalse(player1.placeCardOnTable());
+
     }
 
     @Test
