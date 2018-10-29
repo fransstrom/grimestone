@@ -36,6 +36,8 @@ class PlayerTest {
         assertTrue( player1.isAlive() );
         player1.setHp( 0 );
         assertFalse( player1.isAlive());
+        player1.setHp( 5 );
+        assertTrue( player1.isAlive() );
     }
 
     @Test
