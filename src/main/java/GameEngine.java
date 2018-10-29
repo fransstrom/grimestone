@@ -23,6 +23,10 @@ public class GameEngine {
     }
 
     public void setUpNewGame() {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.drawInitialHand();
+        player2.drawInitialHand();
 
     }
 
