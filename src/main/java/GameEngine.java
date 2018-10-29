@@ -8,6 +8,7 @@ public class GameEngine {
         player1 = new Player();
         player2 = new Player();
         this.gameOver = false;
+
     }
 
     public GameEngine(Player p1, Player p2) {
@@ -47,10 +48,22 @@ public class GameEngine {
     }
 
     public Player getActivePlayer() {
+        randomGenerateFirstActivePlayer();
         if (player1.isActive()) {
             return player1;
         } else {
             return player2;
+        }
+    }
+
+    private void randomGenerateFirstActivePlayer() {
+        if (!player1.isActive() && !player2.isActive()) {
+            int lottery = RandomNumberGenerator.roll();
+            if ((lottery % 2) == 0) {
+                player1.setActive(true);
+            } else if ((lottery % 2) != 0) {
+                player2.setActive(true);
+            }
         }
     }
 }
