@@ -12,7 +12,7 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return false;
+        return true;
     }
 
     public boolean deckIsEmpty() {
