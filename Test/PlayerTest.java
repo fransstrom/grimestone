@@ -34,6 +34,9 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
+        assertTrue( player1.deckIsEmpty() );
+        player1.getDeck().add( card );
+        assertFalse(player1.deckIsEmpty());
     }
 
     @Test
