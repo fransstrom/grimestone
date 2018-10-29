@@ -83,9 +83,13 @@ class PlayerTest {
             player1.getDeck().add(card);
         }
         assertEquals(10, player1.getDeck().size());
+
         assertEquals(0, player1.getHand().size());
+
         player1.drawInitialHand();
+
         assertEquals(5, player1.getHand().size());
+        
         assertEquals(5, player1.getDeck().size());
     }
 

@@ -46,7 +46,10 @@ public class Player {
     }
 
     public void drawInitialHand() {
-
+        for (int i = 0; i < 5; i++) {
+            hand.add(deck.get(deck.size() - 1));
+            deck.remove((deck.size() - 1));
+        }
     }
 
     public void generateDeck() {
