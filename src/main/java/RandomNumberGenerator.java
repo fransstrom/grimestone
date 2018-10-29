@@ -1,13 +1,10 @@
 import java.util.Random;
 
 public abstract class RandomNumberGenerator {
-    private Random random;
 
+    private static Random random = new Random();
 
     public static int roll() {
-        return 0;
+        return random.nextInt(10) + 1;
     }
-
-
-
 }

@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class RandomNumberGeneratorTest {
@@ -11,5 +10,7 @@ class RandomNumberGeneratorTest {
 
     @Test
     void roll() {
+        int randomNum = RandomNumberGenerator.roll();
+        assertTrue(randomNum > 0 && randomNum <= 10);
     }
 }
