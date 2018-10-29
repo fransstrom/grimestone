@@ -51,6 +51,7 @@ class PlayerTest {
         Mockito.when(creatureCard.getHp()).thenReturn(0);
         player1.moveDeadCardToGraveyard();
         assertFalse(player1.getGraveyard().isEmpty());
+        assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
     @Test
