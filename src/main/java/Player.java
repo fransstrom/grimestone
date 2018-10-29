@@ -20,11 +20,11 @@ public class Player {
     }
 
     public boolean deckIsEmpty() {
-        return false;
+        return (deck.isEmpty());
     }
 
     public boolean tableIsEmpty() {
-        return false;
+        return this.table.isEmpty();
     }
 
     public void moveDeadCardToGraveyard() {
@@ -38,9 +38,9 @@ public class Player {
     public boolean drawCard() {
         if (getDeck().size() == 0) {
             return false;
-        } else {
-            hand.add(deck.get(1));
-            deck.remove(1);
+        }else{
+            hand.add(deck.get(0));
+            deck.remove(0);
             return true;
         }
     }
@@ -60,7 +60,7 @@ public class Player {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp( int hp ) {
         this.hp = hp;
     }
 
@@ -68,7 +68,7 @@ public class Player {
         return hand;
     }
 
-    public void setHand(ArrayList<Card> hand) {
+    public void setHand( ArrayList<Card> hand ) {
         this.hand = hand;
     }
 
@@ -76,7 +76,7 @@ public class Player {
         return deck;
     }
 
-    public void setDeck(ArrayList<Card> deck) {
+    public void setDeck( ArrayList<Card> deck ) {
         this.deck = deck;
     }
 
@@ -84,7 +84,7 @@ public class Player {
         return graveyard;
     }
 
-    public void setGraveyard(ArrayList<Card> graveyard) {
+    public void setGraveyard( ArrayList<Card> graveyard ) {
         this.graveyard = graveyard;
     }
 
@@ -92,7 +92,7 @@ public class Player {
         return table;
     }
 
-    public void setTable(ArrayList<Card> table) {
+    public void setTable( ArrayList<Card> table ) {
         this.table = table;
     }
 }

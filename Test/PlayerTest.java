@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerTest {
@@ -33,10 +34,16 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
+        assertTrue( player1.deckIsEmpty() );
+        player1.getDeck().add( card );
+        assertFalse(player1.deckIsEmpty());
     }
 
     @Test
     void tableIsEmpty() {
+        assertTrue(player1.tableIsEmpty());
+        player1.getTable().add(card);
+        assertFalse(player1.tableIsEmpty());
     }
 
     @Test
