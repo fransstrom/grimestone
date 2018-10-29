@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import java.util.Random;
 
@@ -11,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BattleLogicTest {
 
-    @Mock
-    Card card;
+    @Spy
+    Card card = new CreatureCard(10);
 
-    @Mock
-    Player player;
+    @Spy
+    Player player = new Player();
 
 
     private BattleLogic battleLogic;
@@ -23,17 +24,13 @@ class BattleLogicTest {
     @BeforeEach
     void setUp() {
         battleLogic = new BattleLogic();
-        player = mock(Player.class);
-        card = mock(CreatureCard.class);
     }
 
     @Test
     void cardVsPlayer() {
-        battleLogic.setAttackingCard(card);
-        battleLogic.setDefendingPlayer(player);
-        //when(battleLogic.getDefendingPlayer().getHp()).thenReturn(10);
-        System.out.println(player.getHp());
-
+        player.setHp(10);
+        battleLogic.cardVsPlayer(card, player);
+        assertTrue(player.getHp()<10);
     }
 
     @Test
