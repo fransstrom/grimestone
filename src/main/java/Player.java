@@ -24,7 +24,7 @@ public class Player {
     }
 
     public boolean tableIsEmpty() {
-        return false;
+        return this.table.isEmpty();
     }
 
     public void moveDeadCardToGraveyard() {
