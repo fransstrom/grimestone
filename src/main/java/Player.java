@@ -39,8 +39,8 @@ public class Player {
         if(getDeck().size() == 0){
             return false;
         }else{
-            hand.add(deck.get(1));
-            deck.remove(1);
+            hand.add(deck.get(0));
+            deck.remove(0);
             return true;
         }
     }
