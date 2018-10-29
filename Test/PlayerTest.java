@@ -16,6 +16,8 @@ class PlayerTest {
 
     @Mock
     private Card card;
+    @Mock
+    private CreatureCard creatureCard;
 
     @BeforeEach
     void setUp() {
