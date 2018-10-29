@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -37,9 +38,10 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
-        assertTrue( player1.deckIsEmpty());
-        
-
+        Mockito.when(deckMock.isEmpty()).thenReturn( false );
+        assertFalse( player1.deckIsEmpty());
+        Mockito.when( deckMock.isEmpty() ).thenReturn( true );
+        assertTrue( player1.deckIsEmpty() );
     }
 
     @Test
