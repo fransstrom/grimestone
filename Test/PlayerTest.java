@@ -14,6 +14,9 @@ class PlayerTest {
 
     private Player player1;
 
+    @Mock
+    private Card card;
+
     @BeforeEach
     void setUp() {
         player1=new Player();
