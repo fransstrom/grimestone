@@ -17,6 +17,8 @@ class PlayerTest {
 
     @Mock
     private Card card;
+    @Mock
+    private CreatureCard creatureCard;
 
     @BeforeEach
     void setUp() {
@@ -48,6 +50,15 @@ class PlayerTest {
 
     @Test
     void moveDeadCardToGraveyard() {
+        assertTrue(player1.getGraveyard().isEmpty());
+        player1.getTable().add(creatureCard);
+        Mockito.when(creatureCard.getHp()).thenReturn(5);
+        player1.moveDeadCardToGraveyard();
+        assertTrue(player1.getGraveyard().isEmpty());
+        Mockito.when(creatureCard.getHp()).thenReturn(0);
+        player1.moveDeadCardToGraveyard();
+        assertFalse(player1.getGraveyard().isEmpty());
+        assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
     @Test
