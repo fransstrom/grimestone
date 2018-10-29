@@ -28,7 +28,14 @@ public class Player {
     }
 
     public void moveDeadCardToGraveyard() {
-
+        ArrayList<Card> deadCards = new ArrayList<>();
+        for(Card card: this.table){
+            if(((CreatureCard)card).getHp() < 1){
+               deadCards.add(card);
+            }
+        }
+        this.table.removeAll(deadCards);
+        this.graveyard.addAll(deadCards);
     }
 
     public void placeCardOnTable() {
@@ -53,6 +60,9 @@ public class Player {
     }
 
     public void generateDeck() {
+        for (int i = 0; i < 10; i++) {
+            deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
+        }
 
     }
 

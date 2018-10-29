@@ -1,4 +1,5 @@
 public class CreatureCard extends Card {
+
     private boolean active;
     private int hp;
 
@@ -14,5 +15,13 @@ public class CreatureCard extends Card {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }
