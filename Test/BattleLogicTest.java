@@ -29,7 +29,7 @@ class BattleLogicTest {
 
     @Test
     void cardVsCard() {
-        //Nivek
+        //Kev
     }
 
     @Test
