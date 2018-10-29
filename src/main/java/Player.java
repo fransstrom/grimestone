@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class Player {
     private int hp;
-   private ArrayList<Card> hand;
-   private ArrayList<Card> deck;
-   private ArrayList<Card> graveyard;
-   private ArrayList<Card> table;
+    private ArrayList<Card> hand;
+    private ArrayList<Card> deck;
+    private ArrayList<Card> graveyard;
+    private ArrayList<Card> table;
 
     public Player() {
         this.hp = 10;
@@ -16,6 +16,9 @@ public class Player {
     }
 
     public boolean deckIsEmpty() {
+        if (deck.isEmpty()) {
+            return true;
+        }
         return false;
     }
 
@@ -47,7 +50,7 @@ public class Player {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp( int hp ) {
         this.hp = hp;
     }
 
@@ -55,7 +58,7 @@ public class Player {
         return hand;
     }
 
-    public void setHand(ArrayList<Card> hand) {
+    public void setHand( ArrayList<Card> hand ) {
         this.hand = hand;
     }
 
@@ -63,7 +66,7 @@ public class Player {
         return deck;
     }
 
-    public void setDeck(ArrayList<Card> deck) {
+    public void setDeck( ArrayList<Card> deck ) {
         this.deck = deck;
     }
 
@@ -71,7 +74,7 @@ public class Player {
         return graveyard;
     }
 
-    public void setGraveyard(ArrayList<Card> graveyard) {
+    public void setGraveyard( ArrayList<Card> graveyard ) {
         this.graveyard = graveyard;
     }
 
@@ -79,7 +82,7 @@ public class Player {
         return table;
     }
 
-    public void setTable(ArrayList<Card> table) {
+    public void setTable( ArrayList<Card> table ) {
         this.table = table;
     }
 }
