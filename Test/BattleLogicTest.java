@@ -1,12 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Spy;
 
-import java.util.Random;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +12,6 @@ class BattleLogicTest {
 
     @Spy
     Player player = new Player();
-
 
     private BattleLogic battleLogic;
 
