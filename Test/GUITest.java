@@ -9,12 +9,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class GUITest {
 
-    GUI gui;
+    private GUI gui;
 
     @Mock
-    GameEngine gameEngine;
+    private GameEngine gameEngine;
     @Mock
-    Player mockPlayer;
+    private Player mockPlayer;
 
     @BeforeEach
     void setUp() {
