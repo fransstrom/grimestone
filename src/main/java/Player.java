@@ -36,8 +36,10 @@ public class Player {
     }
 
     public boolean drawCard() {
-        
-        return false;
+        if(getDeck().size() == 0){
+            return false;
+        }
+        return true;
     }
 
     public void drawInitialHand() {
