@@ -16,7 +16,7 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return false;
+        return (this.hp > 0);
     }
 
     public boolean deckIsEmpty() {
