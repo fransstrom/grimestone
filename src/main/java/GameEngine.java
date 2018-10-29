@@ -5,6 +5,14 @@ public class GameEngine {
     private boolean gameOver;
 
     public GameEngine() {
+        player1 = new Player();
+        player2 = new Player();
+        this.gameOver = false;
+    }
+
+    public GameEngine(Player p1, Player p2) {
+        player1 = p1;
+        player2 = p2;
         this.gameOver = false;
     }
 
@@ -26,8 +34,6 @@ public class GameEngine {
     }
 
     public void setUpNewGame() {
-        player1 = new Player();
-        player2 = new Player();
         player1.drawInitialHand();
         player2.drawInitialHand();
 
