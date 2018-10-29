@@ -44,22 +44,29 @@ class PlayerTest {
     }
 
     @Test
-    void placeCardOnTable() {
-        int indexOfCard = 0;
-
+    void placeCardOnTableWhenHandIsNotEmpty() {
+        player1.getHand().add(card);
+        assertEquals(1, player1.getHand().size());
+        assertTrue(player1.placeCardOnTable(0));
+        assertEquals(1, player1.getTable().size());
         assertEquals(0, player1.getHand().size());
-        player1.placeCardOnTable(indexOfCard);
-        assertEquals(0, player1.getTable().size());
-        assertEquals(0, player1.getHand().size());
-        assertFalse(player1.placeCardOnTable(indexOfCard));
+        assertFalse(player1.placeCardOnTable(0));
 
         player1.getHand().add(card);
         assertEquals(1, player1.getHand().size());
-        assertTrue(player1.placeCardOnTable(indexOfCard));
-        assertEquals(1, player1.getTable().size());
-        assertEquals(0, player1.getHand().size());
-        assertFalse(player1.placeCardOnTable(indexOfCard));
+        assertFalse(player1.placeCardOnTable(3));
+        assertEquals(0, player1.getTable().size());
+        assertEquals(1, player1.getHand().size());
+    }
 
+    @Test
+    void placeCardOnTableWhenHandIsEmpty() {
+        assertEquals(0, player1.getHand().size());
+
+        assertFalse(player1.placeCardOnTable(0));
+
+        assertEquals(0, player1.getTable().size());
+        assertEquals(0, player1.getHand().size());
     }
 
     @Test
