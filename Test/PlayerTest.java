@@ -28,9 +28,10 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
-        assertTrue( player1.deckIsEmpty());
-        
-
+        Mockito.when(deckMock.isEmpty()).thenReturn( false );
+        assertFalse( player1.deckIsEmpty());
+        Mockito.when( deckMock.isEmpty() ).thenReturn( true );
+        assertTrue( player1.deckIsEmpty() );
     }
 
     @Test
