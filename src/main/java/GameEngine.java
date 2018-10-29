@@ -47,6 +47,10 @@ public class GameEngine {
     }
 
     public Player getActivePlayer() {
-      return null;
+        if (player1.isActive()) {
+            return player1;
+        } else {
+            return player2;
+        }
     }
 }
