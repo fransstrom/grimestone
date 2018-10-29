@@ -5,12 +5,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static com.sun.org.apache.bcel.internal.Repository.instanceOf;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class GameEngineTest{
+class GameEngineTest {
 
     GameEngine gameEngine;
     @Mock
@@ -19,15 +18,20 @@ class GameEngineTest{
     Player player2;
 
     @BeforeEach
-    void SetUp(){
+    void SetUp() {
         gameEngine = new GameEngine(player1, player2);
     }
 
     @Test
-    void setUpNewGame(){
+    void setUpNewGame() {
         gameEngine.setUpNewGame();
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();
     }
 
+    @Test
+    void getActivePlayer() {
+        when(player1.isActive()).thenReturn(true);
+        assertEquals(player1, gameEngine.getActivePlayer());
+    }
 }

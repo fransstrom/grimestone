@@ -36,7 +36,6 @@ public class GameEngine {
     public void setUpNewGame() {
         player1.drawInitialHand();
         player2.drawInitialHand();
-
     }
 
     public Player getPlayer1() {
@@ -45,5 +44,9 @@ public class GameEngine {
 
     public Player getPlayer2() {
         return player2;
+    }
+
+    public Player getActivePlayer() {
+      return null;
     }
 }
