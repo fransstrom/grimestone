@@ -46,17 +46,27 @@ class PlayerTest {
     @Test
     void placeCardOnTableWhenHandIsNotEmpty() {
         player1.getHand().add(card);
+
         assertEquals(1, player1.getHand().size());
         assertTrue(player1.placeCardOnTable(0));
         assertEquals(1, player1.getTable().size());
         assertEquals(0, player1.getHand().size());
         assertFalse(player1.placeCardOnTable(0));
 
+
+    }
+
+    @Test
+    void placeCardOnTableWhenIndexOutOfRange() {
         player1.getHand().add(card);
+
         assertEquals(1, player1.getHand().size());
         assertFalse(player1.placeCardOnTable(3));
         assertEquals(0, player1.getTable().size());
         assertEquals(1, player1.getHand().size());
+        assertTrue(player1.placeCardOnTable(0));
+        assertEquals(1, player1.getTable().size());
+        assertEquals(0, player1.getHand().size());
     }
 
     @Test
@@ -64,7 +74,6 @@ class PlayerTest {
         assertEquals(0, player1.getHand().size());
 
         assertFalse(player1.placeCardOnTable(0));
-
         assertEquals(0, player1.getTable().size());
         assertEquals(0, player1.getHand().size());
     }
