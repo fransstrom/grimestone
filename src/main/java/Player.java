@@ -9,6 +9,10 @@ public class Player {
 
     public Player() {
         this.hp = 10;
+        this.hand = new ArrayList<Card>( );
+        this.deck = new ArrayList<Card>(  );
+        this.graveyard = new ArrayList<Card>(  );
+        this.table = new ArrayList<Card>(  );
     }
 
     public boolean isAlive() {
@@ -31,8 +35,8 @@ public class Player {
 
     }
 
-    public void drawCard() {
-
+    public boolean drawCard() {
+        return false;
     }
 
     public void drawInitialHand() {
