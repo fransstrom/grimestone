@@ -11,7 +11,7 @@ public class BattleLogic {
     }
 
 
-    public void cardVsPlayer() {
+    public void cardVsPlayer(Card attackingCard, Player defendingPlayer) {
 
     }
 
