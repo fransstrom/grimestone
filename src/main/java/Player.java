@@ -35,8 +35,8 @@ public class Player {
 
     }
 
-    public void drawCard() {
-
+    public boolean drawCard() {
+        return false;
     }
 
     public void drawInitialHand() {
