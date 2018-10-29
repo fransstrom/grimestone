@@ -21,7 +21,6 @@ public class Player {
 
     public boolean deckIsEmpty() {
         return (deck.isEmpty());
-
     }
 
     public boolean tableIsEmpty() {

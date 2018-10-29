@@ -19,7 +19,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player1=new Player();
+        player1 = new Player();
     }
 
     @Test
@@ -28,10 +28,9 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
-        Mockito.when(deckMock.isEmpty()).thenReturn( false );
-        assertFalse( player1.deckIsEmpty());
-        Mockito.when( deckMock.isEmpty() ).thenReturn( true );
         assertTrue( player1.deckIsEmpty() );
+        player1.getDeck().add( card );
+        assertFalse(player1.deckIsEmpty());
     }
 
     @Test
