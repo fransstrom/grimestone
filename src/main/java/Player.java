@@ -38,8 +38,11 @@ public class Player {
     public boolean drawCard() {
         if(getDeck().size() == 0){
             return false;
+        }else{
+            hand.add(deck.get(1));
+            deck.remove(1);
+            return true;
         }
-        return true;
     }
 
     public void drawInitialHand() {
