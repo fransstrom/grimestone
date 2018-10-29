@@ -93,5 +93,6 @@ class PlayerTest {
         assertTrue( player1.getDeck().isEmpty() );
         player1.generateDeck();
         assertFalse( player1.getDeck().isEmpty() );
+        assertEquals( 10, player1.getDeck().size() );
     }
 }

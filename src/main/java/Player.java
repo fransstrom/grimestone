@@ -50,6 +50,9 @@ public class Player {
     }
 
     public void generateDeck() {
+        for (int i = 0; i < 10; i++) {
+            deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
+        }
 
     }
 
