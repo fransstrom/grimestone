@@ -44,6 +44,15 @@ class PlayerTest {
 
     @Test
     void drawCard() {
+        for (int i = 0; i < 10; i++) {
+            player1.getDeck().add(card);
+        }
+        assertEquals(10, player1.getDeck().size());
+
+        player1.drawCard();
+
+        assertEquals(1, player1.getHand().size());
+        assertEquals(9, player1.getDeck().size());
     }
 
     @Test
