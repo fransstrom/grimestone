@@ -33,6 +33,7 @@ class PlayerTest {
 
     @Test
     void isAlive() {
+        assertTrue( player1.isAlive() );
     }
 
     @Test
