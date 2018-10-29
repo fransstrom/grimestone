@@ -10,7 +10,8 @@ public class GUI {
     }
 
     public void printPlayerHP() {
-
+        System.out.println("Player 1 HP: " + gameEngine.getPlayer1().getHp());
+        System.out.println("Player 2 HP: " + gameEngine.getPlayer2().getHp());
     }
 
     public void printCardsInHand() {
