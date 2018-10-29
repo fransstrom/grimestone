@@ -64,6 +64,8 @@ class PlayerTest {
 
         player1.drawCard();
 
+        assertEquals(0, player1.getDeck().size());
+
         assertEquals(0, player1.getHand().size());
 
         assertFalse(player1.drawCard());
