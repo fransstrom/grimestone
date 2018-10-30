@@ -3,6 +3,13 @@ public class CreatureCard extends Card {
     private boolean active;
     private int hp;
 
+    public CreatureCard(){
+        super();
+        //Random HP from 1-7
+        this.hp = RandomNumberGenerator.rollCreatureHP();
+        this.active = false;
+    }
+
     public CreatureCard(int hp) {
         super();
         this.hp = hp;
