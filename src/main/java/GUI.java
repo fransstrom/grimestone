@@ -19,7 +19,7 @@ public class GUI {
     }
 
     public void printRemainingCards() {
-
+        System.out.println("You have "+gameEngine.getActivePlayer().getDeck().size() + " cards remaining in deck");
     }
 
     public void printCardsOnTable() {
