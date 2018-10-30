@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Player {
     private int hp;
+    private boolean isActive;
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
     private ArrayList<Card> graveyard;
@@ -13,6 +14,7 @@ public class Player {
         this.deck = new ArrayList<Card>();
         this.graveyard = new ArrayList<Card>();
         this.table = new ArrayList<Card>();
+        this.isActive=false;
     }
 
     public boolean isAlive() {
@@ -38,8 +40,14 @@ public class Player {
         this.graveyard.addAll(deadCards);
     }
 
-    public void placeCardOnTable() {
-
+    public boolean placeCardOnTable(int indexOfCard) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size()) {
+            return false;
+        } else {
+            this.table.add(hand.get(indexOfCard));
+            hand.remove(indexOfCard);
+            return true;
+        }
     }
 
     public boolean drawCard() {
@@ -48,6 +56,7 @@ public class Player {
         }else{
             hand.add(deck.get(0));
             deck.remove(0);
+
             return true;
         }
     }
@@ -104,5 +113,13 @@ public class Player {
 
     public void setTable( ArrayList<Card> table ) {
         this.table = table;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
     }
 }
