@@ -25,15 +25,14 @@ public class GUI {
     }
 
     public void printCardsOnTable() {
-        Player activePlayer = gameEngine.getActivePlayer();
-        ArrayList<Card> table = activePlayer.getTable();
+        ArrayList<Card> table = gameEngine.getActivePlayer().getTable();
         int cardPlacement = 1;
         for (Card i : table) {
             if(i instanceof CreatureCard){
-                System.out.println(cardPlacement+" Card "+ ((CreatureCard) i).getHp());
+                System.out.println("Card "+cardPlacement+"HP: "+ ((CreatureCard) i).getHp());
             }
             else {
-                System.out.println(cardPlacement+" Card ");
+                System.out.println("Card "+cardPlacement+"HP: n/a");
             }
             cardPlacement++;
         }
