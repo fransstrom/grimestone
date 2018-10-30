@@ -25,16 +25,20 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
+        if (player1.getHp() < 1 || noCardsLeft(player1)) {
+            System.out.println("Player1 lost");
+            setGameOver(true);
+        }
+        if (player2.getHp() < 1 || noCardsLeft(player2)) {
+            System.out.println("Player2 lost");
+            setGameOver(true);
+        }
         return gameOver;
     }
 
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-    }
-
-
-    public void gameOver() {
-
     }
 
     public void playerChoice() {
@@ -99,4 +103,10 @@ public class GameEngine {
         }
 
     }
+
+    private boolean noCardsLeft(Player player) {
+        return player.getDeck().isEmpty() && player.getHand().isEmpty() && player.getTable().isEmpty();
+    }
+
 }
+
