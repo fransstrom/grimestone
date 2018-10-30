@@ -7,11 +7,11 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 
 @ExtendWith(MockitoExtension.class)
 class GUITest {
@@ -22,6 +22,8 @@ class GUITest {
     private GameEngine gameEngine;
     @Mock
     private Player mockPlayer;
+    @Mock
+    private CreatureCard creatureCard;
 
     @BeforeEach
     void setUp() {
@@ -60,6 +62,14 @@ class GUITest {
 
     @Test
     void printCardsOnTable() {
+        ArrayList<Card> table = new ArrayList<>();
+        table.add(creatureCard);
+
+        Mockito.when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
+        Mockito.when(mockPlayer.getTable()).thenReturn(table);
+        gui.printCardsOnTable();
+        Mockito.verify(gameEngine, Mockito.times(1)).getActivePlayer();
+        Mockito.verify(mockPlayer, Mockito.times(1)).getTable();
     }
 
     @Test
