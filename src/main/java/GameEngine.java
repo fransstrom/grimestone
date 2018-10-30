@@ -18,16 +18,18 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
+        if (player1.getHp() < 1 || player1.getDeck().isEmpty() && player1.getHand().isEmpty() && player1.getTable().isEmpty()) {
+           setGameOver(true);
+        }
+        if (player2.getHp() < 1 || player2.getDeck().isEmpty() && player2.getHand().isEmpty() && player2.getTable().isEmpty()) {
+            setGameOver(true);
+        }
         return gameOver;
     }
 
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-    }
-
-
-    public void gameOver() {
-
     }
 
     public void playerChoice() {

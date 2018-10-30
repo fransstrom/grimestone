@@ -3,6 +3,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -34,6 +36,41 @@ class GameEngineTest {
         assertEquals(player1, gameEngine.getActivePlayer());
         when(player1.isActive()).thenReturn(false);
         assertEquals(player2, gameEngine.getActivePlayer());
+    }
+
+    @Test
+    public void gameOverByHP() {
+
+        when(player1.getHp()).thenReturn(0);
+        assertTrue(gameEngine.isGameOver());
+        when(player2.getHp()).thenReturn(-1);
+        assertTrue(gameEngine.isGameOver());
+
+    }
+
+    @Test
+    void gameOverByRunningOutOfCards(){
+        ArrayList<Card> deckTest=new ArrayList<>();
+        deckTest.add(new CreatureCard());
+        deckTest.add(new CreatureCard());
+        deckTest.add(new CreatureCard());
+
+        ArrayList<Card> emptyListOfCards=new ArrayList<>();
+
+
+        when(player1.getDeck()).thenReturn(deckTest);
+        when(player2.getDeck()).thenReturn(deckTest);
+        when(player1.getHp()).thenReturn(2);
+        when(player2.getHp()).thenReturn(10);
+        assertFalse(gameEngine.isGameOver());
+
+
+        when(player1.getDeck()).thenReturn(emptyListOfCards);
+        when(player2.getDeck()).thenReturn(deckTest);
+        when(player1.getHp()).thenReturn(2);
+        when(player2.getHp()).thenReturn(10);
+        assertTrue(gameEngine.isGameOver());
+        
     }
 
     @Nested
