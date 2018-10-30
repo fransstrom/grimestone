@@ -77,6 +77,7 @@ public class GameEngine {
 
     public void setBattleLogic(BattleLogic battleLogic) {
         this.battleLogic = battleLogic;
+    }
 
     public Player getActivePlayer() {
         randomGenerateFirstActivePlayer();
