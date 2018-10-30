@@ -58,7 +58,6 @@ class GUITest {
         gui.printCardsOnTable();
         Mockito.verify(gameEngine, Mockito.times(1)).getActivePlayer();
         Mockito.verify(mockPlayer, Mockito.times(1)).getTable();
-
     }
 
     @Test

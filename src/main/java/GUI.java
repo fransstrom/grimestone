@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GUI {
 
     private GameEngine gameEngine;
@@ -23,8 +25,21 @@ public class GUI {
     }
 
     public void printCardsOnTable() {
+        Player activePlayer = gameEngine.getActivePlayer();
+        ArrayList<Card> table = activePlayer.getTable();
+        int cardPlacement = 1;
+        for (Card i : table) {
+            if(i instanceof CreatureCard){
+                System.out.println(cardPlacement+" Card "+ ((CreatureCard) i).getHp());
+            }
+            else {
+                System.out.println(cardPlacement+" Card ");
+            }
+            cardPlacement++;
+        }
 
     }
+
 
     public void printGameOverMenu() {
 
