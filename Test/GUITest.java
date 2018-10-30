@@ -8,7 +8,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,6 +62,14 @@ class GUITest {
 
     @Test
     void printRemainingCards() {
+        ArrayList<Card> deck = new ArrayList<Card>();
+        deck.add(new CreatureCard(10));
+        deck.add(new CreatureCard(20));
+        when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
+        when(mockPlayer.getDeck()).thenReturn(deck);
+        assertEquals(deck, mockPlayer.getDeck());
+        gui.printRemainingCards();
+        verify(gameEngine, Mockito.times(1)).getActivePlayer();
     }
 
     @Test
