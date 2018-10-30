@@ -32,10 +32,8 @@ class GameEngineTest {
     void getActivePlayer() {
         when(player1.isActive()).thenReturn(true);
         assertEquals(player1, gameEngine.getActivePlayer());
-
         when(player1.isActive()).thenReturn(false);
         assertEquals(player2, gameEngine.getActivePlayer());
-
     }
 
     @Nested
@@ -53,13 +51,16 @@ class GameEngineTest {
             player1.setHp(100);
             player2.setHp(200);
             gameEngine = new GameEngine(player1, player2);
+            assertFalse(player1.isActive());
+            assertFalse(player2.isActive());
         }
 
 
         @RepeatedTest(100)
-        void getFirstActivePlayer() {
-            System.out.println(gameEngine.getActivePlayer().getHp());
+        void getFirstActivePlayer(RepetitionInfo repetitionInfo) {
             assertNotNull(gameEngine.getActivePlayer());
+            System.out.println("Repetition #" + repetitionInfo.getCurrentRepetition() + "\n" + gameEngine.getActivePlayer().getHp());
+            assertEquals(100, repetitionInfo.getTotalRepetitions());
         }
     }
 }
