@@ -123,7 +123,6 @@ class PlayerTest {
 
         assertEquals(0, player1.getDeck().size());
 
-
         player1.drawCard();
 
         assertEquals( 0, player1.getDeck().size() );
