@@ -17,6 +17,16 @@ public class GUI {
     }
 
     public void printCardsInHand() {
+        ArrayList<Card> cardsInHand = gameEngine.getActivePlayer().getHand();
+
+        int indexOfCardInHand = 0;
+        for (Card card : cardsInHand) {
+            if (card instanceof CreatureCard) {
+                System.out.println("Card " + indexOfCardInHand + " HP: " + ((CreatureCard) card).getHp());
+            }
+            indexOfCardInHand++;
+        }
+
 
     }
 
