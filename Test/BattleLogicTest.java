@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Spy;
 
 
@@ -8,7 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class BattleLogicTest {
 
     @Spy
-    Card card = new CreatureCard(10);
+    CreatureCard card = new CreatureCard(10);
+
+    @Spy
+    CreatureCard card2 = new CreatureCard(20);
 
     @Spy
     Player player = new Player();
@@ -29,6 +33,21 @@ class BattleLogicTest {
 
     @Test
     void cardVsCard() {
+
+        assertTrue(card.getHp()==10);
+        assertTrue(card2.getHp()==20);
+        battleLogic.setAttackingCard(card);
+        battleLogic.setDefendingCard(card2);
+        System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
+        System.out.println("DC After HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
+
+        battleLogic.cardVsCard();
+        System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
+        System.out.println("DC After HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
+
+
+        assertTrue(card.getHp()<10 || card2.getHp()<20);
+
     }
 
     @Test
