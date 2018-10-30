@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GUI {
 
     private GameEngine gameEngine;
@@ -15,16 +17,38 @@ public class GUI {
     }
 
     public void printCardsInHand() {
+        ArrayList<Card> cardsInHand = gameEngine.getActivePlayer().getHand();
+
+        int indexOfCardInHand = 0;
+        for (Card card : cardsInHand) {
+            if (card instanceof CreatureCard) {
+                System.out.println("Card " + indexOfCardInHand + " HP: " + ((CreatureCard) card).getHp());
+            }
+            indexOfCardInHand++;
+        }
+
 
     }
 
     public void printRemainingCards() {
-
+        System.out.println("You have "+gameEngine.getActivePlayer().getDeck().size() + " cards remaining in deck");
     }
 
     public void printCardsOnTable() {
+        ArrayList<Card> table = gameEngine.getActivePlayer().getTable();
+        int cardPlacement = 1;
+        for (Card i : table) {
+            if(i instanceof CreatureCard){
+                System.out.println("Card "+cardPlacement+"HP: "+ ((CreatureCard) i).getHp());
+            }
+            else {
+                System.out.println("Card "+cardPlacement+"HP: n/a");
+            }
+            cardPlacement++;
+        }
 
     }
+
 
     public void printGameOverMenu() {
 

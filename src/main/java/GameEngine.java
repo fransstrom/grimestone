@@ -15,6 +15,8 @@ public class GameEngine {
         battleLogic = new BattleLogic();
     }*/
 
+
+
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
         player1 = p1;
         player2 = p2;
@@ -42,7 +44,6 @@ public class GameEngine {
     public void setUpNewGame() {
         player1.drawInitialHand();
         player2.drawInitialHand();
-
     }
 
     public void attack() {
@@ -61,6 +62,7 @@ public class GameEngine {
         return player2;
     }
 
+
     public void setPlayer1(Player player1) {
         this.player1 = player1;
     }
@@ -75,5 +77,25 @@ public class GameEngine {
 
     public void setBattleLogic(BattleLogic battleLogic) {
         this.battleLogic = battleLogic;
+
+    public Player getActivePlayer() {
+        randomGenerateFirstActivePlayer();
+        if (player1.isActive()) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+
+    private void randomGenerateFirstActivePlayer() {
+        if (!player1.isActive() && !player2.isActive()) {
+            int lottery = RandomNumberGenerator.roll();
+            if ((lottery % 2) == 0) {
+                player1.setActive(true);
+            } else if ((lottery % 2) != 0) {
+                player2.setActive(true);
+            }
+        }
+
     }
 }
