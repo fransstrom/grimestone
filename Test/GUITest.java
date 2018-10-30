@@ -6,6 +6,13 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class GUITest {
 
@@ -27,12 +34,12 @@ class GUITest {
 
     @Test
     void printPlayerHP() {
-        Mockito.when(gameEngine.getPlayer1()).thenReturn(mockPlayer);
-        Mockito.when(gameEngine.getPlayer2()).thenReturn(mockPlayer);
-        Mockito.when(mockPlayer.getHp()).thenReturn(10);
+        when(gameEngine.getPlayer1()).thenReturn(mockPlayer);
+        when(gameEngine.getPlayer2()).thenReturn(mockPlayer);
+        when(mockPlayer.getHp()).thenReturn(10);
         gui.printPlayerHP();
-        Mockito.verify(gameEngine, Mockito.times(1)).getPlayer1();
-        Mockito.verify(gameEngine, Mockito.times(1)).getPlayer2();
+        verify(gameEngine, Mockito.times(1)).getPlayer1();
+        verify(gameEngine, Mockito.times(1)).getPlayer2();
     }
 
     @Test
@@ -41,6 +48,14 @@ class GUITest {
 
     @Test
     void printRemainingCards() {
+        ArrayList<Card> deck = new ArrayList<Card>();
+        deck.add(new CreatureCard(10));
+        deck.add(new CreatureCard(20));
+        when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
+        when(mockPlayer.getDeck()).thenReturn(deck);
+        assertEquals(deck, mockPlayer.getDeck());
+        gui.printRemainingCards();
+        verify(gameEngine, Mockito.times(1)).getActivePlayer();
     }
 
     @Test
