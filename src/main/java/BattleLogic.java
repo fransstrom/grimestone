@@ -20,14 +20,6 @@ public class BattleLogic {
 
     }
 
-    public void attack() {
-        if(defendingPlayer.tableIsEmpty()){
-            cardVsPlayer();
-        }else {
-            cardVsCard();
-        }
-    }
-
     public Card getAttackingCard() {
         return attackingCard;
     }

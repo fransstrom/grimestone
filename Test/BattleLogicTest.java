@@ -32,23 +32,4 @@ class BattleLogicTest {
     void cardVsCard() {
     }
 
-    @Test
-    void attackWithEmptyTable() {
-        BattleLogic battleLogicSpy = spy(BattleLogic.class);
-        battleLogicSpy.setDefendingPlayer(player);
-        battleLogicSpy.attack();
-        verify(battleLogicSpy, times(1)).cardVsPlayer();
-        verify(battleLogicSpy, times(0)).cardVsCard();
-    }
-
-    @Test
-    void attackWithCardsOnTable(){
-        BattleLogic battleLogicSpy = spy(BattleLogic.class);
-        battleLogicSpy.setDefendingPlayer(player);
-        player.getTable().add(card);
-        battleLogicSpy.attack();
-        verify(battleLogicSpy, times(1)).cardVsCard();
-        verify(battleLogicSpy, times(0)).cardVsPlayer();
-    }
-
 }
