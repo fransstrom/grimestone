@@ -18,10 +18,12 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        if (player1.getHp() < 1 || player1.getDeck().isEmpty() && player1.getHand().isEmpty() && player1.getTable().isEmpty()) {
-           setGameOver(true);
+        if (player1.getHp() < 1 || noCardsLeft(player1)) {
+            System.out.println("Player1 lost");
+            setGameOver(true);
         }
-        if (player2.getHp() < 1 || player2.getDeck().isEmpty() && player2.getHand().isEmpty() && player2.getTable().isEmpty()) {
+        if (player2.getHp() < 1 || noCardsLeft(player2)) {
+            System.out.println("Player2 lost");
             setGameOver(true);
         }
         return gameOver;
@@ -68,4 +70,10 @@ public class GameEngine {
             }
         }
     }
+
+    private boolean noCardsLeft(Player player) {
+        return player.getDeck().isEmpty() && player.getHand().isEmpty() && player.getTable().isEmpty();
+    }
+
 }
+

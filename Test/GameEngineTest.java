@@ -40,23 +40,37 @@ class GameEngineTest {
 
     @Test
     public void gameOverByHP() {
+        ArrayList<Card> deckTest = new ArrayList<>();
+        ArrayList<Card> emptyListOfCards = new ArrayList<>();
+        deckTest.add(new CreatureCard());
+        deckTest.add(new CreatureCard());
+        deckTest.add(new CreatureCard());
 
-        when(player1.getHp()).thenReturn(0);
-        assertTrue(gameEngine.isGameOver());
+        when(player1.getDeck()).thenReturn(deckTest);
+        when(player2.getDeck()).thenReturn(deckTest);
+
+        when(player1.getHp()).thenReturn(1);
+        when(player2.getHp()).thenReturn(9);
+        assertFalse(gameEngine.isGameOver());
+
+        when(player1.getHp()).thenReturn(12);
         when(player2.getHp()).thenReturn(-1);
         assertTrue(gameEngine.isGameOver());
+
+        when(player1.getHp()).thenReturn(-1);
+        when(player2.getHp()).thenReturn(11);
+        assertTrue(gameEngine.isGameOver());
+
 
     }
 
     @Test
-    void gameOverByRunningOutOfCards(){
-        ArrayList<Card> deckTest=new ArrayList<>();
+    void gameOverByRunningOutOfCards() {
+        ArrayList<Card> deckTest = new ArrayList<>();
+        ArrayList<Card> emptyListOfCards = new ArrayList<>();
         deckTest.add(new CreatureCard());
         deckTest.add(new CreatureCard());
         deckTest.add(new CreatureCard());
-
-        ArrayList<Card> emptyListOfCards=new ArrayList<>();
-
 
         when(player1.getDeck()).thenReturn(deckTest);
         when(player2.getDeck()).thenReturn(deckTest);
@@ -64,20 +78,18 @@ class GameEngineTest {
         when(player2.getHp()).thenReturn(10);
         assertFalse(gameEngine.isGameOver());
 
-
         when(player1.getDeck()).thenReturn(emptyListOfCards);
         when(player2.getDeck()).thenReturn(deckTest);
         when(player1.getHp()).thenReturn(2);
         when(player2.getHp()).thenReturn(10);
         assertTrue(gameEngine.isGameOver());
-        
     }
+
 
     @Nested
     @DisplayName("Random pick first active player")
     class randomGenActivePlayer {
-        Player player1;
-        Player player2;
+
 
         GameEngine gameEngine;
 
