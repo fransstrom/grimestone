@@ -11,7 +11,7 @@ public class BattleLogic {
     }
 
 
-    public void cardVsPlayer(Card attackingCard, Player defendingPlayer) {
+    public void cardVsPlayer() {
         int damage = RandomNumberGenerator.roll();
         defendingPlayer.setHp(defendingPlayer.getHp()-damage);
     }
@@ -35,10 +35,6 @@ public class BattleLogic {
         }
     }
 
-
-    public void attack() {
-
-    }
 
     public Card getAttackingCard() {
         return attackingCard;
