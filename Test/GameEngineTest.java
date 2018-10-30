@@ -124,13 +124,16 @@ class GameEngineTest {
 
         GameEngine gameEngine;
 
+        @Mock
+        BattleLogic battleLogic;
+
         @BeforeEach
         void setUp() {
             player1 = new Player();
             player2 = new Player();
             player1.setHp(100);
             player2.setHp(200);
-            gameEngine = new GameEngine(player1, player2);
+            gameEngine = new GameEngine(player1, player2, battleLogic);
             assertFalse(player1.isActive());
             assertFalse(player2.isActive());
         }
