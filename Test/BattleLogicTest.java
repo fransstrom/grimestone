@@ -47,6 +47,7 @@ class BattleLogicTest {
 
 
         assertTrue(card.getHp()<10 || card2.getHp()<20);
+
     }
 
     @Test

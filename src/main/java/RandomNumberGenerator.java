@@ -7,4 +7,8 @@ public abstract class RandomNumberGenerator {
     public static int roll() {
         return random.nextInt(10) + 1;
     }
+
+    public static int rollCreatureHP() {
+        return random.nextInt(7) + 1;
+    }
 }
