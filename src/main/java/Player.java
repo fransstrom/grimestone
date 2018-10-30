@@ -40,8 +40,14 @@ public class Player {
         this.graveyard.addAll(deadCards);
     }
 
-    public void placeCardOnTable() {
-
+    public boolean placeCardOnTable(int indexOfCard) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size()) {
+            return false;
+        } else {
+            this.table.add(hand.get(indexOfCard));
+            hand.remove(indexOfCard);
+            return true;
+        }
     }
 
     public boolean drawCard() {
@@ -50,6 +56,7 @@ public class Player {
         }else{
             hand.add(deck.get(0));
             deck.remove(0);
+
             return true;
         }
     }

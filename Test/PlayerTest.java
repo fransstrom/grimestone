@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -27,11 +29,12 @@ class PlayerTest {
 
     @Test
     void isAlive() {
-        assertTrue( player1.isAlive() );
-        player1.setHp( 0 );
-        assertFalse( player1.isAlive() );
-        player1.setHp( 5 );
-        assertTrue( player1.isAlive() );
+        assertTrue(player1.isAlive());
+        player1.setHp(0);
+        assertFalse(player1.isAlive());
+        player1.setHp(5);
+        assertTrue(player1.isAlive());
+
     }
 
     @Test
@@ -61,8 +64,42 @@ class PlayerTest {
         assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
-    @Test
-    void placeCardOnTable() {
+    @Nested
+    @DisplayName("Place card on table tests")
+    class placeCardOnTable {
+        
+        @Test
+        void placeCardOnTableWhenHandIsNotEmpty() {
+            player1.getHand().add(card);
+
+            assertEquals(1, player1.getHand().size());
+            assertTrue(player1.placeCardOnTable(0));
+            assertEquals(1, player1.getTable().size());
+            assertEquals(0, player1.getHand().size());
+            assertFalse(player1.placeCardOnTable(0));
+        }
+
+        @Test
+        void placeCardOnTableWhenIndexOutOfRange() {
+            player1.getHand().add(card);
+
+            assertEquals(1, player1.getHand().size());
+            assertFalse(player1.placeCardOnTable(3));
+            assertEquals(0, player1.getTable().size());
+            assertEquals(1, player1.getHand().size());
+            assertTrue(player1.placeCardOnTable(0));
+            assertEquals(1, player1.getTable().size());
+            assertEquals(0, player1.getHand().size());
+        }
+
+        @Test
+        void placeCardOnTableWhenHandIsEmpty() {
+            assertEquals(0, player1.getHand().size());
+
+            assertFalse(player1.placeCardOnTable(0));
+            assertEquals(0, player1.getTable().size());
+            assertEquals(0, player1.getHand().size());
+        }
     }
 
     @Test
@@ -83,7 +120,8 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsEmpty() {
-        assertEquals( 0, player1.getDeck().size() );
+
+        assertEquals(0, player1.getDeck().size());
 
 
         player1.drawCard();
