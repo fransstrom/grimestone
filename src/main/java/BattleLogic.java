@@ -17,8 +17,24 @@ public class BattleLogic {
     }
 
     public void cardVsCard() {
-
+        if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
+            int attackingCardDamage = RandomNumberGenerator.roll();
+            int defendingCardDamage = RandomNumberGenerator.roll();
+            int damageToBeDealt;
+            while (attackingCardDamage == defendingCardDamage) {
+                attackingCardDamage = RandomNumberGenerator.roll();
+                defendingCardDamage = RandomNumberGenerator.roll();
+            }
+            if (attackingCardDamage > defendingCardDamage) {
+                damageToBeDealt = attackingCardDamage - defendingCardDamage;
+                ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
+            } else {
+                damageToBeDealt = defendingCardDamage - attackingCardDamage;
+                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
+            }
+        }
     }
+
 
     public void attack() {
 
