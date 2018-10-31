@@ -92,6 +92,11 @@ public class GameEngine {
         }
     }
 
+    private void switchActivePlayer(){
+        player1.setActive(!player1.isActive());
+        player2.setActive(!player2.isActive());
+    }
+
     private void randomGenerateFirstActivePlayer() {
         if (!player1.isActive() && !player2.isActive()) {
             int lottery = RandomNumberGenerator.roll();
