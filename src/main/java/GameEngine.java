@@ -108,5 +108,10 @@ public class GameEngine {
         return player.getDeck().isEmpty() && player.getHand().isEmpty() && player.getTable().isEmpty();
     }
 
+    public Card pickCard(int placement, Player player){
+
+     return ;
+    }
+
 }
 
