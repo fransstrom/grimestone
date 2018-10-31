@@ -26,29 +26,37 @@ public class GUI {
             }
             indexOfCardInHand++;
         }
-
-
     }
 
     public void printRemainingCards() {
-        System.out.println("You have "+gameEngine.getActivePlayer().getDeck().size() + " cards remaining in deck");
+        System.out.println("You have " + gameEngine.getActivePlayer().getDeck().size() + " cards remaining in deck");
     }
 
     public void printCardsOnTable() {
         ArrayList<Card> table = gameEngine.getActivePlayer().getTable();
         int cardPlacement = 1;
         for (Card i : table) {
-            if(i instanceof CreatureCard){
-                System.out.println("Card "+cardPlacement+"HP: "+ ((CreatureCard) i).getHp());
-            }
-            else {
-                System.out.println("Card "+cardPlacement+"HP: n/a");
+            if (i instanceof CreatureCard) {
+                System.out.println("Card " + cardPlacement + "HP: " + ((CreatureCard) i).getHp());
+            } else {
+                System.out.println("Card " + cardPlacement + "HP: n/a");
             }
             cardPlacement++;
         }
 
     }
 
+    void printCardsInHandToPickFrom() {
+        int i = 1;
+        for (Card cardInHand : gameEngine.getActivePlayer().getHand()) {
+            if (cardInHand instanceof CreatureCard) {
+                System.out.println(i + ". Creaturecard " + "(" + ((CreatureCard) cardInHand).getHp() + " HP)");
+            } else {
+                System.out.println(i + ". Magic card: " + "description");
+            }
+            i++;
+        }
+    }
 
     public void printGameOverMenu() {
 
