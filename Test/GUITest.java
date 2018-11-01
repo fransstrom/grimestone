@@ -99,20 +99,21 @@ class GUITest {
     }
 
     @Test
-    void printCardsInHandToPickFrom() {
-        ArrayList<Card> hand = new ArrayList<>();
+    void printUsableCardsOnTable() {
+        ArrayList<Card> table = new ArrayList<>();
         creatureCard = new CreatureCard();
-        hand.add(creatureCard);
-        hand.add(creatureCard);
+        creatureCard.setActive(true);
+        table.add(creatureCard);
+        table.add(creatureCard);
+
         creatureCardInactive = new CreatureCard(40);
         creatureCardInactive.setActive(false);
-        hand.add(creatureCardInactive);
-        creatureCard.setActive(true);
+        table.add(creatureCardInactive);
 
         when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
-        when(gameEngine.getActivePlayer().getHand()).thenReturn(hand);
+        when(gameEngine.getActivePlayer().getTable()).thenReturn(table);
 
-        gui.printCardsInHandToPickFrom();
+        gui.printUsableCardsOnTable();
 
         verify(gameEngine, times(2)).getActivePlayer();
     }

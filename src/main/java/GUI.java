@@ -46,13 +46,11 @@ public class GUI {
 
     }
 
-    void printCardsInHandToPickFrom() {
+    void printUsableCardsOnTable() {
         int i = 1;
-        for (Card cardInHand : gameEngine.getActivePlayer().getHand()) {
-            if (cardInHand instanceof CreatureCard && ((CreatureCard) cardInHand).isActive()) {
-                System.out.println(i + ". Creaturecard " + "(" + ((CreatureCard) cardInHand).getHp() + " HP)");
-            } else if(!(cardInHand instanceof CreatureCard)) {
-                System.out.println(i + ". Magic card: " + "description");
+        for (Card cardsOnTable : gameEngine.getActivePlayer().getTable()) {
+            if (((CreatureCard) cardsOnTable).isActive()) {
+                System.out.println(i + ". Creaturecard " + "(" + ((CreatureCard) cardsOnTable).getHp() + " HP)");
             }
             i++;
         }
