@@ -92,9 +92,12 @@ public class GUI {
                     System.out.printf(" |    Card " + cardPlacement +"    | ");
                 }
                 cardPlacement++;
-            }
-        }
+
     }
+
+
+    }
+
 
     public void printSpaceBetweenCardsAndBoard(ArrayList<Card> cardList){
         switch (cardList.size()){
