@@ -40,12 +40,11 @@ class BattleLogicTest {
         battleLogic.setAttackingCard(card);
         battleLogic.setDefendingCard(card2);
         System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
-        System.out.println("DC After HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
+        System.out.println("DC Before HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
 
         battleLogic.cardVsCard();
-        System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
+        System.out.println("AC After HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
         System.out.println("DC After HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
-
 
         assertTrue(card.getHp()<10 || card2.getHp()<20);
 

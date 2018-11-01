@@ -88,9 +88,20 @@ public class GameEngine {
         }
     }
 
+
+    public Player getInactivePlayer() {
+        randomGenerateFirstActivePlayer();
+        if (!player1.isActive()) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+
     private void switchActivePlayer(){
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
+
     }
 
     private void randomGenerateFirstActivePlayer() {
