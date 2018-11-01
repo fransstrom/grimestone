@@ -7,6 +7,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +27,12 @@ class GUITest {
     private Player mockPlayer;
     @Mock
     private CreatureCard creatureCard;
+
+    @Mock
+    private CreatureCard creatureCardInactive;
+
+    @Spy
+    ArrayList<Card> table;
 
     @BeforeEach
     void setUp() {
@@ -74,8 +81,8 @@ class GUITest {
 
     @Test
     void printCardsOnTable() {
-        ArrayList<Card> table = new ArrayList<>();
         table.add(creatureCard);
+
 
         Mockito.when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
         Mockito.when(mockPlayer.getTable()).thenReturn(table);
@@ -90,5 +97,24 @@ class GUITest {
 
     @Test
     void printStartMenu() {
+    }
+
+    @Test
+    void printUsableCardsOnTable() {
+        when(creatureCard.isActive()).thenReturn(true);
+        table.add(creatureCard);
+        table.add(creatureCard);
+        when(creatureCard.getHp()).thenReturn(10);
+
+        when(creatureCardInactive.isActive()).thenReturn(false);
+        table.add(creatureCardInactive);
+
+
+        when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
+        when(gameEngine.getActivePlayer().getTable()).thenReturn(table);
+
+        gui.printUsableCardsOnTable();
+
+        verify(gameEngine, times(2)).getActivePlayer();
     }
 }
