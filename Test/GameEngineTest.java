@@ -74,14 +74,10 @@ class GameEngineTest {
 
     @Test
     public void gameOverByHP() {
-        ArrayList<Card> deckTest = new ArrayList<>();
-        ArrayList<Card> emptyListOfCards = new ArrayList<>();
-        deckTest.add(new CreatureCard());
-        deckTest.add(new CreatureCard());
-        deckTest.add(new CreatureCard());
 
-        when(player1.getDeck()).thenReturn(deckTest);
-        when(player2.getDeck()).thenReturn(deckTest);
+
+        when(player1.noCardsLeft()).thenReturn(false);
+        when(player2.noCardsLeft()).thenReturn(false);
 
         when(player1.getHp()).thenReturn(1);
         when(player2.getHp()).thenReturn(9);
@@ -100,20 +96,14 @@ class GameEngineTest {
 
     @Test
     void gameOverByRunningOutOfCards() {
-        ArrayList<Card> deckTest = new ArrayList<>();
-        ArrayList<Card> emptyListOfCards = new ArrayList<>();
-        deckTest.add(new CreatureCard());
-        deckTest.add(new CreatureCard());
-        deckTest.add(new CreatureCard());
-
-        when(player1.getDeck()).thenReturn(deckTest);
-        when(player2.getDeck()).thenReturn(deckTest);
+        when(player1.noCardsLeft()).thenReturn(false);
+        when(player2.noCardsLeft()).thenReturn(false);
         when(player1.getHp()).thenReturn(2);
         when(player2.getHp()).thenReturn(10);
         assertFalse(gameEngine.isGameOver());
 
-        when(player1.getDeck()).thenReturn(emptyListOfCards);
-        when(player2.getDeck()).thenReturn(deckTest);
+        when(player1.noCardsLeft()).thenReturn(true);
+        when(player2.noCardsLeft()).thenReturn(false);
         when(player1.getHp()).thenReturn(2);
         when(player2.getHp()).thenReturn(10);
         assertTrue(gameEngine.isGameOver());
