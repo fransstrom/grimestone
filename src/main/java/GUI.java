@@ -12,27 +12,28 @@ public class GUI {
     }
 
     public void printPlayerHP(Player player) {
-        String num="00";
-        if (player.getHp()<9){
-            num="0"+player.getHp();
-        }else {
-            num=Integer.toString(player.getHp());
+        String num = "00";
+        if (player.getHp() < 9) {
+            num = "0" + player.getHp();
+        } else {
+            num = Integer.toString(player.getHp());
         }
         System.out.printf("| Player HP: " + num + " |");
     }
 
-    public void printPlayerCardsInHand(Player player){
-        if (player.isActive()){
+    public void printPlayerCardsInHand(Player player) {
+        if (player.isActive()) {
             ArrayList<Card> cardsInHandForActivePlayer = player.getHand();
             printSpaceBetweenCardsAndBoard(cardsInHandForActivePlayer);
             printCards(cardsInHandForActivePlayer, false);
-        }else{
+        } else {
             ArrayList<Card> cardsInHandForInactivePlayer = player.getHand();
             printSpaceBetweenCardsAndBoard(cardsInHandForInactivePlayer);
             printCards(cardsInHandForInactivePlayer, true);
         }
     }
-    public void printPlayerHud(Player player){
+
+    public void printPlayerHud(Player player) {
         printNumberOfGraveyardCards(player);
         System.out.printf("                             ");
         printPlayerHP(player);
@@ -41,21 +42,21 @@ public class GUI {
     }
 
     public void printRemainingCards(Player player) {
-        String num="00";
-        if (player.getDeck().size()<9){
-            num="0"+player.getDeck().size();
-        }else {
-            num=Integer.toString(player.getDeck().size());
+        String num = "00";
+        if (player.getDeck().size() < 9) {
+            num = "0" + player.getDeck().size();
+        } else {
+            num = Integer.toString(player.getDeck().size());
         }
         System.out.printf("| Cards in Deck: " + num + " |");
     }
 
     public void printNumberOfGraveyardCards(Player player) {
-        String num="00";
-        if (player.getGraveyard().size()<9){
-            num="0"+player.getGraveyard().size();
-        }else{
-            num=Integer.toString(player.getGraveyard().size());
+        String num = "00";
+        if (player.getGraveyard().size() < 9) {
+            num = "0" + player.getGraveyard().size();
+        } else {
+            num = Integer.toString(player.getGraveyard().size());
         }
         System.out.printf("| Cards in Graveyard: " + num + " |");
     }
@@ -71,8 +72,8 @@ public class GUI {
         printCards(activePlayerTable, false);
     }
 
-    public void printCards(ArrayList<Card> cardList, boolean hidden){
-        if (cardList.size()==0){
+    public void printCards(ArrayList<Card> cardList, boolean hidden) {
+        if (cardList.size() == 0) {
             System.out.println();
         }
         if (!hidden) {
@@ -85,31 +86,34 @@ public class GUI {
                 }
                 cardPlacement++;
             }
-        }else{
+        } else {
             int cardPlacement = 1;
             for (Card card : cardList) {
                 if (card instanceof CreatureCard) {
-                    System.out.printf(" |    Card " + cardPlacement +"    | ");
+                    System.out.printf(" |    Card " + cardPlacement + "    | ");
                 }
                 cardPlacement++;
 
+            }
+        }
     }
 
-
-    }
-
-
-    public void printSpaceBetweenCardsAndBoard(ArrayList<Card> cardList){
-        switch (cardList.size()){
-            case 5: System.out.printf("\n                  ");
+    public void printSpaceBetweenCardsAndBoard(ArrayList<Card> cardList) {
+        switch (cardList.size()) {
+            case 5:
+                System.out.printf("\n                  ");
                 break;
-            case 4: System.out.printf("\n                           ");
+            case 4:
+                System.out.printf("\n                           ");
                 break;
-            case 3: System.out.printf("\n                                    ");
+            case 3:
+                System.out.printf("\n                                    ");
                 break;
-            case 2: System.out.printf("\n                                             ");
+            case 2:
+                System.out.printf("\n                                             ");
                 break;
-            case 1: System.out.printf("\n                                                      ");
+            case 1:
+                System.out.printf("\n                                                      ");
                 break;
         }
     }
