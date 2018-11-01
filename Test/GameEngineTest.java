@@ -20,13 +20,17 @@ class GameEngineTest {
     Player player2;
     @Spy
     BattleLogic battleLogic = new BattleLogic();
-    @Mock
+    @Spy
     ArrayList<Card> mocklist;
+    @Mock
+    CreatureCard mockCreatureCard;
 
+    @Mock
+    InputProcessor inputProcessor;
 
     @BeforeEach
     void SetUp(){
-        gameEngine = new GameEngine(player1, player2, battleLogic);
+        gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
 
     }
 
@@ -116,6 +120,27 @@ class GameEngineTest {
         assertTrue(gameEngine.isGameOver());
     }
 
+    @Test
+    void isGameOver() {
+    }
+
+    @Test
+    void pickCard() {
+        mocklist.add(mockCreatureCard);
+        mocklist.add(mockCreatureCard);
+        int choice = 1;
+        when(inputProcessor.getInputInt()).thenReturn(choice);
+        assertEquals(mocklist.get(1), gameEngine.pickCard(mocklist));
+        assertEquals(mocklist.indexOf(mocklist.get(choice)), choice-1);
+        assertNotEquals(mocklist.indexOf(mocklist.get(choice)), choice);
+    }
+
+
+    @Test
+    void BreakCard(){
+
+    }
+
 
     @Nested
     @DisplayName("Random pick first active player")
@@ -133,7 +158,7 @@ class GameEngineTest {
             player2 = new Player();
             player1.setHp(100);
             player2.setHp(200);
-            gameEngine = new GameEngine(player1, player2, battleLogic);
+            gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
             assertFalse(player1.isActive());
             assertFalse(player2.isActive());
         }
