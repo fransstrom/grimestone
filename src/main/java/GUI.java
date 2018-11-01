@@ -49,9 +49,9 @@ public class GUI {
     void printCardsInHandToPickFrom() {
         int i = 1;
         for (Card cardInHand : gameEngine.getActivePlayer().getHand()) {
-            if (cardInHand instanceof CreatureCard) {
+            if (cardInHand instanceof CreatureCard && ((CreatureCard) cardInHand).isActive()) {
                 System.out.println(i + ". Creaturecard " + "(" + ((CreatureCard) cardInHand).getHp() + " HP)");
-            } else {
+            } else if(!(cardInHand instanceof CreatureCard)) {
                 System.out.println(i + ". Magic card: " + "description");
             }
             i++;

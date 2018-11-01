@@ -79,6 +79,7 @@ class GUITest {
         creatureCard = new CreatureCard();
         table.add(creatureCard);
 
+
         Mockito.when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
         Mockito.when(mockPlayer.getTable()).thenReturn(table);
         gui.printCardsOnTable();
@@ -100,6 +101,7 @@ class GUITest {
         creatureCard = new CreatureCard();
         hand.add(creatureCard);
         hand.add(creatureCard);
+        creatureCard.setActive(true);
 
         when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
         when(gameEngine.getActivePlayer().getHand()).thenReturn(hand);
