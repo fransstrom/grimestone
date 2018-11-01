@@ -28,6 +28,9 @@ class GUITest {
     @Mock
     private CreatureCard creatureCard;
 
+    @Mock
+    private CreatureCard creatureCardInactive;
+
     @BeforeEach
     void setUp() {
         gui = new GUI(gameEngine);
@@ -101,6 +104,9 @@ class GUITest {
         creatureCard = new CreatureCard();
         hand.add(creatureCard);
         hand.add(creatureCard);
+        creatureCardInactive = new CreatureCard(40);
+        creatureCardInactive.setActive(false);
+        hand.add(creatureCardInactive);
         creatureCard.setActive(true);
 
         when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
@@ -109,6 +115,5 @@ class GUITest {
         gui.printCardsInHandToPickFrom();
 
         verify(gameEngine, times(2)).getActivePlayer();
-
     }
 }
