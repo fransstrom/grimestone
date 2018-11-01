@@ -31,6 +31,9 @@ class GUITest {
     @Mock
     private CreatureCard creatureCardInactive;
 
+    @Spy
+    ArrayList<Card> table;
+
     @BeforeEach
     void setUp() {
         gui = new GUI(gameEngine);
@@ -78,8 +81,6 @@ class GUITest {
 
     @Test
     void printCardsOnTable() {
-        ArrayList<Card> table = new ArrayList<>();
-        creatureCard = new CreatureCard();
         table.add(creatureCard);
 
 
@@ -100,15 +101,14 @@ class GUITest {
 
     @Test
     void printUsableCardsOnTable() {
-        ArrayList<Card> table = new ArrayList<>();
-        creatureCard = new CreatureCard();
-        creatureCard.setActive(true);
+        when(creatureCard.isActive()).thenReturn(true);
         table.add(creatureCard);
         table.add(creatureCard);
+        when(creatureCard.getHp()).thenReturn(10);
 
-        creatureCardInactive = new CreatureCard(40);
-        creatureCardInactive.setActive(false);
+        when(creatureCardInactive.isActive()).thenReturn(false);
         table.add(creatureCardInactive);
+
 
         when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
         when(gameEngine.getActivePlayer().getTable()).thenReturn(table);
