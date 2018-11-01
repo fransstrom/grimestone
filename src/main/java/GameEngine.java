@@ -96,6 +96,7 @@ public class GameEngine {
         } else {
             return player2;
         }
+    }
 
     private void switchActivePlayer(){
         player1.setActive(!player1.isActive());
