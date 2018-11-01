@@ -8,14 +8,6 @@ public class GameEngine {
 
     private BattleLogic battleLogic;
 
-    /*public GameEngine() {
-        player1 = new Player();
-        player2 = new Player();
-        this.gameOver = false;
-        battleLogic = new BattleLogic();
-    }*/
-
-
 
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
         player1 = p1;
@@ -25,11 +17,11 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        if (player1.getHp() < 1 || noCardsLeft(player1)) {
+        if (player1.getHp() < 1 || player1.noCardsLeft()) {
             System.out.println("Player1 lost");
             setGameOver(true);
         }
-        if (player2.getHp() < 1 || noCardsLeft(player2)) {
+        if (player2.getHp() < 1 || player2.noCardsLeft()) {
             System.out.println("Player2 lost");
             setGameOver(true);
         }

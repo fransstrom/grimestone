@@ -74,7 +74,8 @@ public class Player {
         }
     }
 
-    private boolean noCardsLeft() {
+    public boolean noCardsLeft() {
+        return false;
     }
 
     public int getHp() {
