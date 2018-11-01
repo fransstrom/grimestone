@@ -5,6 +5,7 @@ import org.mockito.Spy;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class BattleLogicTest {
 
@@ -26,8 +27,8 @@ class BattleLogicTest {
 
     @Test
     void cardVsPlayer() {
-        player.setHp(10);
-        battleLogic.cardVsPlayer(card, player);
+        battleLogic.setDefendingPlayer(player);
+        battleLogic.cardVsPlayer();
         assertTrue(player.getHp()<10);
     }
 
@@ -47,10 +48,6 @@ class BattleLogicTest {
 
         assertTrue(card.getHp()<10 || card2.getHp()<20);
 
-    }
-
-    @Test
-    void attack() {
     }
 
 }

@@ -1,33 +1,40 @@
+import java.util.ArrayList;
+
 public class GameEngine {
+
     private Player player1;
+
     private Player player2;
 
     private boolean gameOver;
 
-    public GameEngine() {
-        player1 = new Player();
-        player2 = new Player();
-        this.gameOver = false;
+    private BattleLogic battleLogic;
 
-    }
+    private InputProcessor inputProcessor;
 
-    public GameEngine(Player p1, Player p2) {
+    public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
         player1 = p1;
         player2 = p2;
+        this.battleLogic = battleLogic;
         this.gameOver = false;
+        this.inputProcessor = inputProcessor;
     }
 
     public boolean isGameOver() {
+        if (player1.getHp() < 1 || player1.noCardsLeft()) {
+            System.out.println("Player1 lost");
+            setGameOver(true);
+        }
+        if (player2.getHp() < 1 || player2.noCardsLeft()) {
+            System.out.println("Player2 lost");
+            setGameOver(true);
+        }
         return gameOver;
     }
 
+
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
-    }
-
-
-    public void gameOver() {
-
     }
 
     public void playerChoice() {
@@ -39,12 +46,37 @@ public class GameEngine {
         player2.drawInitialHand();
     }
 
+    public void attack() {
+        if(battleLogic.getDefendingPlayer().getTable().isEmpty()){
+            battleLogic.cardVsPlayer();
+        }else {
+            battleLogic.cardVsCard();
+        }
+    }
+
     public Player getPlayer1() {
         return player1;
     }
 
     public Player getPlayer2() {
         return player2;
+    }
+
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public BattleLogic getBattleLogic() {
+        return battleLogic;
+    }
+
+    public void setBattleLogic(BattleLogic battleLogic) {
+        this.battleLogic = battleLogic;
     }
 
     public Player getActivePlayer() {
@@ -56,6 +88,7 @@ public class GameEngine {
         }
     }
 
+
     public Player getInactivePlayer() {
         randomGenerateFirstActivePlayer();
         if (!player1.isActive()) {
@@ -63,6 +96,11 @@ public class GameEngine {
         } else {
             return player2;
         }
+
+    private void switchActivePlayer(){
+        player1.setActive(!player1.isActive());
+        player2.setActive(!player2.isActive());
+
     }
 
     private void randomGenerateFirstActivePlayer() {
@@ -74,5 +112,20 @@ public class GameEngine {
                 player2.setActive(true);
             }
         }
+
+    }
+
+    public Card pickCard(ArrayList<Card> list){
+        int placement;
+        do{
+            System.out.println("Which card do you choose? ( choose from the available numbers and type your answer, then press enter)");
+            placement = this.inputProcessor.getInputInt();
+            System.out.println(placement);
+            if(list.size()<placement ){
+                System.out.println("Invalid card at position: " + placement);
+            }
+        }while(list.size()<placement);
+     return list.get(placement-1);
     }
 }
+
