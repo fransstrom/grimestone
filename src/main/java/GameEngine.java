@@ -12,15 +12,6 @@ public class GameEngine {
 
     private InputProcessor inputProcessor;
 
-    /*public GameEngine() {
-        player1 = new Player();
-        player2 = new Player();
-        this.gameOver = false;
-        battleLogic = new BattleLogic();
-    }*/
-
-
-
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
         player1 = p1;
         player2 = p2;
@@ -30,11 +21,11 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        if (player1.getHp() < 1 || noCardsLeft(player1)) {
+        if (player1.getHp() < 1 || player1.noCardsLeft()) {
             System.out.println("Player1 lost");
             setGameOver(true);
         }
-        if (player2.getHp() < 1 || noCardsLeft(player2)) {
+        if (player2.getHp() < 1 || player2.noCardsLeft()) {
             System.out.println("Player2 lost");
             setGameOver(true);
         }
@@ -97,6 +88,11 @@ public class GameEngine {
         }
     }
 
+    private void switchActivePlayer(){
+        player1.setActive(!player1.isActive());
+        player2.setActive(!player2.isActive());
+    }
+
     private void randomGenerateFirstActivePlayer() {
         if (!player1.isActive() && !player2.isActive()) {
             int lottery = RandomNumberGenerator.roll();
@@ -107,10 +103,6 @@ public class GameEngine {
             }
         }
 
-    }
-
-    private boolean noCardsLeft(Player player) {
-        return player.getDeck().isEmpty() && player.getHand().isEmpty() && player.getTable().isEmpty();
     }
 
     public Card pickCard(ArrayList<Card> list){
@@ -125,6 +117,5 @@ public class GameEngine {
         }while(list.size()<placement);
      return list.get(placement-1);
     }
-
 }
 

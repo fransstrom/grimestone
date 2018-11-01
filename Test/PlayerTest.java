@@ -64,6 +64,21 @@ class PlayerTest {
         assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
+    @Test
+    void noCardsLeft() {
+        player1.getDeck().add(card);
+        assertFalse(player1.noCardsLeft());
+        player1.getDeck().remove(card);
+        assertTrue(player1.noCardsLeft());
+        player1.getHand().add(card);
+        player1.getTable().add(card);
+        assertFalse(player1.noCardsLeft());
+        player1.getHand().remove(card);
+        assertFalse(player1.noCardsLeft());
+        player1.getTable().remove(card);
+        assertTrue(player1.noCardsLeft());
+    }
+
     @Nested
     @DisplayName("Place card on table tests")
     class placeCardOnTable {
