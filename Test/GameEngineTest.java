@@ -24,7 +24,6 @@ class GameEngineTest {
     ArrayList<Card> mocklist;
     @Mock
     CreatureCard mockCreatureCard;
-
     @Mock
     InputProcessor inputProcessor;
 

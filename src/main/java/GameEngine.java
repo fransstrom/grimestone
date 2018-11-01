@@ -53,6 +53,7 @@ public class GameEngine {
     public void setUpNewGame() {
         player1.drawInitialHand();
         player2.drawInitialHand();
+        randomGenerateFirstActivePlayer();
     }
 
     public void attack() {
@@ -89,7 +90,6 @@ public class GameEngine {
     }
 
     public Player getActivePlayer() {
-        randomGenerateFirstActivePlayer();
         if (player1.isActive()) {
             return player1;
         } else {
