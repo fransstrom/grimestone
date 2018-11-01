@@ -124,10 +124,16 @@ class GameEngineTest {
     void pickCard() {
         int cardPlacement = 1;
         mocklist.add(new CreatureCard());
+        mocklist.add(new CreatureCard());
         when(player1.getTable()).thenReturn(mocklist);
         gameEngine.pickCard(cardPlacement, player1);
         verify(player1, times(1) ).getTable();
         assertEquals (player1.getTable().get(0), gameEngine.pickCard(cardPlacement, player1));
+    }
+
+    @Test
+    void BreakCard(){
+
     }
 
 

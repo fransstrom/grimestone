@@ -109,8 +109,7 @@ public class GameEngine {
     }
 
     public Card pickCard(int placement, Player player){
-
-     return ;
+     return player.getTable().get(placement-1);
     }
 
 }
