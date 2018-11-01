@@ -56,6 +56,15 @@ public class GameEngine {
         }
     }
 
+    public Player getInactivePlayer() {
+        randomGenerateFirstActivePlayer();
+        if (!player1.isActive()) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+
     private void randomGenerateFirstActivePlayer() {
         if (!player1.isActive() && !player2.isActive()) {
             int lottery = RandomNumberGenerator.roll();
