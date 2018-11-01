@@ -72,7 +72,9 @@ public class Player {
         for (int i = 0; i < 10; i++) {
             deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
         }
+    }
 
+    private boolean noCardsLeft() {
     }
 
     public int getHp() {

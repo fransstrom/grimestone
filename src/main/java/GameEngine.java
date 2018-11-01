@@ -109,9 +109,5 @@ public class GameEngine {
 
     }
 
-    private boolean noCardsLeft(Player player) {
-        return player.getDeck().isEmpty() && player.getHand().isEmpty() && player.getTable().isEmpty();
-    }
-
 }
 
