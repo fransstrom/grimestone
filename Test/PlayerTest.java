@@ -70,6 +70,13 @@ class PlayerTest {
         assertFalse(player1.noCardsLeft());
         player1.getDeck().remove(card);
         assertTrue(player1.noCardsLeft());
+        player1.getHand().add(card);
+        player1.getTable().add(card);
+        assertFalse(player1.noCardsLeft());
+        player1.getHand().remove(card);
+        assertFalse(player1.noCardsLeft());
+        player1.getTable().remove(card);
+        assertTrue(player1.noCardsLeft());
     }
 
     @Nested
