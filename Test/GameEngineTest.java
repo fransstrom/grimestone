@@ -20,13 +20,17 @@ class GameEngineTest {
     Player player2;
     @Spy
     BattleLogic battleLogic = new BattleLogic();
-    @Mock
+    @Spy
     ArrayList<Card> mocklist;
+    @Mock
+    CreatureCard mockCreatureCard;
 
+    @Mock
+    InputProcessor inputProcessor;
 
     @BeforeEach
     void SetUp(){
-        gameEngine = new GameEngine(player1, player2, battleLogic);
+        gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
 
     }
 
@@ -122,14 +126,15 @@ class GameEngineTest {
 
     @Test
     void pickCard() {
-        int cardPlacement = 1;
-        mocklist.add(new CreatureCard());
-        mocklist.add(new CreatureCard());
-        when(player1.getTable()).thenReturn(mocklist);
-        gameEngine.pickCard(cardPlacement, player1);
-        verify(player1, times(1) ).getTable();
-        assertEquals (player1.getTable().get(0), gameEngine.pickCard(cardPlacement, player1));
+        mocklist.add(mockCreatureCard);
+        mocklist.add(mockCreatureCard);
+        int choice = 1;
+        when(inputProcessor.getInput()).thenReturn(choice);
+        assertEquals(mocklist.get(1), gameEngine.pickCard(mocklist));
+        assertEquals(mocklist.indexOf(mocklist.get(choice)), choice-1);
+        assertNotEquals(mocklist.indexOf(mocklist.get(choice)), choice);
     }
+
 
     @Test
     void BreakCard(){
@@ -153,7 +158,7 @@ class GameEngineTest {
             player2 = new Player();
             player1.setHp(100);
             player2.setHp(200);
-            gameEngine = new GameEngine(player1, player2, battleLogic);
+            gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
             assertFalse(player1.isActive());
             assertFalse(player2.isActive());
         }
