@@ -44,8 +44,8 @@ public class Player {
         if (getHand().size() == 0 || indexOfCard > getHand().size()) {
             return false;
         } else {
-            this.table.add(hand.get(indexOfCard));
-            hand.remove(indexOfCard);
+            this.table.add(hand.get(indexOfCard - 1));
+            hand.remove(indexOfCard - 1);
             return true;
         }
     }
