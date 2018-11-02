@@ -120,34 +120,4 @@ class GameEngineTest {
 
     }
 
-
-    @Nested
-    @DisplayName("Random pick first active player")
-    class randomGenActivePlayer {
-
-
-        GameEngine gameEngine;
-
-        @Mock
-        BattleLogic battleLogic;
-
-        @BeforeEach
-        void setUp() {
-            player1 = new Player();
-            player2 = new Player();
-            player1.setHp(100);
-            player2.setHp(200);
-            gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
-            assertFalse(player1.isActive());
-            assertFalse(player2.isActive());
-        }
-
-
-        @RepeatedTest(100)
-        void getFirstActivePlayer(RepetitionInfo repetitionInfo) {
-            assertNotNull(gameEngine.getActivePlayer());
-            System.out.println("Repetition #" + repetitionInfo.getCurrentRepetition() + "\n" + gameEngine.getActivePlayer().getHp());
-            assertEquals(100, repetitionInfo.getTotalRepetitions());
-        }
-    }
 }
