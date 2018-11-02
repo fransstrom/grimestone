@@ -45,6 +45,7 @@ public class GameEngine {
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
+        GameLoop game  = new GameLoop(this);
     }
 
     public void attack() {
