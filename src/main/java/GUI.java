@@ -91,11 +91,12 @@ public class GUI {
             int cardPlacement = 1;
             for (Card card : cardList) {
                 if (card instanceof CreatureCard) {
-                    System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
-                } else {
-                    System.out.printf(" | Card " + cardPlacement + " HP: n/a | ");
+                    if (!((CreatureCard) card).isActive()) {
+                        System.out.printf("\u001B[31m | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
+                    } else {
+                        System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
+                    }
                 }
-                cardPlacement++;
             }
         } else {
             int cardPlacement = 1;
