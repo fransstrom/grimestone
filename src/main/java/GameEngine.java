@@ -26,13 +26,13 @@ public class GameEngine {
     public boolean isGameOver() {
         if (player1.getHp() < 1 || player1.noCardsLeft()) {
             System.out.println("Player1 lost");
-            setGameOver(true);
+            return true;
         }
         if (player2.getHp() < 1 || player2.noCardsLeft()) {
             System.out.println("Player2 lost");
-            setGameOver(true);
+            return true;
         }
-        return gameOver;
+        return false;
     }
 
 
@@ -104,7 +104,7 @@ public class GameEngine {
         }
     }
 
-    private void switchActivePlayer(){
+    public void switchActivePlayer(){
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
 
