@@ -41,8 +41,6 @@ class GameLoopTest {
         @Test
         void pickCardFromHandToPutOnTable() {
             when(mockInputProcessor.getInputInt()).thenReturn(1);
-            doNothing().when(mockGameEngine).pickCard(any(ArrayList.class));
-            verify(mockGameEngine, times(1)).pickCard(any(ArrayList.class));
 
         }
 
