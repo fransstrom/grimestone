@@ -78,9 +78,11 @@ public class Player {
         return this.deck.isEmpty() && this.hand.isEmpty() && this.table.isEmpty();
     }
 
-    public Card pickActiveCardFromTable(int index){
-
-        return this.table.get(index -1);
+    public Card pickCardFromTable(int index){
+        if(this.getTable().size() < index){
+            return this.table.get(index - 1);
+        }
+        return null;
     }
 
     public boolean hasActiveCardsOnTable(){
