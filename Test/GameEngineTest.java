@@ -35,7 +35,7 @@ class GameEngineTest {
 
     @Test
     void setUpNewGame() {
-        gameEngine.setUpNewGame();
+        gameEngine.startNewGame();
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();
     }

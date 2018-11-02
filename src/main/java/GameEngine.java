@@ -44,7 +44,7 @@ public class GameEngine {
 
     }
 
-    public void setUpNewGame() {
+    public void startNewGame() {
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
