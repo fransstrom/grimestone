@@ -113,16 +113,6 @@ class GameEngineTest {
     void isGameOver() {
     }
 
-    @Test
-    void pickCard() {
-        mocklist.add(mockCreatureCard);
-        mocklist.add(mockCreatureCard);
-        int choice = 1;
-        when(inputProcessor.getInputInt()).thenReturn(choice);
-        assertEquals(mocklist.get(1), gameEngine.pickCard(mocklist));
-        assertEquals(mocklist.indexOf(mocklist.get(choice)), choice-1);
-        assertNotEquals(mocklist.indexOf(mocklist.get(choice)), choice);
-    }
 
 
     @Test

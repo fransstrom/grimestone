@@ -171,4 +171,9 @@ class PlayerTest {
         assertFalse( player1.getDeck().isEmpty() );
         assertEquals( 10, player1.getDeck().size() );
     }
+
+    @Test
+    void pickCard() {
+
+    }
 }

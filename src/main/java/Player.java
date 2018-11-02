@@ -78,6 +78,19 @@ public class Player {
         return this.deck.isEmpty() && this.hand.isEmpty() && this.table.isEmpty();
     }
 
+    public Card pickCard(ArrayList<Card> list){
+        int placement;
+        do{
+            System.out.println("Which card do you choose? ( choose from the available numbers and type your answer, then press enter)");
+            placement = this.inputProcessor.getInputInt();
+            System.out.println(placement);
+            if(list.size()<placement ){
+                System.out.println("Invalid card at position: " + placement);
+            }
+        }while(list.size()<placement);
+        return list.get(placement-1);
+    }
+
     public int getHp() {
         return hp;
     }
