@@ -2,16 +2,44 @@ public class GameLoop {
   private   GameEngine gameEngine;
   private   InputProcessor inputProcessor;
 
-    public GameLoop(GameEngine gameEngine, InputProcessor inputProcessor){
+    public GameLoop(GameEngine gameEngine){
        this.gameEngine = gameEngine;
-       this.inputProcessor = inputProcessor;
+       this.inputProcessor = new InputProcessor();
+       while(!gameEngine.isGameOver()){
+           getActivePlayer().drawCard();
+           putCardOnTablePhase();
+           actionPhase();
+           gameEngine.switchActivePlayer();
+       }
     }
 
-    public void gameLoopPhase1() {
-
+    public void putCardOnTablePhase() {
+        gameEngine.getGui().render();
+        int choice;
+        do{
+            gameEngine.getGui().printPickACardToPlay();
+            choice = this.inputProcessor.getInputInt();
+        }while (!getActivePlayer().placeCardOnTable(choice));
     }
 
-    public void gameLoopPhase2(){
+    public void actionPhase(){
+        gameEngine.getGui().render();
+        if(getActivePlayer().hasActiveCardsOnTable()){
+            gameEngine.getGui().printChooseCardToAttackWith();
+            int choice;
+            Card pickedCard;
+            do{
+                choice = this.inputProcessor.getInputInt();
+                pickedCard = getActivePlayer().pickCardFromTable(choice);
+            }while (pickedCard == null || !((CreatureCard)pickedCard).isActive());
+        }
+    }
 
+    public Player getActivePlayer(){
+        return this.gameEngine.getActivePlayer();
+    }
+
+    public void setInputProcessor(InputProcessor inputProcessor) {
+        this.inputProcessor = inputProcessor;
     }
 }

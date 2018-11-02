@@ -23,7 +23,8 @@ class GameLoopTest {
 
     @BeforeEach
     void setUp(){
-        gameLoop = new GameLoop(mockGameEngine, mockInputProcessor);
+        gameLoop = new GameLoop(mockGameEngine);
+        gameLoop.setInputProcessor(mockInputProcessor);
     }
 
     @Nested
@@ -37,13 +38,13 @@ class GameLoopTest {
 
         @Test
         void pickCardFromHandToPutOnTable() {
-            when(mockInputProcessor.getInputInt()).thenReturn(1);
+
 
         }
 
         @Test
         void skip(){
-            when(mockInputProcessor.getInputInt()).thenReturn(2);
+
 
         }
 

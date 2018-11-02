@@ -12,13 +12,10 @@ public class GameEngine {
 
     private BattleLogic battleLogic;
 
-    private InputProcessor inputProcessor;
-
-    public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
+    public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
         player1 = p1;
         player2 = p2;
         this.battleLogic = battleLogic;
-        this.inputProcessor = inputProcessor;
         this.gui = new GUI(this);
         this.gameOver = false;
     }
