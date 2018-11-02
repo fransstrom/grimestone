@@ -20,6 +20,7 @@ public class GUI {
         System.out.printf("\n\n");
         printPlayerHud(gameEngine.getActivePlayer());
         System.out.printf("\n------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     public void printPlayerHP(Player player) {
