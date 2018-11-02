@@ -1,10 +1,7 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.api.Nested;
 
 import java.util.ArrayList;
 
@@ -24,7 +21,7 @@ class GameLoopTest {
     ArrayList<Card> mockList;
 
 
-    @BeforeAll
+    @BeforeEach
     void setUp(){
         gameLoop = new GameLoop(mockGameEngine, mockInputProcessor);
     }
@@ -33,7 +30,7 @@ class GameLoopTest {
     @DisplayName("Game loop phase 1")
     class TestPhase1{
 
-        @BeforeAll
+        @BeforeEach
         void setUp2(){
             mockList = new ArrayList<>();
         }
