@@ -9,6 +9,17 @@ public class GUI {
     }
 
     public void render() {
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        printPlayerHud(gameEngine.getInactivePlayer());
+        System.out.printf("\n");
+        printPlayerCardsInHand(gameEngine.getInactivePlayer());
+        System.out.printf("\n\n");
+        printCardsOnTable();
+        System.out.printf("\n\n");
+        printPlayerCardsInHand(gameEngine.getActivePlayer());
+        System.out.printf("\n\n");
+        printPlayerHud(gameEngine.getActivePlayer());
+        System.out.printf("\n------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void printPlayerHP(Player player) {
