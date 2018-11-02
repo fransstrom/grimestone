@@ -92,7 +92,7 @@ public class GUI {
             for (Card card : cardList) {
                 if (card instanceof CreatureCard) {
                     if (!((CreatureCard) card).isActive()) {
-                        System.out.printf("\u001B[31m | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
+                        System.out.printf("\u001B[31m | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | \u001B[0m");
                     } else {
                         System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
                     }
