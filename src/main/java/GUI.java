@@ -98,6 +98,7 @@ public class GUI {
                         System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
                     }
                 }
+                cardPlacement++;
             }
         } else {
             int cardPlacement = 1;

@@ -80,7 +80,7 @@ public class Player {
     }
 
     public Card pickCardFromTable(int index){
-        if(this.getTable().size() < index){
+        if(this.getTable().size() >= index){
             return this.table.get(index - 1);
         }
         return null;

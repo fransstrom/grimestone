@@ -9,6 +9,7 @@ public class GameLoop {
            getActivePlayer().drawCard();
            putCardOnTablePhase();
            actionPhase();
+           getActivePlayer().setCardsOnTableToActive();
            gameEngine.switchActivePlayer();
        }
     }
@@ -32,6 +33,8 @@ public class GameLoop {
                 choice = this.inputProcessor.getInputInt();
                 pickedCard = getActivePlayer().pickCardFromTable(choice);
             }while (pickedCard == null || !((CreatureCard)pickedCard).isActive());
+            gameEngine.getBattleLogic().setAttackingCard(pickedCard);
+            gameEngine.attack();
         }
     }
 

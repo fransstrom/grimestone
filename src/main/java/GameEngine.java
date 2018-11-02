@@ -12,12 +12,15 @@ public class GameEngine {
 
     private BattleLogic battleLogic;
 
+    private InputProcessor inputProcessor;
+
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
         player1 = p1;
         player2 = p2;
         this.battleLogic = battleLogic;
         this.gui = new GUI(this);
         this.gameOver = false;
+        this.inputProcessor = new InputProcessor();
     }
 
     public boolean isGameOver() {
@@ -45,14 +48,24 @@ public class GameEngine {
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
-        GameLoop game  = new GameLoop(this);
+        new GameLoop(this);
     }
 
     public void attack() {
+        battleLogic.setDefendingPlayer(getInactivePlayer());
         if(battleLogic.getDefendingPlayer().getTable().isEmpty()){
             battleLogic.cardVsPlayer();
         }else {
+            int choice;
+            Card defendingCard;
+            do{
+                System.out.println("Choose card to attack!");
+                choice = this.inputProcessor.getInputInt();
+                defendingCard = getInactivePlayer().pickCardFromTable(choice);
+            }while (!(getInactivePlayer().getTable().size() >= choice));
+            battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
+            getInactivePlayer().moveDeadCardToGraveyard();
         }
     }
 

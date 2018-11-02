@@ -29,8 +29,7 @@ public class BattleLogic {
                 damageToBeDealt = attackingCardDamage - defendingCardDamage;
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
             } else {
-                damageToBeDealt = defendingCardDamage - attackingCardDamage;
-                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
+                System.out.println("DODGE!");
             }
         }
     }
