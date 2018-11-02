@@ -83,6 +83,10 @@ public class Player {
         return this.table.get(index -1);
     }
 
+    public boolean hasActiveCardsOnTable(){
+        return this.table.stream().anyMatch(card -> ((CreatureCard)card).isActive());
+    }
+
     public int getHp() {
         return hp;
     }
