@@ -15,6 +15,7 @@ public class Player {
         this.graveyard = new ArrayList<Card>();
         this.table = new ArrayList<Card>();
         this.isActive=false;
+        this.generateDeck();
     }
 
     public boolean isAlive() {
@@ -63,14 +64,14 @@ public class Player {
 
     public void drawInitialHand() {
         for (int i = 0; i < 5; i++) {
-            hand.add(deck.get(deck.size() - 1));
-            deck.remove((deck.size() - 1));
+            this.hand.add(deck.get(deck.size() - 1));
+            this.deck.remove((deck.size() - 1));
         }
     }
 
     public void generateDeck() {
         for (int i = 0; i < 10; i++) {
-            deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
+            this.deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
         }
     }
 
@@ -87,6 +88,9 @@ public class Player {
 
     public boolean hasActiveCardsOnTable(){
         return this.table.stream().anyMatch(card -> ((CreatureCard)card).isActive());
+    }
+    public void setCardsOnTableToActive(){
+        this.table.forEach(card -> ((CreatureCard)card).setActive(true));
     }
 
     public int getHp() {
