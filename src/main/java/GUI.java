@@ -171,4 +171,11 @@ public class GUI {
         System.out.println(startMenuDesign);
     }
 
+    public void printPickACardToPlay(){
+        System.out.println("Choose a card from your hand to play.");
+    }
+    public void inValidChoiceOfCard(){
+        System.out.println("Invalid choice of card.");
+    }
+
 }
