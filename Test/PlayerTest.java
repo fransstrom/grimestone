@@ -178,4 +178,13 @@ class PlayerTest {
         assertEquals(card, player1.pickActiveCardFromTable(1));
     }
 
+    @Test
+    void hasActiveCardsOnTable(){
+        player1.getTable().add(creatureCard);
+        when(creatureCard.isActive()).thenReturn(true);
+        assertTrue(player1.hasActiveCardsOnTable());
+        when(creatureCard.isActive()).thenReturn(false);
+        assertFalse(player1.hasActiveCardsOnTable());
+    }
+
 }
