@@ -8,6 +8,8 @@ public class GameEngine {
 
     private boolean gameOver;
 
+    private GUI gui;
+
     private BattleLogic battleLogic;
 
     private InputProcessor inputProcessor;
@@ -16,8 +18,9 @@ public class GameEngine {
         player1 = p1;
         player2 = p2;
         this.battleLogic = battleLogic;
-        this.gameOver = false;
         this.inputProcessor = inputProcessor;
+        this.gui = new GUI(this);
+        this.gameOver = false;
     }
 
     public boolean isGameOver() {
@@ -63,6 +66,9 @@ public class GameEngine {
         return player2;
     }
 
+    public GUI getGui() {
+        return gui;
+    }
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;
@@ -115,6 +121,8 @@ public class GameEngine {
         }
 
     }
+
+    public void startGame(){}
 
 
 }
