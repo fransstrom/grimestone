@@ -173,7 +173,9 @@ class PlayerTest {
     }
 
     @Test
-    void pickCard() {
-
+    void pickCardFromTable(){
+        player1.getTable().add(card);
+        assertEquals(card, player1.pickCardFromTable(1));
     }
+
 }
