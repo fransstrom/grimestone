@@ -24,13 +24,10 @@ class GameEngineTest {
     ArrayList<Card> mocklist;
     @Mock
     CreatureCard mockCreatureCard;
-    @Mock
-    InputProcessor inputProcessor;
 
     @BeforeEach
     void SetUp(){
-        gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
-
+        gameEngine = new GameEngine(player1, player2, battleLogic);
     }
 
     @Test
