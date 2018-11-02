@@ -79,7 +79,7 @@ public class Player {
     }
 
     public Card pickCardFromTable(int index){
-        return this.table.get(index);
+        return this.table.get(index -1);
     }
 
     public int getHp() {
