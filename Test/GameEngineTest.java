@@ -93,16 +93,17 @@ class GameEngineTest {
 
     @Test
     void gameOverByRunningOutOfCards() {
-        when(player1.noCardsLeft()).thenReturn(false);
-        when(player2.noCardsLeft()).thenReturn(false);
+        when(player1.noCardsLeftInDeck()).thenReturn(false);
+        when(player2.noCardsLeftInDeck()).thenReturn(false);
         when(player1.getHp()).thenReturn(2);
         when(player2.getHp()).thenReturn(10);
         assertFalse(gameEngine.isGameOver());
 
-        when(player1.noCardsLeft()).thenReturn(true);
-        when(player2.noCardsLeft()).thenReturn(false);
-        when(player1.getHp()).thenReturn(2);
-        when(player2.getHp()).thenReturn(10);
+        when(player1.noCardsLeftInDeck()).thenReturn(true);
+        assertTrue(gameEngine.isGameOver());
+
+        when(player1.noCardsLeftInDeck()).thenReturn(false);
+        when(player2.noCardsLeftInDeck()).thenReturn(true);
         assertTrue(gameEngine.isGameOver());
     }
 
