@@ -79,25 +79,18 @@ class PlayerTest {
         assertTrue(player1.noCardsLeft());
     }
 
-    @Nested
-    @DisplayName("No cards Left in Deck")
-    class NoCardsLeftInDeck{
-        @BeforeEach
-        void setUp(){
-            player1.getDeck().add(card);
-        }
         @Test
-        void cardsInDeck(){
+        void noCardsLeftInDeckTest(){
+            assertFalse(player1.noCardsLeftInDeck());
+            player1.getDeck().clear();
+            assertTrue(player1.noCardsLeftInDeck());
+            player1.getDeck().add(card);
             assertFalse(player1.noCardsLeftInDeck());
         }
 
-        @Test
-        void noCardsInDeck(){
-            assertTrue(player1.noCardsLeftInDeck());
-        }
 
 
-    }
+
 
 
     @Nested
