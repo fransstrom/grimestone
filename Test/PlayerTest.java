@@ -80,6 +80,27 @@ class PlayerTest {
     }
 
     @Nested
+    @DisplayName("No cards Left in Deck")
+    class NoCardsLeftInDeck{
+        @BeforeEach
+        void setUp(){
+            player1.getDeck().add(card);
+        }
+        @Test
+        void cardsInDeck(){
+            assertFalse(player1.noCardsLeftInDeck());
+        }
+
+        @Test
+        void noCardsInDeck(){
+            assertTrue(player1.noCardsLeftInDeck());
+        }
+
+
+    }
+
+
+    @Nested
     @DisplayName("Place card on table tests")
     class placeCardOnTable {
         
