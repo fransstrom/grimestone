@@ -79,6 +79,14 @@ public class Player {
         return this.deck.isEmpty() && this.hand.isEmpty() && this.table.isEmpty();
     }
 
+    public boolean noCardsLeftInDeck(){
+        if(this.getDeck().isEmpty())
+        {
+            return true;
+        }
+        return false;
+    }
+
     public Card pickCardFromTable(int index){
         if(this.getTable().size() >= index){
             return this.table.get(index - 1);
