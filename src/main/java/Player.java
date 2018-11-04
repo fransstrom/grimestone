@@ -80,11 +80,7 @@ public class Player {
     }
 
     public boolean noCardsLeftInDeck(){
-        if(this.getDeck().isEmpty())
-        {
-            return true;
-        }
-        return false;
+        return this.getDeck().isEmpty();
     }
 
     public Card pickCardFromTable(int index){
