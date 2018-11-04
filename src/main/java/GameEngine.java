@@ -24,11 +24,11 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        if (player1.getHp() < 1 || player1.noCardsLeft()) {
+        if (player1.getHp() < 1 || player1.noCardsLeftInDeck()) {
             System.out.println("Player1 lost");
             return true;
         }
-        if (player2.getHp() < 1 || player2.noCardsLeft()) {
+        if (player2.getHp() < 1 || player2.noCardsLeftInDeck()) {
             System.out.println("Player2 lost");
             return true;
         }
