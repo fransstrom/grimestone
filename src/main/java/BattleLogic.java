@@ -17,6 +17,7 @@ public class BattleLogic {
     }
 
     public void cardVsCard() {
+        // Print out damage TODO
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = RandomNumberGenerator.roll();
             int defendingCardDamage = RandomNumberGenerator.roll();
@@ -30,6 +31,7 @@ public class BattleLogic {
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
             } else {
                 System.out.println("DODGE!");
+                //Move dodge to gui TODO
             }
         }
     }
