@@ -33,8 +33,7 @@ class BattleLogicTest {
         assertTrue(player.getHp()<10);
     }
 
-    @Test
-    @RepeatedTest(10)
+    @RepeatedTest(5)
     void cardVsCard() {
 
         assertEquals(10, card.getHp());
