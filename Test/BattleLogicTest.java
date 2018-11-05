@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -33,10 +34,11 @@ class BattleLogicTest {
     }
 
     @Test
+    @RepeatedTest(10)
     void cardVsCard() {
 
-        assertTrue(card.getHp()==10);
-        assertTrue(card2.getHp()==20);
+        assertEquals(10, card.getHp());
+        assertEquals(20, card2.getHp());
         battleLogic.setAttackingCard(card);
         battleLogic.setDefendingCard(card2);
         System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
