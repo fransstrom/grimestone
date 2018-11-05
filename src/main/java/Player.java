@@ -1,8 +1,11 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 
 public class Player {
     private int hp;
     private boolean isActive;
+    private boolean passTurn;
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
     private ArrayList<Card> graveyard;
@@ -10,11 +13,12 @@ public class Player {
 
     public Player() {
         this.hp = 10;
-        this.hand = new ArrayList<Card>();
-        this.deck = new ArrayList<Card>();
-        this.graveyard = new ArrayList<Card>();
-        this.table = new ArrayList<Card>();
+        this.hand = new ArrayList<>();
+        this.deck = new ArrayList<>();
+        this.graveyard = new ArrayList<>();
+        this.table = new ArrayList<>();
         this.isActive=false;
+        this.passTurn = false;
         this.generateDeck();
     }
 
@@ -91,6 +95,13 @@ public class Player {
     }
     public void setCardsOnTableToActive(){
         this.table.forEach(card -> ((CreatureCard)card).setActive(true));
+    }
+
+    public void passTurn(Boolean passTurn){
+        this.passTurn = passTurn;
+    }
+    public boolean hasPassedTurn(){
+        return this.passTurn;
     }
 
     public int getHp() {
