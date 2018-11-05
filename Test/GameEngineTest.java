@@ -72,8 +72,8 @@ class GameEngineTest {
     public void gameOverByHP() {
 
 
-        when(player1.noCardsLeft()).thenReturn(false);
-        when(player2.noCardsLeft()).thenReturn(false);
+        when(player1.noCardsLeftInDeck()).thenReturn(false);
+        when(player2.noCardsLeftInDeck()).thenReturn(false);
 
         when(player1.getHp()).thenReturn(1);
         when(player2.getHp()).thenReturn(9);
@@ -84,7 +84,6 @@ class GameEngineTest {
         assertTrue(gameEngine.isGameOver());
 
         when(player1.getHp()).thenReturn(-1);
-        when(player2.getHp()).thenReturn(11);
         assertTrue(gameEngine.isGameOver());
 
 
