@@ -1,26 +1,19 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameEngine {
 
     private Player player1;
-
     private Player player2;
-
-    private boolean gameOver;
-
     private GUI gui;
-
     private BattleLogic battleLogic;
-
-    private InputProcessor inputProcessor;
+    private Scanner scanner;
 
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
         player1 = p1;
         player2 = p2;
         this.battleLogic = battleLogic;
         this.gui = new GUI(this);
-        this.gameOver = false;
-        this.inputProcessor = new InputProcessor();
+        this.scanner = new Scanner(System.in);
     }
 
     public boolean isGameOver() {
@@ -36,21 +29,6 @@ public class GameEngine {
     }
 
 
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
-    }
-
-    public void playerChoice() {
-
-    }
-
-    public void startNewGame() {
-        player1.drawInitialHand();
-        player2.drawInitialHand();
-        randomGenerateFirstActivePlayer();
-        new GameLoop(this);
-    }
-
     public void attack() {
         battleLogic.setDefendingPlayer(getInactivePlayer());
         if(battleLogic.getDefendingPlayer().getTable().isEmpty()){
@@ -60,7 +38,7 @@ public class GameEngine {
             Card defendingCard;
             do{
                 System.out.println("Choose card to attack!");
-                choice = this.inputProcessor.getInputInt();
+                choice = scanner.nextInt();
                 defendingCard = getInactivePlayer().pickCardFromTable(choice);
             }while (!(getInactivePlayer().getTable().size() >= choice));
             battleLogic.setDefendingCard(defendingCard);
@@ -69,32 +47,53 @@ public class GameEngine {
         }
     }
 
-    public Player getPlayer1() {
-        return player1;
+    public void startGame(){
+        player1.drawInitialHand();
+        player2.drawInitialHand();
+        randomGenerateFirstActivePlayer();
+
+        while(!isGameOver()){
+            getActivePlayer().drawCard();
+            putCardOnTablePhase();
+            actionPhase();
+            getActivePlayer().setCardsOnTableToActive();
+            if(getActivePlayer().hasPassedTurn()){
+                getActivePlayer().passTurn(false);
+            }
+            switchActivePlayer();
+        }
     }
 
-    public Player getPlayer2() {
-        return player2;
+    public void putCardOnTablePhase() {
+        gui.render();
+        int choice;
+        do{
+            gui.printPickACardToPlay();
+            choice = scanner.nextInt();
+            if(choice == 0){
+                getActivePlayer().passTurn(true);
+                return;
+            }
+        }while (!getActivePlayer().placeCardOnTable(choice));
     }
 
-    public GUI getGui() {
-        return gui;
-    }
-
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public BattleLogic getBattleLogic() {
-        return battleLogic;
-    }
-
-    public void setBattleLogic(BattleLogic battleLogic) {
-        this.battleLogic = battleLogic;
+    public void actionPhase(){
+        if(getActivePlayer().hasActiveCardsOnTable() && !getActivePlayer().hasPassedTurn()){
+            gui.render();
+            gui.printChooseCardToAttackWith();
+            int choice;
+            Card pickedCard;
+            do{
+                choice = scanner.nextInt();
+                if(choice == 0){
+                    getActivePlayer().passTurn(true);
+                    return;
+                }
+                pickedCard = getActivePlayer().pickCardFromTable(choice);
+            }while (pickedCard == null || !((CreatureCard)pickedCard).isActive());
+            battleLogic.setAttackingCard(pickedCard);
+            attack();
+        }
     }
 
     public Player getActivePlayer() {
@@ -107,7 +106,6 @@ public class GameEngine {
 
 
     public Player getInactivePlayer() {
-        randomGenerateFirstActivePlayer();
         if (!player1.isActive()) {
             return player1;
         } else {
@@ -118,7 +116,6 @@ public class GameEngine {
     public void switchActivePlayer(){
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
-
     }
 
     private void randomGenerateFirstActivePlayer() {
@@ -132,6 +129,5 @@ public class GameEngine {
         }
 
     }
-
 }
 
