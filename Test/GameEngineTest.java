@@ -54,11 +54,10 @@ class GameEngineTest {
         GameEngine gameEngineSpy = spy(gameEngine);
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
-        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
-        doNothing().when(battleLogic).cardVsCard();
+        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
         gameEngineSpy.attack();
-        verify(battleLogic, times(0)).cardVsPlayer();
-        verify(battleLogic, times(1)).cardVsCard();
+        verify(battleLogic, times(1)).cardVsPlayer();
+        verify(battleLogic, times(0)).cardVsCard();
     }
 
     @Test
