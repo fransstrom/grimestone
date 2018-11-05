@@ -102,6 +102,8 @@ class PlayerTest {
             assertTrue(player1.placeCardOnTable(1));
             assertEquals(1, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
+            player1.getHand().add(card);
+            assertFalse(player1.placeCardOnTable(-1));
         }
 
         @Test
