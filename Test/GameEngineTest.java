@@ -19,7 +19,7 @@ class GameEngineTest {
     @Mock
     Player player2;
     @Spy
-    BattleLogic battleLogic = new BattleLogic();
+    BattleLogic battleLogic;
     @Spy
     ArrayList<Card> mocklist;
     @Mock
