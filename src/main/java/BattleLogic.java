@@ -26,12 +26,11 @@ public class BattleLogic {
                 attackingCardDamage = RandomNumberGenerator.roll();
                 defendingCardDamage = RandomNumberGenerator.roll();
             }
+            damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
             if (attackingCardDamage > defendingCardDamage) {
-                damageToBeDealt = attackingCardDamage - defendingCardDamage;
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
             } else {
-                System.out.println("DODGE!");
-                //Move dodge to gui TODO
+                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
             }
         }
     }
