@@ -154,9 +154,15 @@ class PlayerTest {
     }
 
     @Test
-    void pickCardFromTable(){
+    void pickCardFromTableWithCardOnTable(){
         player1.getTable().add(card);
         assertEquals(card, player1.pickCardFromTable(1));
+    }
+
+    @Test
+    void pickCardFromTableWithEmptyTable(){
+        assertEquals(0, player1.getTable().size());
+        assertNull(player1.pickCardFromTable(0));
     }
 
     @Test
