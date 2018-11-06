@@ -1,9 +1,3 @@
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 public class Main {
  //   int rnd = RandomNumberGenerator.roll();
 /*
@@ -17,6 +11,7 @@ public class Main {
 */
 
     public static void main(String[] args) {
-        // launch(args);
+       GameEngine gameEngine = new GameEngine(new Player(), new Player(), new BattleLogic());
+       gameEngine.startGame();
     }
 }

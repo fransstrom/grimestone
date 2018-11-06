@@ -6,7 +6,7 @@ public class CreatureCard extends Card {
     public CreatureCard(){
         super();
         //Random HP from 1-7
-        this.hp = RandomNumberGenerator.rollCreatureHP();
+        this.hp = RandomNumberGenerator.roll();
         this.active = false;
     }
 

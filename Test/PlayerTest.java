@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ class PlayerTest {
 
     @Test
     void deckIsEmpty() {
-        assertTrue( player1.deckIsEmpty() );
+        player1.getDeck().clear();
+        assertTrue(player1.deckIsEmpty());
         player1.getDeck().add( card );
         assertFalse( player1.deckIsEmpty() );
     }
@@ -64,20 +66,15 @@ class PlayerTest {
         assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
-    @Test
-    void noCardsLeft() {
-        player1.getDeck().add(card);
-        assertFalse(player1.noCardsLeft());
-        player1.getDeck().remove(card);
-        assertTrue(player1.noCardsLeft());
-        player1.getHand().add(card);
-        player1.getTable().add(card);
-        assertFalse(player1.noCardsLeft());
-        player1.getHand().remove(card);
-        assertFalse(player1.noCardsLeft());
-        player1.getTable().remove(card);
-        assertTrue(player1.noCardsLeft());
-    }
+        @Test
+        void noCardsLeftInDeckTest(){
+            assertFalse(player1.noCardsLeftInDeck());
+            player1.getDeck().clear();
+            assertTrue(player1.noCardsLeftInDeck());
+            player1.getDeck().add(card);
+            assertFalse(player1.noCardsLeftInDeck());
+        }
+
 
     @Nested
     @DisplayName("Place card on table tests")
@@ -88,10 +85,10 @@ class PlayerTest {
             player1.getHand().add(card);
 
             assertEquals(1, player1.getHand().size());
-            assertTrue(player1.placeCardOnTable(0));
+            assertTrue(player1.placeCardOnTable(1));
             assertEquals(1, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
-            assertFalse(player1.placeCardOnTable(0));
+            assertFalse(player1.placeCardOnTable(1));
         }
 
         @Test
@@ -102,9 +99,11 @@ class PlayerTest {
             assertFalse(player1.placeCardOnTable(3));
             assertEquals(0, player1.getTable().size());
             assertEquals(1, player1.getHand().size());
-            assertTrue(player1.placeCardOnTable(0));
+            assertTrue(player1.placeCardOnTable(1));
             assertEquals(1, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
+            player1.getHand().add(card);
+            assertFalse(player1.placeCardOnTable(-1));
         }
 
         @Test
@@ -119,56 +118,54 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsNotEmpty() {
-        for (int i = 0; i < 10; i++) {
-            player1.getDeck().add( card );
-        }
         assertEquals( 10, player1.getDeck().size() );
-
         player1.drawCard();
-
         assertEquals( 1, player1.getHand().size() );
-
         assertEquals( 9, player1.getDeck().size() );
-
         assertTrue( player1.drawCard() );
     }
 
     @Test
     void drawCardWhenDeckIsEmpty() {
-
+        player1.getDeck().clear();
         assertEquals(0, player1.getDeck().size());
-
+        assertEquals(0, player1.getHand().size());
         player1.drawCard();
-
-        assertEquals( 0, player1.getDeck().size() );
-
-        assertEquals( 0, player1.getHand().size() );
-
-        assertFalse( player1.drawCard() );
-
+        assertEquals(0, player1.getDeck().size());
+        assertEquals(0, player1.getHand().size());
     }
 
     @Test
     void drawInitialHand() {
-        for (int i = 0; i < 10; i++) {
-            player1.getDeck().add(card);
-        }
         assertEquals(10, player1.getDeck().size());
-
         assertEquals(0, player1.getHand().size());
-
         player1.drawInitialHand();
-
         assertEquals(5, player1.getHand().size());
-        
         assertEquals(5, player1.getDeck().size());
     }
 
     @Test
     void generateDeck() {
+        player1.getDeck().clear();
         assertTrue( player1.getDeck().isEmpty() );
         player1.generateDeck();
         assertFalse( player1.getDeck().isEmpty() );
         assertEquals( 10, player1.getDeck().size() );
     }
+
+    @Test
+    void pickCardFromTable(){
+        player1.getTable().add(card);
+        assertEquals(card, player1.pickCardFromTable(1));
+    }
+
+    @Test
+    void hasActiveCardsOnTable(){
+        player1.getTable().add(creatureCard);
+        when(creatureCard.isActive()).thenReturn(true);
+        assertTrue(player1.hasActiveCardsOnTable());
+        when(creatureCard.isActive()).thenReturn(false);
+        assertFalse(player1.hasActiveCardsOnTable());
+    }
+
 }

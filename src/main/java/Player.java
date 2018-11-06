@@ -1,8 +1,11 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 
 public class Player {
     private int hp;
     private boolean isActive;
+    private boolean passTurn;
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
     private ArrayList<Card> graveyard;
@@ -10,11 +13,13 @@ public class Player {
 
     public Player() {
         this.hp = 10;
-        this.hand = new ArrayList<Card>();
-        this.deck = new ArrayList<Card>();
-        this.graveyard = new ArrayList<Card>();
-        this.table = new ArrayList<Card>();
+        this.hand = new ArrayList<>();
+        this.deck = new ArrayList<>();
+        this.graveyard = new ArrayList<>();
+        this.table = new ArrayList<>();
         this.isActive=false;
+        this.passTurn = false;
+        this.generateDeck();
     }
 
     public boolean isAlive() {
@@ -41,11 +46,11 @@ public class Player {
     }
 
     public boolean placeCardOnTable(int indexOfCard) {
-        if (getHand().size() == 0 || indexOfCard > getHand().size()) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < getHand().size()) {
             return false;
         } else {
-            this.table.add(hand.get(indexOfCard));
-            hand.remove(indexOfCard);
+            this.table.add(hand.get(indexOfCard - 1));
+            hand.remove(indexOfCard - 1);
             return true;
         }
     }
@@ -63,19 +68,40 @@ public class Player {
 
     public void drawInitialHand() {
         for (int i = 0; i < 5; i++) {
-            hand.add(deck.get(deck.size() - 1));
-            deck.remove((deck.size() - 1));
+            this.hand.add(deck.get(deck.size() - 1));
+            this.deck.remove((deck.size() - 1));
         }
     }
 
     public void generateDeck() {
         for (int i = 0; i < 10; i++) {
-            deck.add( new CreatureCard( RandomNumberGenerator.roll() ) );
+            this.deck.add( new CreatureCard( ) );
         }
     }
 
-    public boolean noCardsLeft() {
-        return this.deck.isEmpty() && this.hand.isEmpty() && this.table.isEmpty();
+    public boolean noCardsLeftInDeck(){
+        return this.deck.isEmpty();
+    }
+
+    public Card pickCardFromTable(int index){
+        if(this.getTable().size() >= index){
+            return this.table.get(index - 1);
+        }
+        return null;
+    }
+
+    public boolean hasActiveCardsOnTable(){
+        return this.table.stream().anyMatch(card -> ((CreatureCard)card).isActive());
+    }
+    public void setCardsOnTableToActive(){
+        this.table.forEach(card -> ((CreatureCard)card).setActive(true));
+    }
+
+    public void passTurn(Boolean passTurn){
+        this.passTurn = passTurn;
+    }
+    public boolean hasPassedTurn(){
+        return this.passTurn;
     }
 
     public int getHp() {

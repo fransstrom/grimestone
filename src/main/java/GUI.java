@@ -9,6 +9,18 @@ public class GUI {
     }
 
     public void render() {
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        printPlayerHud(gameEngine.getInactivePlayer());
+        System.out.printf("\n");
+        printPlayerCardsInHand(gameEngine.getInactivePlayer());
+        System.out.printf("\n\n");
+        printCardsOnTable();
+        System.out.printf("\n\n");
+        printPlayerCardsInHand(gameEngine.getActivePlayer());
+        System.out.printf("\n\n");
+        printPlayerHud(gameEngine.getActivePlayer());
+        System.out.printf("\n------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
     public void printPlayerHP(Player player) {
@@ -80,9 +92,11 @@ public class GUI {
             int cardPlacement = 1;
             for (Card card : cardList) {
                 if (card instanceof CreatureCard) {
-                    System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
-                } else {
-                    System.out.printf(" | Card " + cardPlacement + " HP: n/a | ");
+                    if (!((CreatureCard) card).isActive()) {
+                        System.out.printf("\u001B[31m | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | \u001B[0m");
+                    } else {
+                        System.out.printf(" | Card " + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
+                    }
                 }
                 cardPlacement++;
             }
@@ -158,6 +172,13 @@ public class GUI {
                 + "|                                                                                                                            |\n"
                 + "------------------------------------------------------------------------------------------------------------------------------";
         System.out.println(startMenuDesign);
+    }
+
+    public void printPickACardToPlay(){
+        System.out.println("Choose a card from your hand to play. Press 0 to pass turn.");
+    }
+    public void printChooseCardToAttackWith(){
+        System.out.println("Choose a card to attack with. Press 0 to pass turn.");
     }
 
 }
