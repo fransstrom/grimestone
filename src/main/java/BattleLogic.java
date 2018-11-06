@@ -23,10 +23,10 @@ public class BattleLogic {
             damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
             if (attackingCardDamage > defendingCardDamage) {
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
-                System.out.println("HIT! Attacking card looses " + damageToBeDealt + " HP!");
+                System.out.println("HIT! Defending card looses " + damageToBeDealt + " HP!");
             } else {
                 ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
-                System.out.println("MISS! Defending card looses " + damageToBeDealt + " HP!");
+                System.out.println("MISS! Attacking card looses " + damageToBeDealt + " HP!");
             }
         }
     }

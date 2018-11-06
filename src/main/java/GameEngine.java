@@ -60,7 +60,10 @@ public class GameEngine {
             if(getActivePlayer().hasPassedTurn()){
                 getActivePlayer().passTurn(false);
             }
+            getActivePlayer().moveDeadCardToGraveyard();
+            getInactivePlayer().moveDeadCardToGraveyard();
             switchActivePlayer();
+            gui.nextTurn();
         }
     }
 
