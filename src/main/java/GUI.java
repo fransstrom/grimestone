@@ -175,13 +175,10 @@ public class GUI {
     }
 
     public void printPickACardToPlay(){
-        System.out.println("Choose a card from your hand to play.");
-    }
-    public void invalidChoiceOfCard(){
-        System.out.println("Invalid choice of card.");
+        System.out.println("Choose a card from your hand to play. Press 0 to pass turn.");
     }
     public void printChooseCardToAttackWith(){
-        System.out.println("Choose a card to attack with!");
+        System.out.println("Choose a card to attack with. Press 0 to pass turn.");
     }
 
 }

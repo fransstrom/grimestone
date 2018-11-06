@@ -6,18 +6,12 @@ public class BattleLogic {
    private Card defendingCard;
    private Player defendingPlayer;
 
-    public BattleLogic() {
-
-    }
-
-
     public void cardVsPlayer() {
         int damage = RandomNumberGenerator.roll();
         defendingPlayer.setHp(defendingPlayer.getHp()-damage);
     }
 
     public void cardVsCard() {
-        // Print out damage TODO
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = RandomNumberGenerator.roll();
             int defendingCardDamage = RandomNumberGenerator.roll();
@@ -26,12 +20,13 @@ public class BattleLogic {
                 attackingCardDamage = RandomNumberGenerator.roll();
                 defendingCardDamage = RandomNumberGenerator.roll();
             }
+            damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
             if (attackingCardDamage > defendingCardDamage) {
-                damageToBeDealt = attackingCardDamage - defendingCardDamage;
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
+                System.out.println("HIT! Attacking card looses " + damageToBeDealt + " HP!");
             } else {
-                System.out.println("DODGE!");
-                //Move dodge to gui TODO
+                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
+                System.out.println("MISS! Defending card looses " + damageToBeDealt + " HP!");
             }
         }
     }

@@ -19,7 +19,7 @@ class GameEngineTest {
     @Mock
     Player player2;
     @Spy
-    BattleLogic battleLogic = new BattleLogic();
+    BattleLogic battleLogic;
     @Spy
     ArrayList<Card> mocklist;
     @Mock
@@ -31,8 +31,9 @@ class GameEngineTest {
     }
 
     @Test
-    void setUpNewGame() {
-        gameEngine.startNewGame();
+    void startGame() {
+        when(player1.getHp()).thenReturn(0);
+        gameEngine.startGame();
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();
     }
@@ -54,11 +55,10 @@ class GameEngineTest {
         GameEngine gameEngineSpy = spy(gameEngine);
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
-        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
-        doNothing().when(battleLogic).cardVsCard();
+        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
         gameEngineSpy.attack();
-        verify(battleLogic, times(0)).cardVsPlayer();
-        verify(battleLogic, times(1)).cardVsCard();
+        verify(battleLogic, times(1)).cardVsPlayer();
+        verify(battleLogic, times(0)).cardVsCard();
     }
 
     @Test
@@ -73,8 +73,8 @@ class GameEngineTest {
     public void gameOverByHP() {
 
 
-        when(player1.noCardsLeft()).thenReturn(false);
-        when(player2.noCardsLeft()).thenReturn(false);
+        when(player1.noCardsLeftInDeck()).thenReturn(false);
+        when(player2.noCardsLeftInDeck()).thenReturn(false);
 
         when(player1.getHp()).thenReturn(1);
         when(player2.getHp()).thenReturn(9);
@@ -85,7 +85,6 @@ class GameEngineTest {
         assertTrue(gameEngine.isGameOver());
 
         when(player1.getHp()).thenReturn(-1);
-        when(player2.getHp()).thenReturn(11);
         assertTrue(gameEngine.isGameOver());
 
 
