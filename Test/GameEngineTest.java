@@ -70,7 +70,7 @@ class GameEngineTest {
     }
 
     @Test
-    public void gameOverByHP() {
+    void gameOverByHP() {
 
 
         when(player1.noCardsLeftInDeck()).thenReturn(false);
@@ -104,6 +104,18 @@ class GameEngineTest {
         when(player1.noCardsLeftInDeck()).thenReturn(false);
         when(player2.noCardsLeftInDeck()).thenReturn(true);
         assertTrue(gameEngine.isGameOver());
+    }
+
+    @Test
+    void getInactivePlayerWhenPlayerOneIsInactive(){
+        when(player1.isActive()).thenReturn(false);
+        assertEquals(player1, gameEngine.getInactivePlayer());
+    }
+
+    @Test
+    void getInactivePlayerWhenPlayerTwoIsInactive(){
+        when(player1.isActive()).thenReturn(true);
+        assertEquals(player2, gameEngine.getInactivePlayer());
     }
 
     @Test
