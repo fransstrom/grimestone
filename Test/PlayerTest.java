@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -172,6 +173,15 @@ class PlayerTest {
         assertTrue(player1.hasActiveCardsOnTable());
         when(creatureCard.isActive()).thenReturn(false);
         assertFalse(player1.hasActiveCardsOnTable());
+    }
+
+    @Test
+    void setCardsOnTableToActive(){
+        CreatureCard creatureCard = spy(CreatureCard.class);
+        player1.getTable().add(creatureCard);
+        assertFalse(creatureCard.isActive());
+        player1.setCardsOnTableToActive();
+        assertTrue(creatureCard.isActive());
     }
 
 }
