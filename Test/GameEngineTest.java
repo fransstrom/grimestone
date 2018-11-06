@@ -14,8 +14,8 @@ import static org.mockito.Mockito.*;
 class GameEngineTest {
 
     private GameEngine gameEngine;
-    @Mock
-    Player player1;
+    @Spy
+    Player player1 = new Player();
     @Mock
     Player player2;
     @Spy
@@ -116,6 +116,13 @@ class GameEngineTest {
     void getInactivePlayerWhenPlayerTwoIsInactive(){
         when(player1.isActive()).thenReturn(true);
         assertEquals(player2, gameEngine.getInactivePlayer());
+    }
+
+    @Test
+    void switchActivePlayer(){
+        assertFalse(player1.isActive());
+        gameEngine.switchActivePlayer();
+        assertTrue(player1.isActive());
     }
 
     @Test
