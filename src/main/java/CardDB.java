@@ -1,0 +1,2 @@
+public class CardDB {
+}
