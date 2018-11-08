@@ -115,7 +115,7 @@ public class Player {
     }
 
     public void refillMana(){
-
+        setMana(getMaxMana());
     }
 
     public int getHp() {
