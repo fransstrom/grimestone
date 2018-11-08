@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Player {
     private int hp;
     private int mana;
+    private int maxMana;
     private boolean isActive;
     private boolean passTurn;
     private ArrayList<Card> hand;
@@ -15,6 +16,7 @@ public class Player {
     public Player() {
         this.hp = 20;
         this.mana = 0;
+        this.maxMana = 0;
         this.hand = new ArrayList<>();
         this.deck = new ArrayList<>();
         this.graveyard = new ArrayList<>();
@@ -106,10 +108,14 @@ public class Player {
         return this.passTurn;
     }
 
-    public void increaseMana(){
-        if(getMana() < 10){
-            setMana(getMana()+1);
+    public void increaseMaxMana(){
+        if(getMaxMana() < 10){
+            setMaxMana(getMaxMana()+1);
         }
+    }
+
+    public void refillMana(){
+
     }
 
     public int getHp() {
@@ -166,5 +172,13 @@ public class Player {
 
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
     }
 }

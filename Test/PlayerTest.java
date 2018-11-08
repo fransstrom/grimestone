@@ -186,18 +186,35 @@ class PlayerTest {
 
     @Test
     void increaseManaWhenManaIsNotMax(){
-        assertEquals(0, player1.getMana());
-        player1.increaseMana();
-        assertEquals(1, player1.getMana());
-        player1.increaseMana();
-        assertEquals(2, player1.getMana());
+        assertEquals(0, player1.getMaxMana());
+        player1.increaseMaxMana();
+        assertEquals(1, player1.getMaxMana());
+        player1.increaseMaxMana();
+        assertEquals(2, player1.getMaxMana());
     }
 
     @Test
     void increaseManaWhenManaIsMax(){
+        player1.setMaxMana(10);
+        assertEquals(10, player1.getMaxMana());
+        player1.increaseMaxMana();
+        assertEquals(10, player1.getMaxMana());
+    }
+
+    @Test
+    void refillManaWithHalfEmptyMana(){
+        player1.setMaxMana(10);
+        assertEquals(0, player1.getMana());
+        player1.refillMana();
+        assertEquals(10, player1.getMana());
+    }
+
+    @Test
+    void refillManaWithFullMana(){
+        player1.setMaxMana(10);
         player1.setMana(10);
         assertEquals(10, player1.getMana());
-        player1.increaseMana();
+        player1.refillMana();
         assertEquals(10, player1.getMana());
     }
 
