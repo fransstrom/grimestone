@@ -107,7 +107,9 @@ public class Player {
     }
 
     public void increaseMana(){
-
+        if(getMana() < 10){
+            setMana(getMana()+1);
+        }
     }
 
     public int getHp() {

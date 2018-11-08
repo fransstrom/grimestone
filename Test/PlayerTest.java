@@ -196,6 +196,7 @@ class PlayerTest {
     @Test
     void increaseManaWhenManaIsMax(){
         player1.setMana(10);
+        assertEquals(10, player1.getMana());
         player1.increaseMana();
         assertEquals(10, player1.getMana());
     }
