@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     private int hp;
+    private int mana;
     private boolean isActive;
     private boolean passTurn;
     private ArrayList<Card> hand;
@@ -12,7 +13,8 @@ public class Player {
     private ArrayList<Card> table;
 
     public Player() {
-        this.hp = 10;
+        this.hp = 20;
+        this.mana = 10;
         this.hand = new ArrayList<>();
         this.deck = new ArrayList<>();
         this.graveyard = new ArrayList<>();
@@ -150,5 +152,13 @@ public class Player {
 
     public void setActive(boolean active) {
         this.isActive = active;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 }
