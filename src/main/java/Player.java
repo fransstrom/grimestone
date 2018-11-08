@@ -14,7 +14,7 @@ public class Player {
 
     public Player() {
         this.hp = 20;
-        this.mana = 10;
+        this.mana = 0;
         this.hand = new ArrayList<>();
         this.deck = new ArrayList<>();
         this.graveyard = new ArrayList<>();
@@ -104,6 +104,10 @@ public class Player {
     }
     public boolean hasPassedTurn(){
         return this.passTurn;
+    }
+
+    public void increaseMana(){
+
     }
 
     public int getHp() {

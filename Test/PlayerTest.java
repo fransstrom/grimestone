@@ -184,4 +184,13 @@ class PlayerTest {
         assertTrue(creatureCard.isActive());
     }
 
+    @Test
+    void increaseManaWhenManaIsNotMax(){
+        assertEquals(0, player1.getMana());
+        player1.increaseMana();
+        assertEquals(1, player1.getMana());
+        player1.increaseMana();
+        assertEquals(2, player1.getMana());
+    }
+
 }
