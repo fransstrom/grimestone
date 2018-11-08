@@ -14,8 +14,8 @@ import static org.mockito.Mockito.*;
 class GameEngineTest {
 
     private GameEngine gameEngine;
-    @Mock
-    Player player1;
+    @Spy
+    Player player1 = new Player();
     @Mock
     Player player2;
     @Spy
@@ -70,7 +70,7 @@ class GameEngineTest {
     }
 
     @Test
-    public void gameOverByHP() {
+    void gameOverByHP() {
 
 
         when(player1.noCardsLeftInDeck()).thenReturn(false);
@@ -104,6 +104,25 @@ class GameEngineTest {
         when(player1.noCardsLeftInDeck()).thenReturn(false);
         when(player2.noCardsLeftInDeck()).thenReturn(true);
         assertTrue(gameEngine.isGameOver());
+    }
+
+    @Test
+    void getInactivePlayerWhenPlayerOneIsInactive(){
+        when(player1.isActive()).thenReturn(false);
+        assertEquals(player1, gameEngine.getInactivePlayer());
+    }
+
+    @Test
+    void getInactivePlayerWhenPlayerTwoIsInactive(){
+        when(player1.isActive()).thenReturn(true);
+        assertEquals(player2, gameEngine.getInactivePlayer());
+    }
+
+    @Test
+    void switchActivePlayer(){
+        assertFalse(player1.isActive());
+        gameEngine.switchActivePlayer();
+        assertTrue(player1.isActive());
     }
 
     @Test

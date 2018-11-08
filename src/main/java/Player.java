@@ -46,7 +46,7 @@ public class Player {
     }
 
     public boolean placeCardOnTable(int indexOfCard) {
-        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < getHand().size()) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
             return false;
         } else {
             this.table.add(hand.get(indexOfCard - 1));
@@ -84,7 +84,7 @@ public class Player {
     }
 
     public Card pickCardFromTable(int index){
-        if(this.getTable().size() >= index){
+        if(this.getTable().size() >= index && index > 0){
             return this.table.get(index - 1);
         }
         return null;

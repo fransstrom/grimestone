@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -154,9 +155,15 @@ class PlayerTest {
     }
 
     @Test
-    void pickCardFromTable(){
+    void pickCardFromTableWithCardOnTable(){
         player1.getTable().add(card);
         assertEquals(card, player1.pickCardFromTable(1));
+    }
+
+    @Test
+    void pickCardFromTableWithEmptyTable(){
+        assertEquals(0, player1.getTable().size());
+        assertNull(player1.pickCardFromTable(0));
     }
 
     @Test
@@ -166,6 +173,15 @@ class PlayerTest {
         assertTrue(player1.hasActiveCardsOnTable());
         when(creatureCard.isActive()).thenReturn(false);
         assertFalse(player1.hasActiveCardsOnTable());
+    }
+
+    @Test
+    void setCardsOnTableToActive(){
+        CreatureCard creatureCard = spy(CreatureCard.class);
+        player1.getTable().add(creatureCard);
+        assertFalse(creatureCard.isActive());
+        player1.setCardsOnTableToActive();
+        assertTrue(creatureCard.isActive());
     }
 
 }

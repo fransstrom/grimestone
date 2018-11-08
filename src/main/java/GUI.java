@@ -181,4 +181,8 @@ public class GUI {
         System.out.println("Choose a card to attack with. Press 0 to pass turn.");
     }
 
+    public void nextTurn(){
+        System.out.println("*************** NEXT TURN *********************");
+    }
+
 }
