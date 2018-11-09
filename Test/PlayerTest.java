@@ -204,7 +204,8 @@ class PlayerTest {
     @Test
     void refillManaWithHalfEmptyMana(){
         player1.setMaxMana(10);
-        assertEquals(0, player1.getMana());
+        player1.setMana(5);
+        assertEquals(5, player1.getMana());
         player1.refillMana();
         assertEquals(10, player1.getMana());
     }
