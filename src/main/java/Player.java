@@ -109,13 +109,13 @@ public class Player {
     }
 
     public void increaseMaxMana(){
-        if(getMaxMana() < 10){
-            setMaxMana(getMaxMana()+1);
+        if(maxMana < 10){
+            maxMana++;
         }
     }
 
     public void refillMana(){
-        setMana(getMaxMana());
+        mana = maxMana;
     }
 
     public int getHp() {
