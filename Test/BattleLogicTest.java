@@ -30,7 +30,7 @@ class BattleLogicTest {
     void cardVsPlayer() {
         battleLogic.setDefendingPlayer(player);
         battleLogic.cardVsPlayer();
-        assertTrue(player.getHp()<10);
+        assertTrue(player.getHp()<20);
     }
 
     @RepeatedTest(5)
