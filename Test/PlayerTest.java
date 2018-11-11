@@ -183,6 +183,12 @@ class PlayerTest {
         player1.setCardsOnTableToActive();
         assertTrue(creatureCard.isActive());
     }
+    @Test
+    void checkManaTest() {
+        int cardMana = 5;
+        player1.setMana( 5 );
+        assertTrue( player1.checkMana( 5 ) );
+    }
 
     @Test
     void increaseManaWhenManaIsNotMax(){

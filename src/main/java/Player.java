@@ -24,6 +24,7 @@ public class Player {
         this.isActive=false;
         this.passTurn = false;
         this.generateDeck();
+        
     }
 
     public boolean isAlive() {
@@ -108,14 +109,20 @@ public class Player {
         return this.passTurn;
     }
 
+
     public void increaseMaxMana(){
         if(maxMana < 10){
             maxMana++;
         }
     }
 
-    public void refillMana(){
+    public void refillMana() {
         mana = maxMana;
+    }
+
+    public boolean checkMana(int cardMana) {
+        return false;
+
     }
 
     public int getHp() {
