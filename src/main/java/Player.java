@@ -123,12 +123,7 @@ public class Player {
     }
 
     public boolean checkMana( int cardMana ) {
-        if (this.mana < cardMana) {
-            return false;
-        }else {
-            return true;
-        }
-
+        return (this.mana >= cardMana);
     }
 
     public int getHp() {

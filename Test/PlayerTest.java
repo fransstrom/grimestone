@@ -192,7 +192,7 @@ class PlayerTest {
         assertTrue( player1.checkMana( -1 ) );
         player1.setMana( 1 );
         assertFalse( player1.checkMana( 5 ) );
-        
+
     }
 
     @Test
