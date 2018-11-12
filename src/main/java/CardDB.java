@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CardDB {
+
+    private static final Random rand = new Random();
 
     private static ArrayList<CreatureCard> creatureCards = new ArrayList<>();
     static {
@@ -16,6 +19,24 @@ public class CardDB {
     private static ArrayList<MagicCard> magicCards = new ArrayList<>();
     static {
         magicCards.add(new MagicCard("Holy Fire", 3, Card.Type.NEUTRAL, new HealPlayerEffect(7)));
+    }
+
+    public static Card getRandomCreatureCard(){
+        int bound = creatureCards.size();
+        int index = rand.nextInt(bound);
+        return creatureCards.get(index);
+    }
+
+    public static Card getRandomSpecialCreatureCard(){
+        int bound = specialCreatureCards.size();
+        int index = rand.nextInt(bound);
+        return specialCreatureCards.get(index);
+    }
+
+    public static Card getRandomMagicCard(){
+        int bound = magicCards.size();
+        int index = rand.nextInt(bound);
+        return magicCards.get(index);
     }
 
 
