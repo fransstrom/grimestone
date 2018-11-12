@@ -195,6 +195,12 @@ class PlayerTest {
         player1.setMana(10);
         assertTrue(player1.checkMana(3));
     }
+
+    @Test
+    void checkManaWithEqualPlayerAndCardMana(){
+        player1.setMana(5);
+        assertTrue(player1.checkMana(5));
+    }
     
     @Test
     void increaseManaWhenManaIsNotMax(){
