@@ -21,9 +21,10 @@ public class Player {
         this.deck = new ArrayList<>();
         this.graveyard = new ArrayList<>();
         this.table = new ArrayList<>();
-        this.isActive=false;
+        this.isActive = false;
         this.passTurn = false;
         this.generateDeck();
+
     }
 
     public boolean isAlive() {
@@ -40,21 +41,21 @@ public class Player {
 
     public void moveDeadCardToGraveyard() {
         ArrayList<Card> deadCards = new ArrayList<>();
-        for(Card card: this.table){
-            if(((CreatureCard)card).getHp() < 1){
-               deadCards.add(card);
+        for (Card card : this.table) {
+            if (((CreatureCard) card).getHp() < 1) {
+                deadCards.add( card );
             }
         }
-        this.table.removeAll(deadCards);
-        this.graveyard.addAll(deadCards);
+        this.table.removeAll( deadCards );
+        this.graveyard.addAll( deadCards );
     }
 
-    public boolean placeCardOnTable(int indexOfCard) {
+    public boolean placeCardOnTable( int indexOfCard ) {
         if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
             return false;
         } else {
-            this.table.add(hand.get(indexOfCard - 1));
-            hand.remove(indexOfCard - 1);
+            this.table.add( hand.get( indexOfCard - 1 ) );
+            hand.remove( indexOfCard - 1 );
             return true;
         }
     }
@@ -62,9 +63,9 @@ public class Player {
     public boolean drawCard() {
         if (getDeck().size() == 0) {
             return false;
-        }else{
-            hand.add(deck.get(0));
-            deck.remove(0);
+        } else {
+            hand.add( deck.get( 0 ) );
+            deck.remove( 0 );
 
             return true;
         }
@@ -72,50 +73,57 @@ public class Player {
 
     public void drawInitialHand() {
         for (int i = 0; i < 5; i++) {
-            this.hand.add(deck.get(deck.size() - 1));
-            this.deck.remove((deck.size() - 1));
+            this.hand.add( deck.get( deck.size() - 1 ) );
+            this.deck.remove( (deck.size() - 1) );
         }
     }
 
     public void generateDeck() {
         for (int i = 0; i < 10; i++) {
-            this.deck.add( new CreatureCard( ) );
+            this.deck.add( new CreatureCard() );
         }
     }
 
-    public boolean noCardsLeftInDeck(){
+    public boolean noCardsLeftInDeck() {
         return this.deck.isEmpty();
     }
 
-    public Card pickCardFromTable(int index){
-        if(this.getTable().size() >= index && index > 0){
-            return this.table.get(index - 1);
+    public Card pickCardFromTable( int index ) {
+        if (this.getTable().size() >= index && index > 0) {
+            return this.table.get( index - 1 );
         }
         return null;
     }
 
-    public boolean hasActiveCardsOnTable(){
-        return this.table.stream().anyMatch(card -> ((CreatureCard)card).isActive());
-    }
-    public void setCardsOnTableToActive(){
-        this.table.forEach(card -> ((CreatureCard)card).setActive(true));
+    public boolean hasActiveCardsOnTable() {
+        return this.table.stream().anyMatch( card -> ((CreatureCard) card).isActive() );
     }
 
-    public void passTurn(Boolean passTurn){
+    public void setCardsOnTableToActive() {
+        this.table.forEach( card -> ((CreatureCard) card).setActive( true ) );
+    }
+
+    public void passTurn( Boolean passTurn ) {
         this.passTurn = passTurn;
     }
-    public boolean hasPassedTurn(){
+
+    public boolean hasPassedTurn() {
         return this.passTurn;
     }
 
-    public void increaseMaxMana(){
-        if(maxMana < 10){
+
+    public void increaseMaxMana() {
+        if (maxMana < 10) {
             maxMana++;
         }
     }
 
-    public void refillMana(){
+    public void refillMana() {
         mana = maxMana;
+    }
+
+    public boolean checkMana( int cardMana ) {
+        return (this.mana >= cardMana);
     }
 
     public int getHp() {
@@ -162,7 +170,7 @@ public class Player {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive( boolean active ) {
         this.isActive = active;
     }
 
@@ -170,7 +178,7 @@ public class Player {
         return mana;
     }
 
-    public void setMana(int mana) {
+    public void setMana( int mana ) {
         this.mana = mana;
     }
 
@@ -178,7 +186,7 @@ public class Player {
         return maxMana;
     }
 
-    public void setMaxMana(int maxMana) {
+    public void setMaxMana( int maxMana ) {
         this.maxMana = maxMana;
     }
 }
