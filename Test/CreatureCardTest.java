@@ -9,7 +9,7 @@ class CreatureCardTest {
 
     @BeforeEach
     void setUp() {
-        card = new CreatureCard(10);
+        card = new CreatureCard("test_card", 1, Card.Type.NEUTRAL, 10);
     }
 
     @Test
