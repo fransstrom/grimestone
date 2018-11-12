@@ -3,6 +3,15 @@ public class CreatureCard extends Card {
     private boolean active;
     private int hp;
 
+    public CreatureCard(){
+        super();
+    }
+
+    public CreatureCard(int hp){
+        super();
+        this.hp = hp;
+    }
+
     //If HP is not provided, a random value will be generated
     public CreatureCard(String name, int manaCost, Type type){
         super(name, manaCost, type);
