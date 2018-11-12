@@ -2,7 +2,7 @@ public class SpecialCreatureCard extends CreatureCard {
     IEffect effect;
     String effectText;
 
-    SpecialCreatureCard(IEffect effect){
+    public SpecialCreatureCard(IEffect effect){
         super();
         this.effect = effect;
     }
