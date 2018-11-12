@@ -224,10 +224,4 @@ class PlayerTest {
         assertEquals(10, player1.getMana());
     }
 
-    @Test
-    void playCard(){
-        when(card instanceof CreatureCard).thenReturn(true);
-        when(card.effect()).then(doNothing());
-    }
-
 }
