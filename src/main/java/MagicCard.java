@@ -1,7 +1,6 @@
 public class MagicCard extends Card {
-    IEffect effect;
-    String effectText;
-    boolean isConsumed;
+    private IEffect effect;
+    private boolean isConsumed;
 
     public MagicCard (IEffect effect){
         super();
