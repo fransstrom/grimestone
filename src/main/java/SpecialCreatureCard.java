@@ -1,6 +1,5 @@
 public class SpecialCreatureCard extends CreatureCard {
-    IEffect effect;
-    String effectText;
+    private IEffect effect;
 
     SpecialCreatureCard(IEffect effect){
         super();
