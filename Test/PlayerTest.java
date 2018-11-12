@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerTest {
@@ -115,7 +116,6 @@ class PlayerTest {
         @Test
         void placeCardOnTableWhenHandIsEmpty() {
             assertEquals(0, player1.getHand().size());
-
             assertFalse(player1.placeCardOnTable(0));
             assertEquals(0, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
@@ -264,10 +264,37 @@ class PlayerTest {
         assertEquals(10, player1.getMana());
     }
 
-    @Test
-    void playCard(){
-        when(card instanceof CreatureCard).thenReturn(true);
-        when(card.effect()).then(doNothing());
+    @Nested
+    @DisplayName("PlayCard")
+    class playCard{
+
+        @Test
+        void creatureCard(){
+            when(card instanceof CreatureCard).thenReturn(true);
+            when(card.effect()).then(doNothing());
+            playCard(creatureCard);
+            verify(player1, Mockito.times(1)).placeCardOnTable();
+        }
+
+        @Test
+        void specialCreatureCard(){
+            when(card instanceof SpecialCreatureCard).thenReturn(true);
+            when(card.effect()).then(doNothing());
+            playCard(specialCreatureCard);
+            verify(specialCreatureCard, Mockito.times(1)).effect();
+
+        }
+
+        @Test
+        void magicCard(){
+            when(card instanceof MagicCard).thenReturn(true);
+            when(card.effect()).then(doNothing());
+            playCard(magicCard);
+            verify(magicCard, Mockito.times(1)).effect();
+        }
+
+
+
     }
 
 }
