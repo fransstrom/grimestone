@@ -21,6 +21,7 @@ class CardTest {
 
     @Test
     void isSuperEffective() {
-
+        when(card.getType()).thenReturn(Card.Type.WATER);
+        assertTrue(card.isSuperEffective(Card.Type.FIRE));
     }
 }
