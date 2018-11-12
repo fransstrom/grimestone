@@ -100,7 +100,10 @@ public class Player {
     }
 
     public void setCardsOnTableToActive() {
-        this.table.forEach( card -> ((CreatureCard) card).setActive( true ) );
+        this.table.forEach( card -> ((CreatureCard) card).setActivationCountdown( ((CreatureCard) card).getActivationCountdown() -1 ) );
+        this.table.stream()
+                .filter(card -> ((CreatureCard)card).getActivationCountdown() < 1)
+                .forEach(card -> ((CreatureCard)card).setActive(true));
     }
 
     public void passTurn( Boolean passTurn ) {
