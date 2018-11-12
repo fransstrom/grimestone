@@ -178,10 +178,16 @@ class PlayerTest {
     @Test
     void setCardsOnTableToActive(){
         CreatureCard creatureCard = spy(CreatureCard.class);
+        creatureCard.setActivationCountdown(1);
         player1.getTable().add(creatureCard);
         assertFalse(creatureCard.isActive());
         player1.setCardsOnTableToActive();
         assertTrue(creatureCard.isActive());
+
+        creatureCard.setActivationCountdown(2);
+        creatureCard.setActive(false);
+        player1.setCardsOnTableToActive();
+        assertFalse(creatureCard.isActive());
     }
 
     @Test
