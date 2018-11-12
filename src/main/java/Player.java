@@ -181,4 +181,8 @@ public class Player {
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
     }
+
+    boolean playCard(){
+        return false;
+    }
 }
