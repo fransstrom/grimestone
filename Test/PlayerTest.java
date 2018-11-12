@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +24,10 @@ class PlayerTest {
     private Card card;
     @Mock
     private CreatureCard creatureCard;
+    @Mock
+    private MagicCard magicCard;
+    @Mock
+    private SpecialCreatureCard specialCreatureCard;
 
     @BeforeEach
     void setUp() {
@@ -217,6 +222,12 @@ class PlayerTest {
         assertEquals(10, player1.getMana());
         player1.refillMana();
         assertEquals(10, player1.getMana());
+    }
+
+    @Test
+    void playCard(){
+        when(card instanceof CreatureCard).thenReturn(true);
+        when(card.effect()).then(doNothing());
     }
 
 }
