@@ -1,7 +1,7 @@
 public class SpecialCreatureCard extends CreatureCard {
     private IEffect effect;
 
-    SpecialCreatureCard(IEffect effect){
+    public SpecialCreatureCard(IEffect effect){
         super();
         this.effect = effect;
     }
