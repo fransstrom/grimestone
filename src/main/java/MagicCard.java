@@ -7,12 +7,17 @@ public class MagicCard extends Card {
         this.effect =effect;
     }
 
-    public MagicCard(String name, int manaCost, Type type, IEffect effect) {
-       super(name, manaCost, type);
+    public MagicCard(String name, int manaCost, IEffect effect) {
+       super(name, manaCost);
        this.effect = effect;
     }
 
-    String getText(){
+    public String getText(){
         return this.effect.getText();
     }
+
+    public String trigger(){
+        return this.effect.trigger();
+    }
+
 }

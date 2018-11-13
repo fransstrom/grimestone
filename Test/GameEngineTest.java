@@ -15,7 +15,7 @@ class GameEngineTest {
 
     private GameEngine gameEngine;
     @Spy
-    Player player1 = new Player();
+    Player player1;
     @Mock
     Player player2;
     @Spy
@@ -123,6 +123,22 @@ class GameEngineTest {
         assertFalse(player1.isActive());
         gameEngine.switchActivePlayer();
         assertTrue(player1.isActive());
+    }
+
+    @Test
+    void resolveEffectHealPlayer(){
+        player1.setActive(true);
+        player1.setHp(5);
+        gameEngine.resolveEffect("HEAL_PLAYER_5");
+        assertEquals(10, player1.getHp());
+    }
+
+    @Test
+    void resolveEffectNegativeHealAmount(){
+        player1.setActive(true);
+        player1.setHp(5);
+        gameEngine.resolveEffect("HEAL_PLAYER_-5");
+        assertEquals(10, player1.getHp());
     }
 
     @Test

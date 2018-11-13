@@ -13,9 +13,11 @@ public class Player {
     private ArrayList<Card> deck;
     private ArrayList<Card> graveyard;
     private ArrayList<Card> table;
+    private int maxHp;
 
     public Player() {
         this.hp = 20;
+        this.maxHp = this.hp;
         this.mana = 0;
         this.maxMana = 0;
         this.hand = new ArrayList<>();
@@ -120,6 +122,12 @@ public class Player {
         return this.passTurn;
     }
 
+    public void heal(int healAmount){
+        if((this.hp + healAmount) > maxHp){
+            this.hp = maxHp;
+        }
+        else this.hp += healAmount;
+    }
 
     public void increaseMaxMana() {
         if (maxMana < 10) {
@@ -137,6 +145,10 @@ public class Player {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 
     public void setHp(int hp) {
@@ -197,5 +209,20 @@ public class Player {
 
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
+    }
+
+    public String playCard(int index){
+        if(index <= hand.size() && index > 0) {
+            Card card = hand.get(index - 1);
+            if (card instanceof CreatureCard) {
+                if (placeCardOnTable(index))
+                    return "PLAYED_CREATURECARD";
+            } else if (card instanceof MagicCard) {
+                graveyard.add(hand.get(index - 1));
+                hand.remove(index - 1);
+                return ((MagicCard) card).trigger();
+            }
+        }
+        return "FAULTY_CHOICE";
     }
 }

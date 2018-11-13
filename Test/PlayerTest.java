@@ -7,12 +7,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerTest {
@@ -114,7 +117,6 @@ class PlayerTest {
         @Test
         void placeCardOnTableWhenHandIsEmpty() {
             assertEquals(0, player1.getHand().size());
-
             assertFalse(player1.placeCardOnTable(0));
             assertEquals(0, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
@@ -123,10 +125,10 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsNotEmpty() {
-        assertEquals(10, player1.getDeck().size());
+        assertEquals(20, player1.getDeck().size());
         player1.drawCard();
         assertEquals(1, player1.getHand().size());
-        assertEquals(9, player1.getDeck().size());
+        assertEquals(19, player1.getDeck().size());
         assertTrue(player1.drawCard());
     }
 
@@ -142,11 +144,24 @@ class PlayerTest {
 
     @Test
     void drawInitialHand() {
-        assertEquals(10, player1.getDeck().size());
+        assertEquals(20, player1.getDeck().size());
         assertEquals(0, player1.getHand().size());
         player1.drawInitialHand();
         assertEquals(5, player1.getHand().size());
-        assertEquals(5, player1.getDeck().size());
+        assertEquals(15, player1.getDeck().size());
+    }
+
+    @Test
+    void overHeal(){
+        player1.setHp(15);
+        player1.heal(6);
+        assertEquals(20, player1.getHp());
+    }
+    @Test
+    void heal(){
+        player1.setHp(10);
+        player1.heal(5);
+        assertEquals(15, player1.getHp());
     }
 
     @Test
@@ -261,6 +276,49 @@ class PlayerTest {
         assertEquals(10, player1.getMana());
         player1.refillMana();
         assertEquals(10, player1.getMana());
+    }
+
+    @Nested
+    @DisplayName("PlayCard")
+    class playCard{
+
+        @BeforeEach
+        void setUp(){
+            player1.getHand().add(creatureCard);
+            player1.getHand().add(specialCreatureCard);
+            player1.getHand().add(magicCard);
+        }
+
+        @Test
+        void creatureCard(){
+            assertEquals(3, player1.getHand().size());
+            assertEquals("PLAYED_CREATURECARD", player1.playCard(1));
+            assertEquals(2, player1.getHand().size());
+        }
+
+        @Test
+        void specialCreatureCard(){
+            assertEquals(3, player1.getHand().size());
+            assertEquals("PLAYED_CREATURECARD", player1.playCard(2));
+            assertEquals(2, player1.getHand().size());
+        }
+
+        @Test
+        void magicCard(){
+            when(magicCard.trigger()).thenReturn("HEAL_PLAYER_5");
+            assertEquals("HEAL_PLAYER_5", player1.playCard(3));
+            verify(magicCard, Mockito.times(1)).trigger();
+            assertEquals(2, player1.getHand().size());
+        }
+
+        @Test
+        void faultyChoice(){
+            assertEquals("FAULTY_CHOICE", player1.playCard(7));
+            assertNotEquals("FAULTY_CHOICE", player1.playCard(3));
+            assertEquals("FAULTY_CHOICE", player1.playCard(-3));
+        }
+
+
     }
 
 }
