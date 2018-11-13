@@ -18,6 +18,10 @@ public class HealPlayerEffect implements IEffect{
     public void trigger(Player player) {
      // implement functionality ?
         player.setHp(player.getHp()+this.healAmount);
+    }
+
+    @Override
+    public void trigger(Card player) {
 
     }
 

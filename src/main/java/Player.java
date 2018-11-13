@@ -134,7 +134,11 @@ public class Player {
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        if (hp > 20) {
+            this.hp = 20;
+        } else {
+            this.hp = hp;
+        }
     }
 
     public ArrayList<Card> getHand() {
