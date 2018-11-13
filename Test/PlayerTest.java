@@ -281,23 +281,22 @@ class PlayerTest {
         @Test
         void creatureCard(){
             assertEquals(3, player1.getHand().size());
-            assertEquals("", player1.playCard(1));
+            assertEquals("PLAYED_CREATURECARD", player1.playCard(1));
             assertEquals(2, player1.getHand().size());
         }
 
         @Test
         void specialCreatureCard(){
             assertEquals(3, player1.getHand().size());
-            assertEquals("", player1.playCard(2));
+            assertEquals("PLAYED_CREATURECARD", player1.playCard(2));
             assertEquals(2, player1.getHand().size());
         }
 
         @Test
         void magicCard(){
-            when(magicCard.getEffect()).thenReturn(effect);
-            when(effect.trigger()).thenReturn("HEAL_PLAYER_5");
+            when(magicCard.trigger()).thenReturn("HEAL_PLAYER_5");
             assertEquals("HEAL_PLAYER_5", player1.playCard(3));
-            verify(magicCard, Mockito.times(1)).getEffect();
+            verify(magicCard, Mockito.times(1)).trigger();
             assertEquals(2, player1.getHand().size());
         }
 

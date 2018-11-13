@@ -5,12 +5,19 @@ public class CreatureCard extends Card {
     private int activationCountdown;
     private int attack;
     private int defense;
+    private Type type;
+
+
+    public enum Type{
+        WATER, FIRE, GRASS, NEUTRAL
+    }
 
     public CreatureCard(){
         super();
         this.activationCountdown = 1;
         this.attack = 1;
         this.defense = 1;
+        this.type = Type.NEUTRAL;
     }
 
     public CreatureCard(int hp){
@@ -19,12 +26,14 @@ public class CreatureCard extends Card {
         this.activationCountdown = 1;
         this.attack = 1;
         this.defense = 1;
+        this.type = Type.NEUTRAL;
     }
 
     //If HP is not provided, a random value will be generated
     public CreatureCard(String name, int manaCost, Type type, int activationCountdown, int attack, int defense){
-        super(name, manaCost, type);
+        super(name, manaCost);
         //Random HP from 1-7
+        this.type = type;
         this.hp = RandomNumberGenerator.roll();
         this.activationCountdown = activationCountdown;
         this.active = false;
@@ -33,12 +42,33 @@ public class CreatureCard extends Card {
     }
 
     public CreatureCard(String name, int manaCost, Type type, int activationCountdown, int attack, int defense, int hp) {
-        super(name, manaCost, type);
+        super(name, manaCost);
+        this.type = type;
         this.activationCountdown = activationCountdown;
         this.attack = attack;
         this.defense = defense;
         this.hp = hp;
         this.active = false;
+    }
+
+    public boolean isSuperEffective(Type opponentType){
+        switch (this.type){
+            case FIRE:
+                return opponentType == Type.GRASS;
+            case GRASS:
+                return opponentType == Type.WATER;
+            case WATER:
+                return opponentType == Type.FIRE;
+        }
+        return false;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public boolean isActive() {

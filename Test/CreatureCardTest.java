@@ -9,7 +9,7 @@ class CreatureCardTest {
 
     @BeforeEach
     void setUp() {
-        card = new CreatureCard("test_card", 1, Card.Type.NEUTRAL, 10, 2, 1);
+        card = new CreatureCard("test_card", 1, CreatureCard.Type.NEUTRAL, 10, 2, 1);
     }
 
     @Test
@@ -23,5 +23,15 @@ class CreatureCardTest {
     void setActive() {
         card.setActive(true);
         assertTrue(card.isActive());
+    }
+
+    @Test
+    void isSuperEffective() {
+        card.setType(CreatureCard.Type.WATER);
+        assertTrue(card.isSuperEffective(CreatureCard.Type.FIRE));
+        assertFalse(card.isSuperEffective(CreatureCard.Type.WATER));
+        card.setType(CreatureCard.Type.FIRE);
+        assertTrue(card.isSuperEffective(CreatureCard.Type.GRASS));
+        assertFalse(card.isSuperEffective(CreatureCard.Type.FIRE));
     }
 }
