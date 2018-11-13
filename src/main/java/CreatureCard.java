@@ -9,7 +9,7 @@ public class CreatureCard extends Card {
 
 
     public enum Type{
-        WATER, FIRE, GRASS, NEUTRAL
+        WATER, FIRE, GRASS, DRAGON, ZOMBIE, HOLY, FAIRY, PSYCHIC, GHOST, NEUTRAL
     }
 
     public CreatureCard(){
@@ -59,6 +59,18 @@ public class CreatureCard extends Card {
                 return opponentType == Type.WATER;
             case WATER:
                 return opponentType == Type.FIRE;
+            case ZOMBIE:
+                return opponentType == Type.FAIRY;
+            case FAIRY:
+                return opponentType == Type.DRAGON;
+            case HOLY:
+                return opponentType == Type.ZOMBIE;
+            case DRAGON:
+                return opponentType == Type.PSYCHIC;
+            case PSYCHIC:
+                return opponentType == Type.GHOST;
+            case GHOST:
+                return opponentType == Type.HOLY;
         }
         return false;
     }
