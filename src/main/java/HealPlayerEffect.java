@@ -1,9 +1,9 @@
-public class HealPlayerEffect implements IEffect{
+public class HealPlayerEffect implements IEffect {
 
     private int healAmount;
     private String effectDescription;
 
-    public HealPlayerEffect( int healAmount ) {
+    public HealPlayerEffect(int healAmount) {
         this.healAmount = healAmount;
         this.effectDescription = "Heal player for " + healAmount + " HP.";
     }
@@ -11,17 +11,12 @@ public class HealPlayerEffect implements IEffect{
 
     @Override
     public void trigger() {
-
     }
 
     @Override
     public void trigger(Player player) {
-     // implement functionality ?
-        player.setHp(player.getHp()+this.healAmount);
-    }
 
-    @Override
-    public void trigger(Card player) {
+        player.setHp(player.getHp() + this.healAmount);
 
     }
 
