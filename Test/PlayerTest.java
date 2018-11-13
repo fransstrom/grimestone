@@ -152,6 +152,19 @@ class PlayerTest {
     }
 
     @Test
+    void overHeal(){
+        player1.setHp(15);
+        player1.heal(6);
+        assertEquals(20, player1.getHp());
+    }
+    @Test
+    void heal(){
+        player1.setHp(10);
+        player1.heal(5);
+        assertEquals(15, player1.getHp());
+    }
+
+    @Test
     void generateDeck() {
 
         player1.getDeck().clear();
