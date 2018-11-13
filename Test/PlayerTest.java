@@ -31,8 +31,6 @@ class PlayerTest {
     @Mock
     private MagicCard magicCard;
 
-    private IEffect effect;
-
     @BeforeEach
     void setUp() {
         player1 = new Player();
@@ -127,10 +125,10 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsNotEmpty() {
-        assertEquals(10, player1.getDeck().size());
+        assertEquals(20, player1.getDeck().size());
         player1.drawCard();
         assertEquals(1, player1.getHand().size());
-        assertEquals(9, player1.getDeck().size());
+        assertEquals(19, player1.getDeck().size());
         assertTrue(player1.drawCard());
     }
 
@@ -146,11 +144,11 @@ class PlayerTest {
 
     @Test
     void drawInitialHand() {
-        assertEquals(10, player1.getDeck().size());
+        assertEquals(20, player1.getDeck().size());
         assertEquals(0, player1.getHand().size());
         player1.drawInitialHand();
         assertEquals(5, player1.getHand().size());
-        assertEquals(5, player1.getDeck().size());
+        assertEquals(15, player1.getDeck().size());
     }
 
     @Test
