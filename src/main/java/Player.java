@@ -123,7 +123,10 @@ public class Player {
     }
 
     public void heal(int healAmount){
-
+        if((this.hp + healAmount) > maxHp){
+            this.hp = maxHp;
+        }
+        else this.hp += healAmount;
     }
 
     public void increaseMaxMana() {
