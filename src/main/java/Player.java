@@ -1,6 +1,7 @@
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
     private int hp;
@@ -86,6 +87,7 @@ public class Player {
             this.deck.add(CardDB.getRandomSpecialCreatureCard());
             this.deck.add(CardDB.getRandomMagicCard());
         }
+        Collections.shuffle(this.deck);
     }
 
     public boolean noCardsLeftInDeck() {
