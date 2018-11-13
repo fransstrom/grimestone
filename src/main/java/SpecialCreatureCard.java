@@ -6,6 +6,11 @@ public class SpecialCreatureCard extends CreatureCard {
         this.effect = effect;
     }
 
+    public SpecialCreatureCard(String name, int manaCost, Type type, int activationCountdown, int attack, int defense, int hp, IEffect effect){
+        super(name, manaCost, type, activationCountdown, attack, defense, hp);
+        this.effect = effect;
+    }
+
     String getText(){
         return this.effect.getText();
     }
