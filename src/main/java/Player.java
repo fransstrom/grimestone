@@ -199,18 +199,17 @@ public class Player {
         this.maxMana = maxMana;
     }
 
-    boolean playCard(int index){
+    public String playCard(int index){
         Card card = hand.get(index-1);
         if(card instanceof CreatureCard){
-            placeCardOnTable(index);
-            return true;
+            if (placeCardOnTable(index))
+            return "";
         }
         else if(card instanceof MagicCard){
-            ((MagicCard)card).getEffect().trigger();
             graveyard.add(hand.get(index-1));
             hand.remove(index-1);
-            return true;
+            return ((MagicCard)card).getEffect().trigger();
         }
-        return false;
+        return "FALSE";
     }
 }
