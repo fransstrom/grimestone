@@ -122,6 +122,9 @@ public class Player {
         return this.passTurn;
     }
 
+    public void heal(int healAmount){
+
+    }
 
     public void increaseMaxMana() {
         if (maxMana < 10) {
