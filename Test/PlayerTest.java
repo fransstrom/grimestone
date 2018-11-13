@@ -31,6 +31,8 @@ class PlayerTest {
     @Mock
     private MagicCard magicCard;
 
+    private IEffect effect;
+
     @BeforeEach
     void setUp() {
         player1 = new Player();
@@ -269,31 +271,34 @@ class PlayerTest {
     @DisplayName("PlayCard")
     class playCard{
 
+        @BeforeEach
+        void setUp(){
+            player1.getHand().add(creatureCard);
+            player1.getHand().add(specialCreatureCard);
+            player1.getHand().add(magicCard);
+        }
+
         @Test
         void creatureCard(){
-            when(card instanceof CreatureCard).thenReturn(true);
-            doNothing().when(player1).placeCardOnTable(1);
-            playCard(creatureCard);
-            verify(player1, Mockito.times(1)).placeCardOnTable(1);
+            assertEquals(3, player1.getHand().size());
+            assertTrue(player1.playCard(1));
+            assertEquals(2, player1.getHand().size());
         }
 
         @Test
         void specialCreatureCard(){
-            when(card instanceof SpecialCreatureCard).thenReturn(true);
-            doNothing().when(specialCreatureCard).getEffect();
-            playCard(specialCreatureCard);
-            verify(specialCreatureCard, Mockito.times(1)).effect();
-
+            assertEquals(3, player1.getHand().size());
+            assertTrue(player1.playCard(2));
+            assertEquals(2, player1.getHand().size());
         }
 
         @Test
         void magicCard(){
-            when(card instanceof MagicCard).thenReturn(true);
-            doNothing().when(magicCard).getEffect();
-            playCard(magicCard);
-            verify(magicCard, Mockito.times(1)).effect();
+            when(magicCard.getEffect()).thenReturn(effect);
+            assertTrue(player1.playCard(3));
+            verify(magicCard, Mockito.times(1)).getEffect();
+            assertEquals(2, player1.getHand().size());
         }
-
 
 
     }
