@@ -23,6 +23,10 @@ class PlayerTest {
     private Card card;
     @Mock
     private CreatureCard creatureCard;
+    @Mock
+    private SpecialCreatureCard specialCreatureCard;
+    @Mock
+    private MagicCard magicCard;
 
     @BeforeEach
     void setUp() {
@@ -43,15 +47,15 @@ class PlayerTest {
     void deckIsEmpty() {
         player1.getDeck().clear();
         assertTrue(player1.deckIsEmpty());
-        player1.getDeck().add( card );
-        assertFalse( player1.deckIsEmpty() );
+        player1.getDeck().add(card);
+        assertFalse(player1.deckIsEmpty());
     }
 
     @Test
     void tableIsEmpty() {
-        assertTrue( player1.tableIsEmpty() );
-        player1.getTable().add( card );
-        assertFalse( player1.tableIsEmpty() );
+        assertTrue(player1.tableIsEmpty());
+        player1.getTable().add(card);
+        assertFalse(player1.tableIsEmpty());
     }
 
     @Test
@@ -67,20 +71,20 @@ class PlayerTest {
         assertEquals(player1.getGraveyard().get(0), creatureCard);
     }
 
-        @Test
-        void noCardsLeftInDeckTest(){
-            assertFalse(player1.noCardsLeftInDeck());
-            player1.getDeck().clear();
-            assertTrue(player1.noCardsLeftInDeck());
-            player1.getDeck().add(card);
-            assertFalse(player1.noCardsLeftInDeck());
-        }
+    @Test
+    void noCardsLeftInDeckTest() {
+        assertFalse(player1.noCardsLeftInDeck());
+        player1.getDeck().clear();
+        assertTrue(player1.noCardsLeftInDeck());
+        player1.getDeck().add(card);
+        assertFalse(player1.noCardsLeftInDeck());
+    }
 
 
     @Nested
     @DisplayName("Place card on table tests")
     class placeCardOnTable {
-        
+
         @Test
         void placeCardOnTableWhenHandIsNotEmpty() {
             player1.getHand().add(card);
@@ -119,11 +123,11 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsNotEmpty() {
-        assertEquals( 10, player1.getDeck().size() );
+        assertEquals(10, player1.getDeck().size());
         player1.drawCard();
-        assertEquals( 1, player1.getHand().size() );
-        assertEquals( 9, player1.getDeck().size() );
-        assertTrue( player1.drawCard() );
+        assertEquals(1, player1.getHand().size());
+        assertEquals(9, player1.getDeck().size());
+        assertTrue(player1.drawCard());
     }
 
     @Test
@@ -147,27 +151,51 @@ class PlayerTest {
 
     @Test
     void generateDeck() {
+
+        ArrayList<Card> expected = new ArrayList<>();
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(creatureCard);
+        expected.add(specialCreatureCard);
+        expected.add(specialCreatureCard);
+        expected.add(specialCreatureCard);
+        expected.add(specialCreatureCard);
+        expected.add(specialCreatureCard);
+        expected.add(magicCard);
+        expected.add(magicCard);
+        expected.add(magicCard);
+        expected.add(magicCard);
+        expected.add(magicCard);
+
         player1.getDeck().clear();
-        assertTrue( player1.getDeck().isEmpty() );
+        assertTrue(player1.getDeck().isEmpty());
         player1.generateDeck();
-        assertFalse( player1.getDeck().isEmpty() );
-        assertEquals( 10, player1.getDeck().size() );
+        assertFalse(player1.getDeck().isEmpty());
+        assertEquals(20, player1.getDeck().size());
+        assertEquals(expected, player1.getDeck());
     }
 
     @Test
-    void pickCardFromTableWithCardOnTable(){
+    void pickCardFromTableWithCardOnTable() {
         player1.getTable().add(card);
         assertEquals(card, player1.pickCardFromTable(1));
     }
 
     @Test
-    void pickCardFromTableWithEmptyTable(){
+    void pickCardFromTableWithEmptyTable() {
         assertEquals(0, player1.getTable().size());
         assertNull(player1.pickCardFromTable(0));
     }
 
     @Test
-    void hasActiveCardsOnTable(){
+    void hasActiveCardsOnTable() {
         player1.getTable().add(creatureCard);
         when(creatureCard.isActive()).thenReturn(true);
         assertTrue(player1.hasActiveCardsOnTable());
@@ -176,7 +204,7 @@ class PlayerTest {
     }
 
     @Test
-    void setCardsOnTableToActive(){
+    void setCardsOnTableToActive() {
         CreatureCard creatureCard = spy(CreatureCard.class);
         creatureCard.setActivationCountdown(1);
         player1.getTable().add(creatureCard);
@@ -191,25 +219,25 @@ class PlayerTest {
     }
 
     @Test
-    void checkManaWithNotEnoughPlayerMana(){
+    void checkManaWithNotEnoughPlayerMana() {
         player1.setMana(5);
         assertFalse(player1.checkMana(7));
     }
 
     @Test
-    void checkManaWithEnoughPlayerMana(){
+    void checkManaWithEnoughPlayerMana() {
         player1.setMana(10);
         assertTrue(player1.checkMana(3));
     }
 
     @Test
-    void checkManaWithEqualPlayerAndCardMana(){
+    void checkManaWithEqualPlayerAndCardMana() {
         player1.setMana(5);
         assertTrue(player1.checkMana(5));
     }
-    
+
     @Test
-    void increaseManaWhenManaIsNotMax(){
+    void increaseManaWhenManaIsNotMax() {
         assertEquals(0, player1.getMaxMana());
         player1.increaseMaxMana();
         assertEquals(1, player1.getMaxMana());
@@ -218,7 +246,7 @@ class PlayerTest {
     }
 
     @Test
-    void increaseManaWhenManaIsMax(){
+    void increaseManaWhenManaIsMax() {
         player1.setMaxMana(10);
         assertEquals(10, player1.getMaxMana());
         player1.increaseMaxMana();
@@ -226,7 +254,7 @@ class PlayerTest {
     }
 
     @Test
-    void refillManaWithHalfEmptyMana(){
+    void refillManaWithHalfEmptyMana() {
         player1.setMaxMana(10);
         player1.setMana(5);
         assertEquals(5, player1.getMana());
@@ -235,7 +263,7 @@ class PlayerTest {
     }
 
     @Test
-    void refillManaWithFullMana(){
+    void refillManaWithFullMana() {
         player1.setMaxMana(10);
         player1.setMana(10);
         assertEquals(10, player1.getMana());
