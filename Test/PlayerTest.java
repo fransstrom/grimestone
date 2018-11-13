@@ -159,7 +159,7 @@ class PlayerTest {
         assertEquals(20, player1.getDeck().size());
 
         long creatureCount = player1.getDeck().stream()
-                .filter(card -> card instanceof CreatureCard )
+                .filter(card -> card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
                 .count();
         assertEquals(10, creatureCount);
 
@@ -167,13 +167,11 @@ class PlayerTest {
                 .filter(card -> card instanceof SpecialCreatureCard)
                 .count();
         assertEquals(5, specialCreatureCount);
-        
+
         long magicCount = player1.getDeck().stream()
                 .filter(card -> card instanceof MagicCard)
                 .count();
         assertEquals(5, magicCount);
-
-
     }
 
     @Test
