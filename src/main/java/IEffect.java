@@ -1,5 +1,5 @@
 public interface IEffect {
 
-    void trigger();
+    String trigger();
     String getText();
 }
