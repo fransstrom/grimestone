@@ -152,34 +152,28 @@ class PlayerTest {
     @Test
     void generateDeck() {
 
-        ArrayList<Card> expected = new ArrayList<>();
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(creatureCard);
-        expected.add(specialCreatureCard);
-        expected.add(specialCreatureCard);
-        expected.add(specialCreatureCard);
-        expected.add(specialCreatureCard);
-        expected.add(specialCreatureCard);
-        expected.add(magicCard);
-        expected.add(magicCard);
-        expected.add(magicCard);
-        expected.add(magicCard);
-        expected.add(magicCard);
-
         player1.getDeck().clear();
         assertTrue(player1.getDeck().isEmpty());
         player1.generateDeck();
         assertFalse(player1.getDeck().isEmpty());
         assertEquals(20, player1.getDeck().size());
-        assertEquals(expected, player1.getDeck());
+
+        long creatureCount = player1.getDeck().stream()
+                .filter(card -> card instanceof CreatureCard )
+                .count();
+        assertEquals(10, creatureCount);
+
+        long specialCreatureCount = player1.getDeck().stream()
+                .filter(card -> card instanceof SpecialCreatureCard)
+                .count();
+        assertEquals(5, specialCreatureCount);
+        
+        long magicCount = player1.getDeck().stream()
+                .filter(card -> card instanceof MagicCard)
+                .count();
+        assertEquals(5, magicCount);
+
+
     }
 
     @Test
