@@ -15,7 +15,7 @@ public class SpecialCreatureCard extends CreatureCard {
         return this.effect.getText();
     }
 
-    public IEffect getEffect(){
-        return effect;
+    public String trigger(){
+        return this.effect.trigger();
     }
 }

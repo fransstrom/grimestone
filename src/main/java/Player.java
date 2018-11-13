@@ -208,7 +208,7 @@ public class Player {
         else if(card instanceof MagicCard){
             graveyard.add(hand.get(index-1));
             hand.remove(index-1);
-            return ((MagicCard)card).getEffect().trigger();
+            return ((MagicCard)card).trigger();
         }
         return "FALSE";
     }

@@ -16,8 +16,8 @@ public class MagicCard extends Card {
         return this.effect.getText();
     }
 
-    public IEffect getEffect(){
-        return this.effect;
+    public String trigger(){
+        return this.effect.trigger();
     }
 
 }
