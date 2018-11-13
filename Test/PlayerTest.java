@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 
@@ -271,15 +272,15 @@ class PlayerTest {
         @Test
         void creatureCard(){
             when(card instanceof CreatureCard).thenReturn(true);
-            when(card.effect()).then(doNothing());
+            doNothing().when(player1).placeCardOnTable(1);
             playCard(creatureCard);
-            verify(player1, Mockito.times(1)).placeCardOnTable();
+            verify(player1, Mockito.times(1)).placeCardOnTable(1);
         }
 
         @Test
         void specialCreatureCard(){
             when(card instanceof SpecialCreatureCard).thenReturn(true);
-            when(card.effect()).then(doNothing());
+            doNothing().when(specialCreatureCard).getEffect();
             playCard(specialCreatureCard);
             verify(specialCreatureCard, Mockito.times(1)).effect();
 
@@ -288,7 +289,7 @@ class PlayerTest {
         @Test
         void magicCard(){
             when(card instanceof MagicCard).thenReturn(true);
-            when(card.effect()).then(doNothing());
+            doNothing().when(magicCard).getEffect();
             playCard(magicCard);
             verify(magicCard, Mockito.times(1)).effect();
         }
