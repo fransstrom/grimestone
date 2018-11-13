@@ -10,8 +10,8 @@ public class HealPlayerEffect implements IEffect{
 
 
     @Override
-    public void trigger() {
-     // implement functionality ?
+    public String trigger() {
+     return "HEAL_PLAYER_" + healAmount;
     }
 
     @Override
