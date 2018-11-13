@@ -79,7 +79,7 @@ public class GameEngine {
                 getActivePlayer().passTurn(true);
                 return;
             }
-        }while (!resolvePlay.equals("FALSE"));
+        }while (!resolvePlay.equals("FAULTY_CHOICE"));
         resolveEffect(resolvePlay);
     }
 
