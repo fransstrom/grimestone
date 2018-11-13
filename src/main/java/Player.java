@@ -212,15 +212,16 @@ public class Player {
     }
 
     public String playCard(int index){
-        Card card = hand.get(index-1);
-        if(card instanceof CreatureCard){
-            if (placeCardOnTable(index))
-            return "PLAYED_CREATURECARD";
-        }
-        else if(card instanceof MagicCard){
-            graveyard.add(hand.get(index-1));
-            hand.remove(index-1);
-            return ((MagicCard)card).trigger();
+        if(index <= hand.size() && index > 0) {
+            Card card = hand.get(index - 1);
+            if (card instanceof CreatureCard) {
+                if (placeCardOnTable(index))
+                    return "PLAYED_CREATURECARD";
+            } else if (card instanceof MagicCard) {
+                graveyard.add(hand.get(index - 1));
+                hand.remove(index - 1);
+                return ((MagicCard) card).trigger();
+            }
         }
         return "FAULTY_CHOICE";
     }
