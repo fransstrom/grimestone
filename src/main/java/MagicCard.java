@@ -15,4 +15,10 @@ public class MagicCard extends Card {
     String getText(){
         return this.effect.getText();
     }
+
+    public IEffect getEffect() {
+        return effect;
+    }
+
+  
 }

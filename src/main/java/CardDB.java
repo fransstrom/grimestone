@@ -19,6 +19,11 @@ public class CardDB {
     private static ArrayList<MagicCard> magicCards = new ArrayList<>();
     static {
         magicCards.add(new MagicCard("Holy Fire", 3, Card.Type.NEUTRAL, new HealPlayerEffect(7)));
+
+        MagicCard magicCard=new MagicCard("Holy Fire", 3, Card.Type.NEUTRAL, new HealPlayerEffect(7));
+
+        magicCard.getEffect().trigger(new Player());
+
     }
 
     public static Card getRandomCreatureCard(){
