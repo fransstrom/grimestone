@@ -13,9 +13,11 @@ public class Player {
     private ArrayList<Card> deck;
     private ArrayList<Card> graveyard;
     private ArrayList<Card> table;
+    private int maxHp;
 
     public Player() {
         this.hp = 20;
+        this.maxHp = this.hp;
         this.mana = 0;
         this.maxMana = 0;
         this.hand = new ArrayList<>();
@@ -137,6 +139,10 @@ public class Player {
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 
     public void setHp(int hp) {

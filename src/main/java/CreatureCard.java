@@ -6,6 +6,7 @@ public class CreatureCard extends Card {
     private int attack;
     private int defense;
     private Type type;
+    private int maxHp;
 
 
     public enum Type{
@@ -23,22 +24,11 @@ public class CreatureCard extends Card {
     public CreatureCard(int hp){
         super();
         this.hp = hp;
+        this.maxHp = hp;
         this.activationCountdown = 1;
         this.attack = 1;
         this.defense = 1;
         this.type = Type.NEUTRAL;
-    }
-
-    //If HP is not provided, a random value will be generated
-    public CreatureCard(String name, int manaCost, Type type, int activationCountdown, int attack, int defense){
-        super(name, manaCost);
-        //Random HP from 1-7
-        this.type = type;
-        this.hp = RandomNumberGenerator.roll();
-        this.activationCountdown = activationCountdown;
-        this.active = false;
-        this.attack = attack;
-        this.defense = defense;
     }
 
     public CreatureCard(String name, int manaCost, Type type, int activationCountdown, int attack, int defense, int hp) {
@@ -48,6 +38,7 @@ public class CreatureCard extends Card {
         this.attack = attack;
         this.defense = defense;
         this.hp = hp;
+        this.maxHp = hp;
         this.active = false;
     }
 
@@ -77,6 +68,10 @@ public class CreatureCard extends Card {
 
     public Type getType() {
         return type;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 
     public void setType(Type type) {
