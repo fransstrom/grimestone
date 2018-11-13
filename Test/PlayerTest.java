@@ -311,6 +311,13 @@ class PlayerTest {
             assertEquals(2, player1.getHand().size());
         }
 
+        @Test
+        void faultyChoice(){
+            assertEquals("FAULTY_CHOICE", player1.playCard(7));
+            assertNotEquals("FAULTY_CHOICE", player1.playCard(3));
+            assertEquals("FAULTY_CHOICE", player1.playCard(-3));
+        }
+
 
     }
 
