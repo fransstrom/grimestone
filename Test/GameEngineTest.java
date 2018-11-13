@@ -138,7 +138,7 @@ class GameEngineTest {
         player1.setActive(true);
         player1.setHp(5);
         gameEngine.resolveEffect("HEAL_PLAYER_-5");
-        assertEquals(5, player1.getHp());
+        assertEquals(10, player1.getHp());
     }
 
     @Test
