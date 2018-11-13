@@ -70,14 +70,29 @@ public class GameEngine {
     public void putCardOnTablePhase() {
         gui.render();
         int choice;
+        String resolvePlay;
         do{
             gui.printPickACardToPlay();
             choice = scanner.nextInt();
+            resolvePlay = getActivePlayer().playCard(choice);
             if(choice == 0){
                 getActivePlayer().passTurn(true);
                 return;
             }
-        }while (!getActivePlayer().placeCardOnTable(choice));
+        }while (!resolvePlay.equals("FALSE"));
+        resolveEffect(resolvePlay);
+    }
+
+    public void resolveEffect(String effect){
+        String[] effectComponents = effect.split("_");
+        switch (effectComponents[0]){
+            case "HEAL":
+                if(effectComponents[1].equals("PLAYER")){
+                    int currentHp = getActivePlayer().getHp();
+                    int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
+                    getActivePlayer().setHp(currentHp + healAmount);
+                }
+        }
     }
 
     public void actionPhase(){
