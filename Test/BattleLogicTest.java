@@ -57,7 +57,7 @@ class BattleLogicTest {
         }
 
         @Test
-        void attackLessThenDefence(){
+        void attackLessThanDefence(){
             battleLogic.setAttackingCard(card2);
             battleLogic.setDefendingCard(card);
 
