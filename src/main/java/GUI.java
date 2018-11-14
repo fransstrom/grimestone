@@ -99,7 +99,7 @@ public class GUI {
                     }
                 }
                 if(card instanceof MagicCard){
-                    System.out.printf("\033[0;32m | Card " + cardPlacement + " HP: " + ((MagicCard) card).getText() + " | \u001B[0m");
+                    System.out.printf("\033[0;32m | Card " + cardPlacement + ((MagicCard) card).getText() + " | \u001B[0m");
                 }
                 cardPlacement++;
             }

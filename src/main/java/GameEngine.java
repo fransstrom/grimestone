@@ -43,7 +43,6 @@ public class GameEngine {
             } while (!(getInactivePlayer().getTable().size() >= choice));
             battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
-            getInactivePlayer().moveDeadCardToGraveyard();
         }
     }
 
