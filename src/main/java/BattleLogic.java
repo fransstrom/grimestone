@@ -13,20 +13,16 @@ public class BattleLogic {
 
     public void cardVsCard() {
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
-            int attackingCardDamage = RandomNumberGenerator.roll();
-            int defendingCardDamage = RandomNumberGenerator.roll();
+            int attackingCardDamage = ((CreatureCard) attackingCard).getAttack();
+            int defendingCardDefence = ((CreatureCard) defendingCard).getDefense();
             int damageToBeDealt;
-            while (attackingCardDamage == defendingCardDamage) {
-                attackingCardDamage = RandomNumberGenerator.roll();
-                defendingCardDamage = RandomNumberGenerator.roll();
-            }
-            damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
-            if (attackingCardDamage > defendingCardDamage) {
-                ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
+
+            damageToBeDealt = attackingCardDamage - defendingCardDefence;
+            if (damageToBeDealt>0) {
+               ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
                 System.out.println("HIT! Defending card looses " + damageToBeDealt + " HP!");
             } else {
-                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
-                System.out.println("MISS! Attacking card looses " + damageToBeDealt + " HP!");
+                System.out.println("MISS! Defending card was too strong!");
             }
         }
     }
