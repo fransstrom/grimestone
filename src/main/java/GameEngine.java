@@ -36,11 +36,14 @@ public class GameEngine {
         } else {
             int choice;
             Card defendingCard;
-            do {
+            System.out.println("Choose card to attack!");
+            choice = scanner.nextInt();
+            defendingCard = getInactivePlayer().pickCardFromTable(choice);
+            while (!(getInactivePlayer().getTable().size() >= choice)) {
                 System.out.println("Choose card to attack!");
                 choice = scanner.nextInt();
                 defendingCard = getInactivePlayer().pickCardFromTable(choice);
-            } while (!(getInactivePlayer().getTable().size() >= choice));
+            }
             battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
         }
@@ -53,13 +56,11 @@ public class GameEngine {
 
         while (!isGameOver()) {
             getActivePlayer().drawCard();
-            playerChoicePhase();
             getActivePlayer().setCardsOnTableToActive();
-            if (getActivePlayer().hasPassedTurn()) {
-                getActivePlayer().passTurn(false);
-            }
+            playerChoicePhase();
+
             switchActivePlayer();
-            gui.nextTurn();
+
         }
     }
 
@@ -148,8 +149,12 @@ public class GameEngine {
     }
 
     public void switchActivePlayer() {
+        if (getActivePlayer().hasPassedTurn()) {
+            getActivePlayer().passTurn(false);
+        }
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
+        gui.nextTurn();
     }
 
     private void randomGenerateFirstActivePlayer() {
