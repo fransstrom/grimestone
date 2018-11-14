@@ -20,6 +20,8 @@ public class BattleLogic {
                 attackingCardDamage = RandomNumberGenerator.roll();
                 defendingCardDamage = RandomNumberGenerator.roll();
             }
+            System.out.println("Attacking dmg :" + attackingCardDamage);
+            System.out.println("defending dmg :" + defendingCardDamage);
             damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
             if (attackingCardDamage > defendingCardDamage) {
                 ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
