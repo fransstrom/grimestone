@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 class BattleLogicTest {
 
     @Spy
-    CreatureCard card = new CreatureCard(10);
+    CreatureCard card = new CreatureCard("Creature",2, CreatureCard.Type.NEUTRAL,1,2,1,3);
 
     @Spy
     CreatureCard card2 = new CreatureCard(20);
@@ -33,22 +33,13 @@ class BattleLogicTest {
         assertTrue(player.getHp()<20);
     }
 
-    @RepeatedTest(5)
+    @Test
     void cardVsCard() {
-
-        assertEquals(10, card.getHp());
-        assertEquals(20, card2.getHp());
-        battleLogic.setAttackingCard(card);
-        battleLogic.setDefendingCard(card2);
-        System.out.println("AC Before HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
-        System.out.println("DC Before HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
-
-        battleLogic.cardVsCard();
-        System.out.println("AC After HIT " + ((CreatureCard)battleLogic.getAttackingCard()).getHp());
-        System.out.println("DC After HIT " + ((CreatureCard)battleLogic.getDefendingCard()).getHp());
-
-        assertTrue(card.getHp()<10 || card2.getHp()<20);
-
+        battleLogic.setAttackingCard(card2);
+        battleLogic.setDefendingCard(card);
+        assertEquals(3,card.getHp());
+        cardVsCard();
+        assertEquals(2,card.getHp());
     }
 
 }
