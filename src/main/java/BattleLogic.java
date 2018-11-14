@@ -15,9 +15,12 @@ public class BattleLogic {
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = ((CreatureCard) attackingCard).getAttack();
             int defendingCardDefence = ((CreatureCard) defendingCard).getDefense();
-            int damageToBeDealt;
 
-            damageToBeDealt = attackingCardDamage - defendingCardDefence;
+            if(((CreatureCard) attackingCard).isSuperEffective(((CreatureCard) defendingCard).getType())){
+                attackingCardDamage +=2;
+            }
+
+            int damageToBeDealt = attackingCardDamage - defendingCardDefence;
             if (damageToBeDealt>0) {
                ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
                 System.out.println("HIT! Defending card looses " + damageToBeDealt + " HP!");
