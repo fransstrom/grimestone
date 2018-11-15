@@ -7,8 +7,7 @@ public class BattleLogic {
    private Player defendingPlayer;
 
     public void cardVsPlayer() {
-        int damageToBeDealt= ((CreatureCard)attackingCard).getAttack();
-        defendingPlayer.setHp((defendingPlayer.getHp()-damageToBeDealt));
+        defendingPlayer.setHp(defendingPlayer.getHp()-((CreatureCard)attackingCard).getAttack());
     }
 
     public void cardVsCard() {
