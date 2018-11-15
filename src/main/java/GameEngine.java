@@ -59,7 +59,6 @@ public class GameEngine {
             getActivePlayer().drawCard();
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
-
             switchActivePlayer();
 
         }
