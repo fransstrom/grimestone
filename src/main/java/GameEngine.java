@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class GameEngine {
 
@@ -174,8 +173,5 @@ public class GameEngine {
         }
     }
 
-    public void setInputProcessor(InputProcessor inputProcessor) {
-        this.inputProcessor = inputProcessor;
-    }
 }
 
