@@ -339,6 +339,16 @@ class PlayerTest {
             assertEquals("FAULTY_CHOICE", player1.playCard(1));
         }
 
+
     }
 
+
+    @Test
+    void reduceMana() {
+        player1.setMana(1);
+        assertEquals(1, player1.getMana());
+        player1.reduceMana(1);
+        assertEquals(0, player1.getMana());
+    }
 }
+
