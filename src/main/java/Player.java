@@ -232,7 +232,7 @@ public class Player {
     }
 
     public void reduceMana(int cardManaCost) {
-
+        mana -= cardManaCost;
     }
 
 }
