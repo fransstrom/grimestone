@@ -67,7 +67,7 @@ public class GameEngine {
         while (!getActivePlayer().hasPassedTurn()) {
             String resolvePlay = "";
             gui.render();
-            System.out.println("\033[1;31mDin tur!\n\033[0;93m1. Spela ett kort\n2. Attackera\n3. Passa\033[0m");
+            System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -82,7 +82,7 @@ public class GameEngine {
                     getActivePlayer().passTurn(true);
                     break;
                 default:
-                    System.out.println("\033[0;101m\033[1;97mOgiltigt val!\033[0m");
+                    System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
                     sleep(1000);
             }
             moveAllDeadCardsToGraveYard();
