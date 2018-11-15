@@ -64,7 +64,8 @@ public class Player {
     }
 
     public boolean drawCard() {
-        if (getDeck().size() == 0) {
+
+        if (deck.size() == 0) {
             return false;
         } else {
             hand.add(deck.get(0));
