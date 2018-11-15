@@ -11,6 +11,7 @@ public class BattleLogic {
     }
 
     public void cardVsCard() {
+
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = ((CreatureCard) attackingCard).getAttack();
             int defendingCardDefence = ((CreatureCard) defendingCard).getDefense();

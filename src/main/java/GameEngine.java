@@ -31,63 +31,72 @@ public class GameEngine {
 
     public void attack() {
         battleLogic.setDefendingPlayer(getInactivePlayer());
-        if(battleLogic.getDefendingPlayer().getTable().isEmpty()){
+        if (battleLogic.getDefendingPlayer().getTable().isEmpty()) {
             battleLogic.cardVsPlayer();
-        }else {
+        } else {
             int choice;
             Card defendingCard;
-            do{
+            do {
                 System.out.println("Choose card to attack!");
                 choice = scanner.nextInt();
                 defendingCard = getInactivePlayer().pickCardFromTable(choice);
-            }while (!(getInactivePlayer().getTable().size() >= choice));
+            } while (!(getInactivePlayer().getTable().size() >= choice));
             battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
-            getInactivePlayer().moveDeadCardToGraveyard();
         }
     }
 
-    public void startGame(){
+    public void startGame() {
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
 
-        while(!isGameOver()){
+        while (!isGameOver()) {
             getActivePlayer().drawCard();
-            putCardOnTablePhase();
-            actionPhase();
             getActivePlayer().setCardsOnTableToActive();
-            if(getActivePlayer().hasPassedTurn()){
-                getActivePlayer().passTurn(false);
-            }
-            getActivePlayer().moveDeadCardToGraveyard();
-            getInactivePlayer().moveDeadCardToGraveyard();
+            playerChoicePhase();
             switchActivePlayer();
-            gui.nextTurn();
+
         }
     }
 
-    public void putCardOnTablePhase() {
-        gui.render();
+    public void playerChoicePhase() {
         int choice;
-        String resolvePlay;
-        do{
-            gui.printPickACardToPlay();
+        int cardIndex;
+
+        while (!getActivePlayer().hasPassedTurn()) {
+            String resolvePlay = "";
+            gui.render();
+            System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
             choice = scanner.nextInt();
-            resolvePlay = getActivePlayer().playCard(choice);
-            if(choice == 0){
-                getActivePlayer().passTurn(true);
-                return;
+            switch (choice) {
+                case 1:
+                    gui.printPickACardToPlay();
+                    cardIndex = scanner.nextInt();
+                    resolvePlay = getActivePlayer().playCard(cardIndex);
+                    break;
+                case 2:
+                    actionPhase();
+                    break;
+                case 3:
+                    getActivePlayer().passTurn(true);
+                    break;
+                default:
+                    System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
+                    sleep(1000);
             }
-        }while (!resolvePlay.equals("FAULTY_CHOICE"));
-        resolveEffect(resolvePlay);
+            moveAllDeadCardsToGraveYard();
+            resolveEffect(resolvePlay);
+        }
+
     }
 
-    public void resolveEffect(String effect){
+
+    public void resolveEffect(String effect) {
         String[] effectComponents = effect.split("_");
-        switch (effectComponents[0]){
+        switch (effectComponents[0]) {
             case "HEAL":
-                if(effectComponents[1].equals("PLAYER")){
+                if (effectComponents[1].equals("PLAYER")) {
                     int currentHp = getActivePlayer().getHp();
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().setHp(currentHp + healAmount);
@@ -95,20 +104,20 @@ public class GameEngine {
         }
     }
 
-    public void actionPhase(){
-        if(getActivePlayer().hasActiveCardsOnTable() && !getActivePlayer().hasPassedTurn()){
+    public void actionPhase() {
+        if (getActivePlayer().hasActiveCardsOnTable() && !getActivePlayer().hasPassedTurn()) {
             gui.render();
             gui.printChooseCardToAttackWith();
             int choice;
             Card pickedCard;
-            do{
+            do {
                 choice = scanner.nextInt();
-                if(choice == 0){
+                if (choice == 0) {
                     getActivePlayer().passTurn(true);
                     return;
                 }
                 pickedCard = getActivePlayer().pickCardFromTable(choice);
-            }while (pickedCard == null || !((CreatureCard)pickedCard).isActive());
+            } while (pickedCard == null || !((CreatureCard) pickedCard).isActive());
             battleLogic.setAttackingCard(pickedCard);
             attack();
         }
@@ -131,9 +140,13 @@ public class GameEngine {
         }
     }
 
-    public void switchActivePlayer(){
+    public void switchActivePlayer() {
+
+        getActivePlayer().passTurn(false);
+
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
+        gui.nextTurn();
     }
 
     private void randomGenerateFirstActivePlayer() {
@@ -146,6 +159,19 @@ public class GameEngine {
             }
         }
 
+    }
+
+    private void moveAllDeadCardsToGraveYard() {
+        getActivePlayer().moveDeadCardToGraveyard();
+        getInactivePlayer().moveDeadCardToGraveyard();
+    }
+
+    private void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 

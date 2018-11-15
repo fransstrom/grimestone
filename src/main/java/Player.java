@@ -54,6 +54,7 @@ public class Player {
     }
 
     public boolean placeCardOnTable(int indexOfCard) {
+
         if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
             return false;
         } else {
