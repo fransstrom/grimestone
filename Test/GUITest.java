@@ -165,13 +165,5 @@ class GUITest {
         verify(mockPlayer2, Mockito.times(1)).getTable();
     }
 
-    @Test
-    void printGameOverMenu() {
-        gui.printGameOverMenu();
-    }
 
-    @Test
-    void printStartMenu() {
-        gui.printStartMenu();
-    }
 }

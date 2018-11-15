@@ -28,8 +28,7 @@ class GameEngineTest {
     InputProcessor inputProcessor;
     @BeforeEach
     void SetUp(){
-        gameEngine = new GameEngine(player1, player2, battleLogic);
-        gameEngine.setInputProcessor(inputProcessor);
+        gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
     }
 
     @Test
@@ -46,9 +45,8 @@ class GameEngineTest {
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
         doNothing().when(battleLogic).cardVsCard();
-        when(inputProcessor.nextInt()).thenReturn(1);
-        when(player2.isActive()).thenReturn(false);
-        when(player2.getDeck().size()).thenReturn(1);
+        when(inputProcessor.nextInt()).thenReturn(0);
+        mocklist.add(mockCreatureCard);
         gameEngine.attack();
         verify(battleLogic, times(0)).cardVsPlayer();
         verify(battleLogic, times(1)).cardVsCard();
@@ -56,6 +54,7 @@ class GameEngineTest {
 
     @Test
     void attackWithoutCardsOnTable(){
+
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
