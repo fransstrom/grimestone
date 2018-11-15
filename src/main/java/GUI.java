@@ -91,7 +91,7 @@ public class GUI {
         ArrayList<Card> activePlayerTable = gameEngine.getActivePlayer().getTable();
         ArrayList<Card> inActivePlayerTable = gameEngine.getInactivePlayer().getTable();
         //printSpaceBetweenCardsAndBoard(inActivePlayerTable);
-        printCards(activePlayerTable, false);
+        printCards(inActivePlayerTable, false);
         System.out.printf("\n\n");
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
         //printSpaceBetweenCardsAndBoard(activePlayerTable);
