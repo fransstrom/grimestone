@@ -96,8 +96,6 @@ public class GameEngine {
     }
 
 
-
-
     public void resolveEffect(String effect) {
         String[] effectComponents = effect.split("_");
         switch (effectComponents[0]) {
@@ -147,9 +145,9 @@ public class GameEngine {
     }
 
     public void switchActivePlayer() {
-        if (getActivePlayer().hasPassedTurn()) {
-            getActivePlayer().passTurn(false);
-        }
+
+        getActivePlayer().passTurn(false);
+
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
         gui.nextTurn();
@@ -171,6 +169,7 @@ public class GameEngine {
         getActivePlayer().moveDeadCardToGraveyard();
         getInactivePlayer().moveDeadCardToGraveyard();
     }
+
     private void sleep(int ms) {
         try {
             Thread.sleep(ms);

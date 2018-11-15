@@ -12,6 +12,7 @@ public class BattleLogic {
     }
 
     public void cardVsCard() {
+
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = RandomNumberGenerator.roll();
             int defendingCardDamage = RandomNumberGenerator.roll();
