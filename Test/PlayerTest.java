@@ -95,6 +95,16 @@ class PlayerTest {
         }
 
         @Test
+        void placeCardOnTableWhenTableIsFull() {
+            for (int i = 0; i < 5; i++) {
+                player1.getTable().add(creatureCard);
+            }
+            player1.getHand().add(creatureCard);
+            assertEquals(5, player1.getTable().size());
+            assertFalse(player1.placeCardOnTable(1));
+        }
+
+        @Test
         void placeCardOnTableWhenIndexOutOfRange() {
             player1.getHand().add(card);
 
@@ -120,13 +130,13 @@ class PlayerTest {
 
     @Test
     void drawCardWhenHandIsFull() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 5; i++) {
             player1.getHand().add(creatureCard);
         }
-        assertEquals(8, player1.getHand().size());
+        assertEquals(5, player1.getHand().size());
         assertEquals(0, player1.getGraveyard().size());
         player1.drawCard();
-        assertEquals(8, player1.getHand().size());
+        assertEquals(5, player1.getHand().size());
         assertEquals(1, player1.getGraveyard().size());
     }
 

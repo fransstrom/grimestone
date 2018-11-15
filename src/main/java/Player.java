@@ -14,6 +14,7 @@ public class Player {
     private ArrayList<Card> graveyard;
     private ArrayList<Card> table;
     private int maxHp;
+    private final int maxNumberOfCardsOnDisplay = 5;
 
     public Player() {
         this.hp = 20;
@@ -55,7 +56,7 @@ public class Player {
 
     public boolean placeCardOnTable(int indexOfCard) {
 
-        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 || getTable().size() >= maxNumberOfCardsOnDisplay) {
             return false;
         } else {
             this.table.add(hand.get(indexOfCard - 1));
@@ -67,7 +68,7 @@ public class Player {
     public boolean drawCard() {
         if (deck.size() == 0) {
             return false;
-        } else if (hand.size() == 8) {
+        } else if (hand.size() == maxNumberOfCardsOnDisplay) {
             graveyard.add(deck.get(0));
             deck.remove(0);
             return false;
@@ -143,9 +144,9 @@ public class Player {
     }
 
     public boolean checkMana(int cardMana) {
-        if (this.mana >= cardMana){
+        if (this.mana >= cardMana) {
             return true;
-        }else{
+        } else {
             System.out.println("Not sufficient mana");
             return false;
         }
