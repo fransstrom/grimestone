@@ -64,13 +64,15 @@ public class Player {
     }
 
     public boolean drawCard() {
-
         if (deck.size() == 0) {
+            return false;
+        } else if (hand.size() == 8) {
+            graveyard.add(deck.get(0));
+            deck.remove(0);
             return false;
         } else {
             hand.add(deck.get(0));
             deck.remove(0);
-
             return true;
         }
     }
@@ -123,11 +125,10 @@ public class Player {
         return this.passTurn;
     }
 
-    public void heal(int healAmount){
-        if((this.hp + healAmount) > maxHp){
+    public void heal(int healAmount) {
+        if ((this.hp + healAmount) > maxHp) {
             this.hp = maxHp;
-        }
-        else this.hp += healAmount;
+        } else this.hp += healAmount;
     }
 
     public void increaseMaxMana() {
@@ -212,8 +213,8 @@ public class Player {
         this.maxMana = maxMana;
     }
 
-    public String playCard(int index){
-        if(index <= hand.size() && index > 0) {
+    public String playCard(int index) {
+        if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
             if (card instanceof CreatureCard) {
                 if (placeCardOnTable(index))
