@@ -51,6 +51,8 @@ public class GameEngine {
         randomGenerateFirstActivePlayer();
 
         while (!isGameOver()) {
+            getActivePlayer().incrementMaxMana();
+            getActivePlayer().refillMana();
             getActivePlayer().drawCard();
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
@@ -96,9 +98,8 @@ public class GameEngine {
         switch (effectComponents[0]) {
             case "HEAL":
                 if (effectComponents[1].equals("PLAYER")) {
-                    int currentHp = getActivePlayer().getHp();
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
-                    getActivePlayer().setHp(currentHp + healAmount);
+                    getActivePlayer().heal(healAmount);
                 }
         }
     }

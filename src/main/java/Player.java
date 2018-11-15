@@ -132,7 +132,7 @@ public class Player {
         } else this.hp += healAmount;
     }
 
-    public void increaseMaxMana() {
+    public void incrementMaxMana() {
         if (maxMana < 10) {
             maxMana++;
         }
@@ -143,7 +143,12 @@ public class Player {
     }
 
     public boolean checkMana(int cardMana) {
-        return (this.mana >= cardMana);
+        if (this.mana >= cardMana){
+            return true;
+        }else{
+            System.out.println("Not sufficient mana");
+            return false;
+        }
     }
 
     public int getHp() {

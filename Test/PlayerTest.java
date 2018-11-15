@@ -5,15 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.mockito.internal.verification.Times;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
@@ -258,19 +252,19 @@ class PlayerTest {
     }
 
     @Test
-    void increaseManaWhenManaIsNotMax() {
+    void incrementMaxManaWhenManaIsNotMax() {
         assertEquals(0, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(1, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(2, player1.getMaxMana());
     }
 
     @Test
-    void increaseManaWhenManaIsMax() {
+    void incrementMaxManaWhenManaIsMax() {
         player1.setMaxMana(10);
         assertEquals(10, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(10, player1.getMaxMana());
     }
 
