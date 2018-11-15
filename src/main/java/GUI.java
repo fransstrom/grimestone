@@ -109,6 +109,9 @@ public class GUI {
                 if (card instanceof CreatureCard) {
                     System.out.printf(" |    Card " + cardPlacement + "    | ");
                 }
+                if(card instanceof MagicCard){
+                    System.out.printf(" |    Card " + cardPlacement + "    | ");
+                }
                 cardPlacement++;
 
             }

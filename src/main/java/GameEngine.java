@@ -53,13 +53,10 @@ public class GameEngine {
 
         while (!isGameOver()) {
             getActivePlayer().drawCard();
-            playerChoicePhase();
             getActivePlayer().setCardsOnTableToActive();
-            if (getActivePlayer().hasPassedTurn()) {
-                getActivePlayer().passTurn(false);
-            }
+            playerChoicePhase();
             switchActivePlayer();
-            gui.nextTurn();
+
         }
     }
 
@@ -70,7 +67,7 @@ public class GameEngine {
         while (!getActivePlayer().hasPassedTurn()) {
             String resolvePlay = "";
             gui.render();
-            System.out.println("\033[1;31mDin tur!\n\033[0;93m1. Spela ett kort\n2. Attackera\n3. Passa\033[0m");
+            System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -85,12 +82,8 @@ public class GameEngine {
                     getActivePlayer().passTurn(true);
                     break;
                 default:
-                    System.out.println("\033[0;101m\033[1;97mOgiltigt val!\033[0m");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
+                    sleep(1000);
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -148,8 +141,12 @@ public class GameEngine {
     }
 
     public void switchActivePlayer() {
+
+        getActivePlayer().passTurn(false);
+
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
+        gui.nextTurn();
     }
 
     private void randomGenerateFirstActivePlayer() {
@@ -167,6 +164,14 @@ public class GameEngine {
     private void moveAllDeadCardsToGraveYard() {
         getActivePlayer().moveDeadCardToGraveyard();
         getInactivePlayer().moveDeadCardToGraveyard();
+    }
+
+    private void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
