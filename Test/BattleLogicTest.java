@@ -35,12 +35,17 @@ class BattleLogicTest {
         battleLogic = new BattleLogic();
     }
 
-    @Test
-    void cardVsPlayer() {
-        battleLogic.setDefendingPlayer(player);
-        battleLogic.cardVsPlayer();
-        assertTrue(player.getHp()<20);
-    }
+
+        @Test
+        void cardVsPlayer() {
+            battleLogic.setDefendingPlayer(player);
+            player.setHp(20);
+            battleLogic.setAttackingCard(card);
+            assertEquals(20, player.getHp());
+            battleLogic.cardVsPlayer();
+            assertEquals(18, player.getHp());
+        }
+
 
 
     @Nested
