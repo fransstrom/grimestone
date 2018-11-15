@@ -16,7 +16,7 @@ class GameEngineTest {
     private GameEngine gameEngine;
     @Spy
     Player player1;
-    @Mock
+    @Spy
     Player player2;
     @Spy
     BattleLogic battleLogic;
@@ -24,10 +24,11 @@ class GameEngineTest {
     ArrayList<Card> mocklist;
     @Mock
     CreatureCard mockCreatureCard;
-
+    @Mock
+    InputProcessor inputProcessor;
     @BeforeEach
     void SetUp(){
-        gameEngine = new GameEngine(player1, player2, battleLogic);
+        gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
     }
 
     @Test
@@ -40,10 +41,11 @@ class GameEngineTest {
     
     @Test
     void attackWithCardsOnTable(){
-        when(player1.getTable()).thenReturn(mocklist);
+        mocklist.add(mockCreatureCard);
+        player1.setTable(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
-        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
         doNothing().when(battleLogic).cardVsCard();
+        when(inputProcessor.nextInt()).thenReturn(1);
         gameEngine.attack();
         verify(battleLogic, times(0)).cardVsPlayer();
         verify(battleLogic, times(1)).cardVsCard();

@@ -6,14 +6,14 @@ public class GameEngine {
     private Player player2;
     private GUI gui;
     private BattleLogic battleLogic;
-    private Scanner scanner;
+    private InputProcessor inputProcessor;
 
-    public GameEngine(Player p1, Player p2, BattleLogic battleLogic) {
+    public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
         player1 = p1;
         player2 = p2;
+        this.inputProcessor =  inputProcessor;
         this.battleLogic = battleLogic;
         this.gui = new GUI(this);
-        this.scanner = new Scanner(System.in);
     }
 
     public boolean isGameOver() {
@@ -38,7 +38,7 @@ public class GameEngine {
             Card defendingCard;
             do {
                 System.out.println("Choose card to attack!");
-                choice = scanner.nextInt();
+                choice = inputProcessor.nextInt();
                 defendingCard = getInactivePlayer().pickCardFromTable(choice);
             } while (!(getInactivePlayer().getTable().size() >= choice));
             battleLogic.setDefendingCard(defendingCard);
@@ -68,11 +68,11 @@ public class GameEngine {
             String resolvePlay = "";
             gui.render();
             System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
-            choice = scanner.nextInt();
+            choice = inputProcessor.nextInt();
             switch (choice) {
                 case 1:
                     gui.printPickACardToPlay();
-                    cardIndex = scanner.nextInt();
+                    cardIndex = inputProcessor.nextInt();
                     resolvePlay = getActivePlayer().playCard(cardIndex);
                     break;
                 case 2:
@@ -111,7 +111,7 @@ public class GameEngine {
             int choice;
             Card pickedCard;
             do {
-                choice = scanner.nextInt();
+                choice = inputProcessor.nextInt();
                 if (choice == 0) {
                     getActivePlayer().passTurn(true);
                     return;
@@ -172,6 +172,10 @@ public class GameEngine {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setInputProcessor(InputProcessor inputProcessor) {
+        this.inputProcessor = inputProcessor;
     }
 }
 
