@@ -7,8 +7,8 @@ public class BattleLogic {
    private Player defendingPlayer;
 
     public void cardVsPlayer() {
-        int damage = RandomNumberGenerator.roll();
-        defendingPlayer.setHp(defendingPlayer.getHp()-damage);
+        int damageToBeDealt= ((CreatureCard)attackingCard).getAttack();
+        defendingPlayer.setHp((defendingPlayer.getHp()-damageToBeDealt));
     }
 
     public void cardVsCard() {
