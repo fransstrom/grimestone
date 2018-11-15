@@ -34,6 +34,12 @@ class GUITest {
     private CreatureCard creatureCardInactive;
 
     @Spy
+    private Player spyPlayer;
+
+    @Spy
+    private Player spyPlayer2;
+
+    @Spy
     ArrayList<Card> table;
     @Spy
     ArrayList<Card> table2;
@@ -76,6 +82,37 @@ class GUITest {
         hand2.add(creatureCard);
         hand2.add(creatureCard);
         hand2.add(creatureCard);
+
+        spyPlayer = new Player();
+    }
+
+    @Test
+    void renderTest2() {
+        //System.out.println(spyPlayer.getDeck().size());
+        spyPlayer.drawInitialHand();
+        spyPlayer2.drawInitialHand();
+        spyPlayer2.setActive(true);
+        //System.out.println(spyPlayer.getHand().size());
+
+        //Created the Inactive player
+        when(gameEngine.getInactivePlayer()).thenReturn(spyPlayer);
+        //when(gameEngine.getInactivePlayer().getTable()).thenReturn(table);
+        //Created the active player
+        when(gameEngine.getActivePlayer()).thenReturn(spyPlayer2);
+        when(gameEngine.getActivePlayer().getTable()).thenReturn(spyPlayer.getHand());
+
+
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+        gui.printPlayerHud(gameEngine.getInactivePlayer());
+        System.out.printf("\n");
+        gui.printPlayerCardsInHand(gameEngine.getInactivePlayer());
+        System.out.printf("\n\n");
+        gui.printCardsOnTable();
+        System.out.printf("\n\n");
+        gui.printPlayerCardsInHand(gameEngine.getActivePlayer());
+        System.out.printf("\n\n");
+        gui.printPlayerHud(gameEngine.getActivePlayer());
+        System.out.printf("\n---------------------------------------------------------------------------------------------------------------------------------");
     }
 
     @Test
@@ -173,5 +210,14 @@ class GUITest {
     @Test
     void printStartMenu() {
         gui.printStartMenu();
+    }
+
+    @Test
+    void printCards() {
+        spyPlayer.generateDeck();
+        spyPlayer.drawInitialHand();
+        gui.printCards(spyPlayer.getHand(), false);
+        gui.printCards(spyPlayer.getHand(), true);
+
     }
 }

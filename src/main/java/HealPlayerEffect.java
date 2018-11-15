@@ -5,7 +5,7 @@ public class HealPlayerEffect implements IEffect{
 
     public HealPlayerEffect( int healAmount ) {
         this.healAmount = healAmount;
-        this.effectDescription = "Heal player for " + healAmount + " HP.";
+        this.effectDescription = "Heal Player " + healAmount + " HP";
     }
 
 
