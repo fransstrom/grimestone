@@ -46,6 +46,7 @@ public class GameEngine {
             }
             battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
+
         }
     }
 
@@ -87,17 +88,15 @@ public class GameEngine {
                     break;
                 default:
                     System.out.println("\033[0;101m\033[1;97mOgiltigt val!\033[0m");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    sleep(1000);
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
         }
 
     }
+
+
 
 
     public void resolveEffect(String effect) {
@@ -172,6 +171,13 @@ public class GameEngine {
     private void moveAllDeadCardsToGraveYard() {
         getActivePlayer().moveDeadCardToGraveyard();
         getInactivePlayer().moveDeadCardToGraveyard();
+    }
+    private void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
