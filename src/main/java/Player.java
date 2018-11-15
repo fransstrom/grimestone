@@ -217,10 +217,10 @@ public class Player {
     public String playCard(int index) {
         if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
-            if (card instanceof CreatureCard) {
+            if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
                 if (placeCardOnTable(index))
                     return "PLAYED_CREATURECARD";
-            } else if (card instanceof MagicCard) {
+            } else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
