@@ -124,6 +124,18 @@ class PlayerTest {
     }
 
     @Test
+    void drawCardWhenHandIsFull(){
+        for (int i = 0; i < 8; i++) {
+            player1.getHand().add(creatureCard);
+        }
+        assertEquals(8, player1.getHand().size());
+        assertEquals(0, player1.getGraveyard().size());
+        player1.drawCard();
+        assertEquals(8, player1.getHand().size());
+        assertEquals(1, player1.getGraveyard().size());
+    }
+
+    @Test
     void drawCardWhenDeckIsNotEmpty() {
         assertEquals(20, player1.getDeck().size());
         player1.drawCard();
