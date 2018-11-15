@@ -164,8 +164,8 @@ class PlayerTest {
         assertEquals(20, player1.getDeck().size());
         assertEquals(0, player1.getHand().size());
         player1.drawInitialHand();
-        assertEquals(5, player1.getHand().size());
-        assertEquals(15, player1.getDeck().size());
+        assertEquals(3, player1.getHand().size());
+        assertEquals(17, player1.getDeck().size());
     }
 
     @Test

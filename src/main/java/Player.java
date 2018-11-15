@@ -15,6 +15,7 @@ public class Player {
     private ArrayList<Card> table;
     private int maxHp;
     private final int maxNumberOfCardsOnDisplay = 5;
+    private final int initialAmountOfCardsInHand=3;
 
     public Player() {
         this.hp = 20;
@@ -80,7 +81,7 @@ public class Player {
     }
 
     public void drawInitialHand() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < initialAmountOfCardsInHand; i++) {
             this.hand.add(deck.get(deck.size() - 1));
             this.deck.remove((deck.size() - 1));
         }
