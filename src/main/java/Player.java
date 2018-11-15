@@ -224,9 +224,7 @@ public class Player {
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
-
             }
-
         }
         return "FAULTY_CHOICE";
     }
@@ -234,6 +232,5 @@ public class Player {
     public void reduceMana(int cardManaCost) {
         mana -= cardManaCost;
     }
-
 }
 
