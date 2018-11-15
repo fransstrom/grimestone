@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Player {
+    private String name;
     private int hp;
     private int mana;
     private int maxMana;
@@ -144,6 +145,14 @@ public class Player {
 
     public boolean checkMana(int cardMana) {
         return (this.mana >= cardMana);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHp() {
