@@ -36,17 +36,13 @@ public class GameEngine {
         } else {
             int choice;
             Card defendingCard;
-            System.out.println("Choose card to attack!");
-            choice = scanner.nextInt();
-            defendingCard = getInactivePlayer().pickCardFromTable(choice);
-            while (!(getInactivePlayer().getTable().size() >= choice)) {
+            do {
                 System.out.println("Choose card to attack!");
                 choice = scanner.nextInt();
                 defendingCard = getInactivePlayer().pickCardFromTable(choice);
-            }
+            } while (!(getInactivePlayer().getTable().size() >= choice));
             battleLogic.setDefendingCard(defendingCard);
             battleLogic.cardVsCard();
-
         }
     }
 
