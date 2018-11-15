@@ -7,29 +7,27 @@ public class BattleLogic {
    private Player defendingPlayer;
 
     public void cardVsPlayer() {
-        int damage = RandomNumberGenerator.roll();
-        defendingPlayer.setHp(defendingPlayer.getHp()-damage);
+        defendingPlayer.setHp(defendingPlayer.getHp()-((CreatureCard)attackingCard).getAttack());
     }
 
     public void cardVsCard() {
 
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
-            int attackingCardDamage = RandomNumberGenerator.roll();
-            int defendingCardDamage = RandomNumberGenerator.roll();
-            int damageToBeDealt;
-            while (attackingCardDamage == defendingCardDamage) {
-                attackingCardDamage = RandomNumberGenerator.roll();
-                defendingCardDamage = RandomNumberGenerator.roll();
+            int attackingCardDamage = ((CreatureCard) attackingCard).getAttack();
+            int defendingCardDefence = ((CreatureCard) defendingCard).getDefense();
+            String superEffective="";
+
+            if(((CreatureCard) attackingCard).isSuperEffective(((CreatureCard) defendingCard).getType())){
+                attackingCardDamage +=2;
+                superEffective=" The attack was SUPER EFFECTIVE!";
             }
-            System.out.println("Attacking dmg :" + attackingCardDamage);
-            System.out.println("Defending dmg :" + defendingCardDamage);
-            damageToBeDealt = Math.abs(attackingCardDamage - defendingCardDamage);
-            if (attackingCardDamage > defendingCardDamage) {
-                ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
-                System.out.println("HIT! Defending card looses " + damageToBeDealt + " HP!");
+
+            int damageToBeDealt = attackingCardDamage - defendingCardDefence;
+            if (damageToBeDealt>0) {
+               ((CreatureCard) defendingCard).setHp(((CreatureCard) defendingCard).getHp()-damageToBeDealt);
+                System.out.println("HIT! Defending card looses " + damageToBeDealt + " HP!"+ superEffective);
             } else {
-                ((CreatureCard) attackingCard).setHp(((CreatureCard) attackingCard).getHp()-damageToBeDealt);
-                System.out.println("MISS! Attacking card looses " + damageToBeDealt + " HP!");
+                System.out.println("MISS! Defending card was too strong!");
             }
         }
     }

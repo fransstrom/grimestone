@@ -40,23 +40,22 @@ class GameEngineTest {
     
     @Test
     void attackWithCardsOnTable(){
-        GameEngine gameEngineSpy = spy(gameEngine);
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
-        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
-        doNothing().when(battleLogic).cardVsPlayer();
-        gameEngineSpy.attack();
-        verify(battleLogic, times(1)).cardVsPlayer();
-        verify(battleLogic, times(0)).cardVsCard();
+        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
+        doNothing().when(battleLogic).cardVsCard();
+        gameEngine.attack();
+        verify(battleLogic, times(0)).cardVsPlayer();
+        verify(battleLogic, times(1)).cardVsCard();
     }
 
     @Test
     void attackWithoutCardsOnTable(){
-        GameEngine gameEngineSpy = spy(gameEngine);
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
-        gameEngineSpy.attack();
+        doNothing().when(battleLogic).cardVsPlayer();
+        gameEngine.attack();
         verify(battleLogic, times(1)).cardVsPlayer();
         verify(battleLogic, times(0)).cardVsCard();
     }
