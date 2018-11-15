@@ -41,12 +41,11 @@ class GameEngineTest {
     
     @Test
     void attackWithCardsOnTable(){
-        when(player1.getTable()).thenReturn(mocklist);
-        when(battleLogic.getDefendingPlayer()).thenReturn(player1);
-        when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(false);
-        doNothing().when(battleLogic).cardVsCard();
-        when(inputProcessor.nextInt()).thenReturn(0);
         mocklist.add(mockCreatureCard);
+        player1.setTable(mocklist);
+        when(battleLogic.getDefendingPlayer()).thenReturn(player1);
+        doNothing().when(battleLogic).cardVsCard();
+        when(inputProcessor.nextInt()).thenReturn(1);
         gameEngine.attack();
         verify(battleLogic, times(0)).cardVsPlayer();
         verify(battleLogic, times(1)).cardVsCard();
@@ -54,7 +53,6 @@ class GameEngineTest {
 
     @Test
     void attackWithoutCardsOnTable(){
-
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
