@@ -69,9 +69,11 @@ class BattleLogicTest {
         void attackLessThanDefence(){
             battleLogic.setAttackingCard(card2);
             battleLogic.setDefendingCard(card);
+            card2.setActive(true);
             assertEquals(3, card.getHp());
             battleLogic.cardVsCard();
             assertEquals(3, card.getHp());
+            assertFalse(card2.isActive());
         }
 
         @Test
