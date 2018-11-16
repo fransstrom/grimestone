@@ -89,9 +89,11 @@ class BattleLogicTest {
         void attackingCardIsSuperEffective(){
             battleLogic.setAttackingCard(card);
             battleLogic.setDefendingCard(card3);
+            card.setActive(true);
             assertEquals(10, card3.getHp());
             battleLogic.cardVsCard();
             assertEquals(7, card3.getHp());
+            assertFalse(card.isActive());
         }
 
     }
