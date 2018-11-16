@@ -1,6 +1,7 @@
 import cards.Card;
 import cards.CreatureCard;
 import cards.MagicCard;
+import cards.SpecialCreatureCard;
 
 import java.util.ArrayList;
 
