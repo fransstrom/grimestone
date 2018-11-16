@@ -8,10 +8,10 @@ public class BattleLogic {
 
     public void cardVsPlayer() {
         defendingPlayer.setHp(defendingPlayer.getHp()-((CreatureCard)attackingCard).getAttack());
+        ((CreatureCard) attackingCard).setActive(false);
     }
 
     public void cardVsCard() {
-
         if (attackingCard instanceof CreatureCard && defendingCard instanceof CreatureCard) {
             int attackingCardDamage = ((CreatureCard) attackingCard).getAttack();
             int defendingCardDefence = ((CreatureCard) defendingCard).getDefense();
@@ -30,6 +30,7 @@ public class BattleLogic {
                 System.out.println("MISS! Defending card was too strong!");
             }
         }
+        ((CreatureCard) attackingCard).setActive(false);
     }
 
 
