@@ -1,4 +1,6 @@
-public class HealPlayerEffect implements IEffect{
+package cards.effects;
+
+public class HealPlayerEffect implements IEffect {
 
     private int healAmount;
     private String effectDescription;
