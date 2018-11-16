@@ -14,6 +14,8 @@ public class Player {
     private ArrayList<Card> graveyard;
     private ArrayList<Card> table;
     private int maxHp;
+    private final int maxNumberOfCardsOnDisplay = 5;
+    private final int initialAmountOfCardsInHand=3;
 
     public Player() {
         this.hp = 20;
@@ -54,7 +56,8 @@ public class Player {
     }
 
     public boolean placeCardOnTable(int indexOfCard) {
-        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
+
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 || getTable().size() >= maxNumberOfCardsOnDisplay) {
             return false;
         } else {
             this.table.add(hand.get(indexOfCard - 1));
@@ -64,18 +67,21 @@ public class Player {
     }
 
     public boolean drawCard() {
-        if (getDeck().size() == 0) {
+        if (deck.size() == 0) {
+            return false;
+        } else if (hand.size() == maxNumberOfCardsOnDisplay) {
+            graveyard.add(deck.get(0));
+            deck.remove(0);
             return false;
         } else {
             hand.add(deck.get(0));
             deck.remove(0);
-
             return true;
         }
     }
 
     public void drawInitialHand() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < initialAmountOfCardsInHand; i++) {
             this.hand.add(deck.get(deck.size() - 1));
             this.deck.remove((deck.size() - 1));
         }
@@ -122,14 +128,13 @@ public class Player {
         return this.passTurn;
     }
 
-    public void heal(int healAmount){
-        if((this.hp + healAmount) > maxHp){
+    public void heal(int healAmount) {
+        if ((this.hp + healAmount) > maxHp) {
             this.hp = maxHp;
-        }
-        else this.hp += healAmount;
+        } else this.hp += healAmount;
     }
 
-    public void increaseMaxMana() {
+    public void incrementMaxMana() {
         if (maxMana < 10) {
             maxMana++;
         }
@@ -140,7 +145,12 @@ public class Player {
     }
 
     public boolean checkMana(int cardMana) {
-        return (this.mana >= cardMana);
+        if (this.mana >= cardMana) {
+            return true;
+        } else {
+            System.out.println("Not sufficient mana");
+            return false;
+        }
     }
 
     public int getHp() {
@@ -211,13 +221,16 @@ public class Player {
         this.maxMana = maxMana;
     }
 
-    public String playCard(int index){
-        if(index <= hand.size() && index > 0) {
+    public String playCard(int index) {
+        if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
-            if (card instanceof CreatureCard) {
-                if (placeCardOnTable(index))
+            if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
+                if (placeCardOnTable(index)) {
+                    reduceMana(card.getManaCost());
                     return "PLAYED_CREATURECARD";
-            } else if (card instanceof MagicCard) {
+                }
+            } else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
+                reduceMana(card.getManaCost());
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
@@ -225,4 +238,9 @@ public class Player {
         }
         return "FAULTY_CHOICE";
     }
+
+    public void reduceMana(int cardManaCost) {
+        mana -= cardManaCost;
+    }
 }
+

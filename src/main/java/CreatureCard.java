@@ -101,4 +101,12 @@ public class CreatureCard extends Card {
     public int getActivationCountdown() {
         return activationCountdown;
     }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
 }

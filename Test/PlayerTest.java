@@ -5,14 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
@@ -100,6 +95,16 @@ class PlayerTest {
         }
 
         @Test
+        void placeCardOnTableWhenTableIsFull() {
+            for (int i = 0; i < 5; i++) {
+                player1.getTable().add(creatureCard);
+            }
+            player1.getHand().add(creatureCard);
+            assertEquals(5, player1.getTable().size());
+            assertFalse(player1.placeCardOnTable(1));
+        }
+
+        @Test
         void placeCardOnTableWhenIndexOutOfRange() {
             player1.getHand().add(card);
 
@@ -121,6 +126,18 @@ class PlayerTest {
             assertEquals(0, player1.getTable().size());
             assertEquals(0, player1.getHand().size());
         }
+    }
+
+    @Test
+    void drawCardWhenHandIsFull() {
+        for (int i = 0; i < 5; i++) {
+            player1.getHand().add(creatureCard);
+        }
+        assertEquals(5, player1.getHand().size());
+        assertEquals(0, player1.getGraveyard().size());
+        player1.drawCard();
+        assertEquals(5, player1.getHand().size());
+        assertEquals(1, player1.getGraveyard().size());
     }
 
     @Test
@@ -147,18 +164,19 @@ class PlayerTest {
         assertEquals(20, player1.getDeck().size());
         assertEquals(0, player1.getHand().size());
         player1.drawInitialHand();
-        assertEquals(5, player1.getHand().size());
-        assertEquals(15, player1.getDeck().size());
+        assertEquals(3, player1.getHand().size());
+        assertEquals(17, player1.getDeck().size());
     }
 
     @Test
-    void overHeal(){
+    void overHeal() {
         player1.setHp(15);
         player1.heal(6);
         assertEquals(20, player1.getHp());
     }
+
     @Test
-    void heal(){
+    void heal() {
         player1.setHp(10);
         player1.heal(5);
         assertEquals(15, player1.getHp());
@@ -244,19 +262,19 @@ class PlayerTest {
     }
 
     @Test
-    void increaseManaWhenManaIsNotMax() {
+    void incrementMaxManaWhenManaIsNotMax() {
         assertEquals(0, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(1, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(2, player1.getMaxMana());
     }
 
     @Test
-    void increaseManaWhenManaIsMax() {
+    void incrementMaxManaWhenManaIsMax() {
         player1.setMaxMana(10);
         assertEquals(10, player1.getMaxMana());
-        player1.increaseMaxMana();
+        player1.incrementMaxMana();
         assertEquals(10, player1.getMaxMana());
     }
 
@@ -280,31 +298,31 @@ class PlayerTest {
 
     @Nested
     @DisplayName("PlayCard")
-    class playCard{
+    class playCard {
 
         @BeforeEach
-        void setUp(){
+        void setUp() {
             player1.getHand().add(creatureCard);
             player1.getHand().add(specialCreatureCard);
             player1.getHand().add(magicCard);
         }
 
         @Test
-        void creatureCard(){
+        void creatureCard() {
             assertEquals(3, player1.getHand().size());
             assertEquals("PLAYED_CREATURECARD", player1.playCard(1));
             assertEquals(2, player1.getHand().size());
         }
 
         @Test
-        void specialCreatureCard(){
+        void specialCreatureCard() {
             assertEquals(3, player1.getHand().size());
             assertEquals("PLAYED_CREATURECARD", player1.playCard(2));
             assertEquals(2, player1.getHand().size());
         }
 
         @Test
-        void magicCard(){
+        void magicCard() {
             when(magicCard.trigger()).thenReturn("HEAL_PLAYER_5");
             assertEquals("HEAL_PLAYER_5", player1.playCard(3));
             verify(magicCard, Mockito.times(1)).trigger();
@@ -312,13 +330,29 @@ class PlayerTest {
         }
 
         @Test
-        void faultyChoice(){
+        void faultyChoice() {
             assertEquals("FAULTY_CHOICE", player1.playCard(7));
             assertNotEquals("FAULTY_CHOICE", player1.playCard(3));
             assertEquals("FAULTY_CHOICE", player1.playCard(-3));
         }
 
+        @Test
+        void checkManaWithInsufficientMana() {
+            player1.setMana(1);
+            when(creatureCard.getManaCost()).thenReturn(2);
+            assertEquals("FAULTY_CHOICE", player1.playCard(1));
+        }
+
 
     }
 
+
+    @Test
+    void reduceMana() {
+        player1.setMana(1);
+        assertEquals(1, player1.getMana());
+        player1.reduceMana(1);
+        assertEquals(0, player1.getMana());
+    }
 }
+

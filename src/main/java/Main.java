@@ -11,7 +11,7 @@ public class Main {
 */
 
     public static void main(String[] args) {
-       GameEngine gameEngine = new GameEngine(new Player(), new Player(), new BattleLogic());
+       GameEngine gameEngine = new GameEngine(new Player(), new Player(), new BattleLogic(), new InputProcessor());
        gameEngine.startGame();
     }
 }
