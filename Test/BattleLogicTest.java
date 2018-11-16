@@ -41,10 +41,12 @@ class BattleLogicTest {
             battleLogic.setDefendingPlayer(player);
             player.setHp(20);
             battleLogic.setAttackingCard(card);
+            card.setActive(true);
             assertEquals(20, player.getHp());
             battleLogic.cardVsPlayer();
             assertEquals(18, player.getHp());
-        }
+            assertFalse(card.isActive());
+    }
 
 
 
