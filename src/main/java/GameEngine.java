@@ -67,7 +67,7 @@ public class GameEngine {
         int choice;
         int cardIndex;
 
-        while (!getActivePlayer().hasPassedTurn()) {
+        while (!getActivePlayer().hasPassedTurn() && !isGameOver()){
             String resolvePlay = "";
             gui.render();
             System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
