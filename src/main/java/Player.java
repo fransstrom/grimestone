@@ -1,4 +1,8 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import cards.Card;
+import cards.CardFactory;
+import cards.CreatureCard;
+import cards.MagicCard;
+import data.CardDB;
 
 import java.util.ArrayList;
 import java.util.Collections;

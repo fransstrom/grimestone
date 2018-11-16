@@ -1,3 +1,9 @@
+import cards.Card;
+import cards.CreatureCard;
+import cards.MagicCard;
+import cards.SpecialCreatureCard;
+import cards.effects.HealPlayerEffect;
+
 import java.util.ArrayList;
 import java.util.Random;
 
