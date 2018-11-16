@@ -1,4 +1,8 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import cards.Card;
+import cards.CardFactory;
+import cards.CreatureCard;
+import cards.MagicCard;
+import data.CardDB;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,11 +93,11 @@ public class Player {
 
     public void generateDeck() {
         for (int i = 0; i < 10; i++) {
-            this.deck.add(CardDB.getRandomCreatureCard());
+            this.deck.add(CardFactory.getRandomCardOfType(CardFactory.entityType.CREATURE_CARD));
         }
         for (int i = 0; i < 5; i++) {
-            this.deck.add(CardDB.getRandomSpecialCreatureCard());
-            this.deck.add(CardDB.getRandomMagicCard());
+            this.deck.add(CardFactory.getRandomCardOfType(CardFactory.entityType.SPECIAL_CREATURE_CARD));
+            this.deck.add(CardFactory.getRandomCardOfType(CardFactory.entityType.MAGIC_CARD));
         }
         Collections.shuffle(this.deck);
     }

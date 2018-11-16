@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import cards.Card;
+import cards.CreatureCard;
 
 public class BattleLogic {
 

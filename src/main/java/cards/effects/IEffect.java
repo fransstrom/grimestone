@@ -1,3 +1,5 @@
+package cards.effects;
+
 public interface IEffect {
 
     String trigger();

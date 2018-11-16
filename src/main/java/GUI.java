@@ -1,3 +1,7 @@
+import cards.Card;
+import cards.CreatureCard;
+import cards.MagicCard;
+
 import java.util.ArrayList;
 
 public class GUI {

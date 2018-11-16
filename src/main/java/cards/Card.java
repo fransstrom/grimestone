@@ -1,10 +1,12 @@
+package cards;
+
 import java.util.UUID;
 
 public abstract class Card {
 
 
-    private String name;
-    private int manaCost;
+    protected String name;
+    protected int manaCost;
     public Card(){
         this.name = "";
         this.manaCost = 1;
