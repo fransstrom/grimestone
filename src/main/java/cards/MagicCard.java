@@ -1,5 +1,9 @@
+package cards;
+
+import cards.effects.IEffect;
+
 public class MagicCard extends Card {
-    private IEffect effect;
+    protected IEffect effect;
     private boolean isConsumed;
 
     public MagicCard (IEffect effect){
