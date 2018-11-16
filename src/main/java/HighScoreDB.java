@@ -1,10 +1,16 @@
 import java.sql.*;
+import java.util.ResourceBundle;
 
 public class HighScoreDB {
 
+    private ResourceBundle rb = ResourceBundle.getBundle("mysql");
+
     public Connection getConnection() throws SQLException, ClassNotFoundException {
+        String username = rb.getString("username");
+        String password = rb.getString("password");
+        String url = rb.getString("url");
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("JDBC:mysql://localhost:3306/grimestone", "grimestone", "abc123");
+        return DriverManager.getConnection(url, username, password);
     }
 
     public void addUserIfNew(String name) throws SQLException, ClassNotFoundException {
