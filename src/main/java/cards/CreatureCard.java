@@ -1,12 +1,14 @@
+package cards;
+
 public class CreatureCard extends Card {
 
-    private boolean active;
-    private int hp;
-    private int activationCountdown;
-    private int attack;
-    private int defense;
-    private Type type;
-    private int maxHp;
+    protected boolean active;
+    protected int hp;
+    protected int activationCountdown;
+    protected int attack;
+    protected int defense;
+    protected Type type;
+    protected int maxHp;
 
 
     public enum Type{

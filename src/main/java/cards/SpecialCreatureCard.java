@@ -1,5 +1,9 @@
+package cards;
+
+import cards.effects.IEffect;
+
 public class SpecialCreatureCard extends CreatureCard {
-    private IEffect effect;
+    protected IEffect effect;
 
     public SpecialCreatureCard(IEffect effect){
         super();
