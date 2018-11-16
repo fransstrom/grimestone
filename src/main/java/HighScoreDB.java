@@ -24,4 +24,17 @@ public class HighScoreDB {
         getConnection().close();
     }
 
+    public void updateUser(String name, String column) throws SQLException, ClassNotFoundException {
+        Statement statement = getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM players WHERE player_name = " + "'" + name + "'");
+        String query = "UPDATE players SET `" + column + "` = (?) WHERE player_name = (?)";
+        PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+        while (resultSet.next()){
+            preparedStatement.setInt(1, resultSet.getInt(column)+1);
+            preparedStatement.setString(2, name);
+            preparedStatement.executeUpdate();
+        }
+        getConnection().close();
+    }
+
 }
