@@ -29,8 +29,8 @@ public class BattleLogic {
             } else {
                 System.out.println("MISS! Defending card was too strong!");
             }
+            ((CreatureCard) attackingCard).setActive(false);
         }
-        ((CreatureCard) attackingCard).setActive(false);
     }
 
 
