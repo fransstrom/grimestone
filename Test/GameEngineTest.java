@@ -35,7 +35,7 @@ class GameEngineTest {
 
     @Test
     void startGame() {
-        when(player1.getHp()).thenReturn(0);
+        player1.setHp(0);
         gameEngine.startGame();
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();
@@ -75,30 +75,20 @@ class GameEngineTest {
     @Test
     void gameOverByHP() {
 
-
         when(player1.noCardsLeftInDeck()).thenReturn(false);
         when(player2.noCardsLeftInDeck()).thenReturn(false);
 
-        when(player1.getHp()).thenReturn(1);
-        when(player2.getHp()).thenReturn(9);
         assertFalse(gameEngine.isGameOver());
-
-        when(player1.getHp()).thenReturn(12);
-        when(player2.getHp()).thenReturn(-1);
+        player2.setHp(-1);
         assertTrue(gameEngine.isGameOver());
-
-        when(player1.getHp()).thenReturn(-1);
-        assertTrue(gameEngine.isGameOver());
-
-
+        player2.setHp(1);
+        assertFalse(gameEngine.isGameOver());
     }
 
     @Test
     void gameOverByRunningOutOfCards() {
         when(player1.noCardsLeftInDeck()).thenReturn(false);
         when(player2.noCardsLeftInDeck()).thenReturn(false);
-        when(player1.getHp()).thenReturn(2);
-        when(player2.getHp()).thenReturn(10);
         assertFalse(gameEngine.isGameOver());
 
         when(player1.noCardsLeftInDeck()).thenReturn(true);
