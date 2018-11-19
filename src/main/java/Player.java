@@ -76,6 +76,8 @@ public class Player {
         } else if (hand.size() == maxNumberOfCardsOnDisplay) {
             graveyard.add(deck.get(0));
             deck.remove(0);
+            System.out.println("\033[0;93mHand full, the card is moved straight to Graveyeard\n\033[0m");
+            sleep(1000);
             return false;
         } else {
             hand.add(deck.get(0));
@@ -152,7 +154,8 @@ public class Player {
         if (this.mana >= cardMana) {
             return true;
         } else {
-            System.out.println("Not sufficient mana");
+            System.out.println("\033[0;93mNot enough mana!\n\033[0m");
+            sleep(1000);
             return false;
         }
     }
@@ -246,5 +249,14 @@ public class Player {
     public void reduceMana(int cardManaCost) {
         mana -= cardManaCost;
     }
+
+    private void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
