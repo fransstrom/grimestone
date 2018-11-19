@@ -79,6 +79,7 @@ public class GameEngine {
                     break;
                 case 2:
                     actionPhase();
+                    sleep(1500);
                     break;
                 case 3:
                     getActivePlayer().passTurn(true);
