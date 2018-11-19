@@ -202,11 +202,11 @@ public class GUI {
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
-                    System.out.printf(SpecialCreatureCardStatFormat, 10,10,3);
+                    System.out.printf(SpecialCreatureCardStatFormat, ((SpecialCreatureCard) card).getAttack(),((SpecialCreatureCard) card).getDefense(),((SpecialCreatureCard) card).getActivationCountdown());
                 if (card instanceof MagicCard)
                     System.out.printf(BlankCardLine, "");
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
-                    System.out.printf(CreatureCardStatFormat, 3,3,1);
+                    System.out.printf(CreatureCardStatFormat, ((CreatureCard) card).getAttack(),((CreatureCard) card).getDefense(),((CreatureCard) card).getActivationCountdown());
             }
             System.out.println();
             for (int i=0; i<cardList.size(); i++){

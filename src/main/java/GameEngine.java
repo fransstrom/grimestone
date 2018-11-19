@@ -79,6 +79,7 @@ public class GameEngine {
                     break;
                 case 2:
                     actionPhase();
+                    sleep(1500);
                     break;
                 case 3:
                     getActivePlayer().passTurn(true);
@@ -102,6 +103,8 @@ public class GameEngine {
                 if (effectComponents[1].equals("PLAYER")) {
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().heal(healAmount);
+                    System.out.println("\033[0;93mYou healed \033[0m"+effectComponents[2]+"\033[0;93m HP!\033[0m");
+                    sleep(1000);
                 }
         }
     }
@@ -122,6 +125,10 @@ public class GameEngine {
             } while (pickedCard == null || !((CreatureCard) pickedCard).isActive());
             battleLogic.setAttackingCard(pickedCard);
             attack();
+        }
+        else{
+            System.out.println("\033[1;93mYou have no cards you can attack with!\033[0m");
+            sleep(1000);
         }
     }
 
