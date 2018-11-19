@@ -20,6 +20,7 @@ public class Player {
     private int maxHp;
     private final int maxNumberOfCardsOnDisplay = 5;
     private final int initialAmountOfCardsInHand=3;
+    private String name;
 
     public Player() {
         this.hp = 20;
@@ -120,7 +121,14 @@ public class Player {
     }
 
     public void setCardsOnTableToActive() {
-        this.table.forEach(card -> ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() - 1));
+        this.table.forEach(card -> {
+            if (((CreatureCard) card).getActivationCountdown() <= 0) {
+                ((CreatureCard) card).setActivationCountdown(0);
+            }else{
+                ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() -1);
+            }
+        });
+       // this.table.forEach(card -> ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() - 1));
         this.table.stream()
                 .filter(card -> ((CreatureCard) card).getActivationCountdown() < 1)
                 .forEach(card -> ((CreatureCard) card).setActive(true));
@@ -258,5 +266,12 @@ public class Player {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
