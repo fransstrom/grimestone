@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 public class Main {
  //   int rnd = RandomNumberGenerator.roll();
 /*
@@ -10,7 +12,7 @@ public class Main {
     }
 */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
        GameEngine gameEngine = new GameEngine(new Player(), new Player(), new BattleLogic(), new InputProcessor());
        gameEngine.startGame();
     }
