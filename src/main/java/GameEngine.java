@@ -18,15 +18,7 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        if (player1.getHp() < 1 || player1.noCardsLeftInDeck()) {
-            System.out.println("Player1 lost");
-            return true;
-        }
-        if (player2.getHp() < 1 || player2.noCardsLeftInDeck()) {
-            System.out.println("Player2 lost");
-            return true;
-        }
-        return false;
+        return !player1.isAlive() || !player2.isAlive();
     }
 
 
@@ -59,7 +51,14 @@ public class GameEngine {
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
             switchActivePlayer();
-
+        }
+        //GAME OVER
+        System.out.println("********************* GAME OVER *********************");
+        if(!player1.isAlive()){
+            System.out.println("PLAYER 1 LOST!");
+        }
+        else{
+            System.out.println("PLAYER 2 LOST!!");
         }
     }
 
@@ -83,6 +82,7 @@ public class GameEngine {
                     break;
                 case 3:
                     getActivePlayer().passTurn(true);
+                    gui.nextTurn();
                     break;
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
@@ -148,7 +148,6 @@ public class GameEngine {
 
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
-        gui.nextTurn();
     }
 
     private void randomGenerateFirstActivePlayer() {

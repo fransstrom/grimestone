@@ -37,7 +37,7 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return (this.hp > 0);
+        return (this.hp > 0) && (!this.noCardsLeftInDeck());
     }
 
     public boolean deckIsEmpty() {

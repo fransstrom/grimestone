@@ -355,7 +355,7 @@ public class GUI {
     }
 
     public void nextTurn(){
-        System.out.println("*************** NEXT TURN *********************");
+        System.out.println("********************* NEXT TURN *********************");
     }
 
 }
