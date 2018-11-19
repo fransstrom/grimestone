@@ -1,6 +1,8 @@
 import cards.Card;
 import cards.CreatureCard;
 
+import java.sql.SQLException;
+
 public class GameEngine {
 
     private Player player1;
@@ -8,6 +10,7 @@ public class GameEngine {
     private GUI gui;
     private BattleLogic battleLogic;
     private InputProcessor inputProcessor;
+    private HighScoreDB highScoreDB;
 
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
         player1 = p1;
@@ -15,6 +18,7 @@ public class GameEngine {
         this.inputProcessor =  inputProcessor;
         this.battleLogic = battleLogic;
         this.gui = new GUI(this);
+        this.highScoreDB = new HighScoreDB();
     }
 
     public boolean isGameOver() {
@@ -39,7 +43,8 @@ public class GameEngine {
         }
     }
 
-    public void startGame() {
+    public void startGame() throws SQLException, ClassNotFoundException {
+        namePlayers();
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
@@ -56,10 +61,15 @@ public class GameEngine {
         System.out.println("********************* GAME OVER *********************");
         if(!player1.isAlive()){
             System.out.println("PLAYER 1 LOST!");
+            highScoreDB.updateUser(player1.getName(), "losses");
+            highScoreDB.updateUser(player2.getName(), "wins");
         }
         else{
             System.out.println("PLAYER 2 LOST!!");
+            highScoreDB.updateUser(player1.getName(), "wins");
+            highScoreDB.updateUser(player2.getName(), "losses");
         }
+        highScoreDB.printLeaderboard();
     }
 
     public void playerChoicePhase() {
@@ -180,6 +190,17 @@ public class GameEngine {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void namePlayers() throws SQLException, ClassNotFoundException {
+        System.out.println("Enter name for player one:");
+        player1.setName(inputProcessor.nextLine());
+        highScoreDB.addUserIfNew(player1.getName());
+        System.out.println("Enter name for player two:");
+        player2.setName(inputProcessor.nextLine());
+        highScoreDB.addUserIfNew(player2.getName());
+
+
     }
 
 }
