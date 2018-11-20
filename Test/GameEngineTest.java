@@ -7,6 +7,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,8 +35,9 @@ class GameEngineTest {
     }
 
     @Test
-    void startGame() {
+    void startGame() throws SQLException, ClassNotFoundException {
         player1.setHp(0);
+        when(inputProcessor.nextLine()).thenReturn("test");
         gameEngine.startGame();
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();

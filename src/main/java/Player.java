@@ -20,6 +20,7 @@ public class Player {
     private int maxHp;
     private final int maxNumberOfCardsOnDisplay = 5;
     private final int initialAmountOfCardsInHand=3;
+    private String name;
 
     public Player() {
         this.hp = 20;
@@ -127,6 +128,7 @@ public class Player {
                 ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() -1);
             }
         });
+
         this.table.stream()
                 .filter(card -> ((CreatureCard) card).getActivationCountdown() < 1)
                 .forEach(card -> ((CreatureCard) card).setActive(true));
@@ -264,5 +266,12 @@ public class Player {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 

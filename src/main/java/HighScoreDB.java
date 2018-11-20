@@ -43,4 +43,12 @@ public class HighScoreDB {
         getConnection().close();
     }
 
+    public void printLeaderboard() throws SQLException, ClassNotFoundException {
+        Statement statement = getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM players ORDER BY wins DESC LIMIT 10");
+        System.out.println("***************HIGH SCORE***************");
+        while (resultSet.next()){
+            System.out.println("Player: " + resultSet.getString("player_name") + " | Wins: " + resultSet.getInt("wins") + " | Losses: " + resultSet.getInt("losses") );
+        }
+    }
 }
