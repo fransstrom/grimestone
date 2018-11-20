@@ -1,7 +1,4 @@
-import cards.Card;
-import cards.CardFactory;
-import cards.CreatureCard;
-import cards.MagicCard;
+import cards.*;
 import data.CardDB;
 
 import java.util.ArrayList;
@@ -19,7 +16,7 @@ public class Player {
     private ArrayList<Card> table;
     private int maxHp;
     private final int maxNumberOfCardsOnDisplay = 5;
-    private final int initialAmountOfCardsInHand=3;
+    private final int initialAmountOfCardsInHand = 3;
     private String name;
 
     public Player() {
@@ -124,8 +121,8 @@ public class Player {
         this.table.forEach(card -> {
             if (((CreatureCard) card).getActivationCountdown() <= 0) {
                 ((CreatureCard) card).setActivationCountdown(0);
-            }else{
-                ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() -1);
+            } else {
+                ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() - 1);
             }
         });
 
@@ -239,16 +236,19 @@ public class Player {
     public String playCard(int index) {
         if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
-            if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
-                if (placeCardOnTable(index)) {
-                    reduceMana(card.getManaCost());
-                    return "PLAYED_CREATURECARD";
-                }
+            if (card instanceof SpecialCreatureCard && checkMana(card.getManaCost())) {
+                reduceMana(card.getManaCost());
+                return ((SpecialCreatureCard) card).trigger();
             } else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
                 reduceMana(card.getManaCost());
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
+            } else if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
+                if (placeCardOnTable(index)) {
+                    reduceMana(card.getManaCost());
+                    return "PLAYED_CREATURECARD";
+                }
             }
         }
         return "FAULTY_CHOICE";
