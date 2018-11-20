@@ -29,8 +29,9 @@ class GameEngineTest {
     CreatureCard spyCreatureCard;
     @Mock
     InputProcessor inputProcessor;
+
     @BeforeEach
-    void SetUp(){
+    void SetUp() {
         gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
     }
 
@@ -42,9 +43,9 @@ class GameEngineTest {
         verify(player1, times(1)).drawInitialHand();
         verify(player2, times(1)).drawInitialHand();
     }
-    
+
     @Test
-    void attackWithCardsOnTable(){
+    void attackWithCardsOnTable() {
         mocklist.add(spyCreatureCard);
         player1.setTable(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
@@ -56,7 +57,7 @@ class GameEngineTest {
     }
 
     @Test
-    void attackWithoutCardsOnTable(){
+    void attackWithoutCardsOnTable() {
         when(player1.getTable()).thenReturn(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         when(battleLogic.getDefendingPlayer().getTable().isEmpty()).thenReturn(true);
@@ -102,26 +103,26 @@ class GameEngineTest {
     }
 
     @Test
-    void getInactivePlayerWhenPlayerOneIsInactive(){
+    void getInactivePlayerWhenPlayerOneIsInactive() {
         when(player1.isActive()).thenReturn(false);
         assertEquals(player1, gameEngine.getInactivePlayer());
     }
 
     @Test
-    void getInactivePlayerWhenPlayerTwoIsInactive(){
+    void getInactivePlayerWhenPlayerTwoIsInactive() {
         when(player1.isActive()).thenReturn(true);
         assertEquals(player2, gameEngine.getInactivePlayer());
     }
 
     @Test
-    void switchActivePlayer(){
+    void switchActivePlayer() {
         assertFalse(player1.isActive());
         gameEngine.switchActivePlayer();
         assertTrue(player1.isActive());
     }
 
     @Test
-    void resolveEffectHealPlayer(){
+    void resolveEffectHealPlayer() {
         player1.setActive(true);
         player1.setHp(5);
         gameEngine.resolveEffect("HEAL_PLAYER_5");
@@ -129,7 +130,7 @@ class GameEngineTest {
     }
 
     @Test
-    void resolveEffectNegativeHealAmount(){
+    void resolveEffectNegativeHealAmount() {
         player1.setActive(true);
         player1.setHp(5);
         gameEngine.resolveEffect("HEAL_PLAYER_-5");
@@ -137,7 +138,7 @@ class GameEngineTest {
     }
 
     @Test
-    void resolveSetCreatureToActive(){
+    void resolveSetCreatureToActive() {
         player1.setActive(true);
         spyCreatureCard.setActive(false);
         player1.getTable().add(spyCreatureCard);
@@ -150,9 +151,8 @@ class GameEngineTest {
     }
 
 
-
     @Test
-    void BreakCard(){
+    void BreakCard() {
 
     }
 
