@@ -116,6 +116,11 @@ public class GameEngine {
                     System.out.println("\033[0;93mYou healed \033[0m"+effectComponents[2]+"\033[0;93m HP!\033[0m");
                     sleep(1000);
                 }
+                break;
+            case "RUSH":
+                Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size()-1);
+                ((CreatureCard)card).setActive(true);
+                break;
         }
     }
 
