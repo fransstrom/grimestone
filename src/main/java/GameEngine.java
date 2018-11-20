@@ -60,12 +60,12 @@ public class GameEngine {
         //GAME OVER
         System.out.println("********************* GAME OVER *********************");
         if(!player1.isAlive()){
-            System.out.println("PLAYER 1 LOST!");
+            System.out.println(player1.getName() + " LOST!");
             highScoreDB.updateUser(player1.getName(), "losses");
             highScoreDB.updateUser(player2.getName(), "wins");
         }
         else{
-            System.out.println("PLAYER 2 LOST!!");
+            System.out.println(player2.getName() + " LOST!!");
             highScoreDB.updateUser(player1.getName(), "wins");
             highScoreDB.updateUser(player2.getName(), "losses");
         }
