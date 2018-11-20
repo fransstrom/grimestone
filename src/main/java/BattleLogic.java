@@ -10,6 +10,7 @@ public class BattleLogic {
     public void cardVsPlayer() {
         defendingPlayer.setHp(defendingPlayer.getHp()-((CreatureCard)attackingCard).getAttack());
         ((CreatureCard) attackingCard).setActive(false);
+        System.out.println("HIT! Defending player looses " + ((CreatureCard) attackingCard).getAttack() + " HP!");
     }
 
     public void cardVsCard() {

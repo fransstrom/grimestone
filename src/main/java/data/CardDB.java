@@ -13,6 +13,8 @@ public class CardDB {
     static {
         creatureCardConfigs.add(new CreatureCard("Mangry Hamster", 1, CreatureCard.Type.NEUTRAL, 1, 2, 1, 2));
         creatureCardConfigs.add(new CreatureCard("Trippy Toad",1, CreatureCard.Type.GRASS, 1 , 1, 1, 3));
+        creatureCardConfigs.add(new CreatureCard("Spicy Lizard",1, CreatureCard.Type.FIRE, 1 , 1, 1, 3));
+        creatureCardConfigs.add(new CreatureCard("Whimsy Walrus",1, CreatureCard.Type.WATER, 1 , 1, 2, 2));
     }
     private static ArrayList<SpecialCreatureCard> specialCreatureCardConfigs = new ArrayList<>();
     static {

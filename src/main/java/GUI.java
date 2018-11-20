@@ -2,6 +2,7 @@ import cards.Card;
 import cards.CreatureCard;
 import cards.MagicCard;
 import cards.SpecialCreatureCard;
+import jdk.nashorn.internal.runtime.NumberToString;
 
 import java.util.ArrayList;
 
@@ -41,11 +42,15 @@ public class GUI {
     public void printManaBar(Player player){
         String numMax = "00";
         String num = "00";
-        if (player.getMaxMana()<9){
+        if (player.getMaxMana()<=9){
             numMax = "0" + player.getMaxMana();
+        }else{
+            numMax= Integer.toString(player.getMaxMana());
         }
-        if (player.getMana()<9){
+        if (player.getMana()<=9){
             num = "0" + player.getMana();
+        }else{
+            num=Integer.toString(player.getMana());
         }
         System.out.printf("MANA: " +num+"/"+numMax);
     }
