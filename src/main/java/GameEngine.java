@@ -56,6 +56,7 @@ public class GameEngine {
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
             switchActivePlayer();
+            printActivePlayerTurn();
         }
         //GAME OVER
         System.out.println("********************* GAME OVER *********************");
@@ -206,5 +207,9 @@ public class GameEngine {
 
     }
 
+    private void printActivePlayerTurn(){
+        System.out.printf("\033[1;93mSwitching from %s's turn to %s's turn\n \033[0m", getInactivePlayer().getName(), getActivePlayer().getName());
+        sleep(3000);
+    }
 }
 
