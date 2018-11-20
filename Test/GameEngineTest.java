@@ -25,8 +25,8 @@ class GameEngineTest {
     BattleLogic battleLogic;
     @Spy
     ArrayList<Card> mocklist;
-    @Mock
-    CreatureCard mockCreatureCard;
+    @Spy
+    CreatureCard spyCreatureCard;
     @Mock
     InputProcessor inputProcessor;
     @BeforeEach
@@ -45,7 +45,7 @@ class GameEngineTest {
     
     @Test
     void attackWithCardsOnTable(){
-        mocklist.add(mockCreatureCard);
+        mocklist.add(spyCreatureCard);
         player1.setTable(mocklist);
         when(battleLogic.getDefendingPlayer()).thenReturn(player1);
         doNothing().when(battleLogic).cardVsCard();
@@ -134,6 +134,15 @@ class GameEngineTest {
         player1.setHp(5);
         gameEngine.resolveEffect("HEAL_PLAYER_-5");
         assertEquals(10, player1.getHp());
+    }
+
+    @Test
+    void resolveSetCreatureToActive(){
+        player1.setActive(true);
+        spyCreatureCard.setActive(false);
+        player1.getTable().add(spyCreatureCard);
+        gameEngine.resolveEffect("RUSH_TRUE");
+        assertTrue(spyCreatureCard.isActive());
     }
 
     @Test
