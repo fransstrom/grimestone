@@ -237,8 +237,10 @@ public class Player {
         if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
             if (card instanceof SpecialCreatureCard && checkMana(card.getManaCost())) {
-                reduceMana(card.getManaCost());
-                return ((SpecialCreatureCard) card).trigger();
+                if(placeCardOnTable(index)) {
+                    reduceMana(card.getManaCost());
+                    return ((SpecialCreatureCard) card).trigger();
+                }
             } else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
                 reduceMana(card.getManaCost());
                 graveyard.add(hand.get(index - 1));
