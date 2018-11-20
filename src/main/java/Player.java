@@ -120,7 +120,13 @@ public class Player {
     }
 
     public void setCardsOnTableToActive() {
-        this.table.forEach(card -> ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() - 1));
+        this.table.forEach(card -> {
+            if (((CreatureCard) card).getActivationCountdown() <= 0) {
+                ((CreatureCard) card).setActivationCountdown(0);
+            }else{
+                ((CreatureCard) card).setActivationCountdown(((CreatureCard) card).getActivationCountdown() -1);
+            }
+        });
         this.table.stream()
                 .filter(card -> ((CreatureCard) card).getActivationCountdown() < 1)
                 .forEach(card -> ((CreatureCard) card).setActive(true));
