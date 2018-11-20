@@ -131,6 +131,9 @@ public class GUI {
             String CreatureCardStatFormat = "| ATT %-2d  DEF %-2d \u001B[31m S  %-2d\u001B[0m | " ;
             String SpecialCreatureCardStatFormat = "\u001B[33m| ATT %-2d  DEF %-2d  \u001B[31m S %-2d\u001B[33m | \u001B[0m" ;
 
+            String CreatureCardStatFormatRested = "| ATT %-2d  DEF %-2d       \u001B[0m | " ;
+            String SpecialCreatureCardStatFormatRested = "\u001B[33m| ATT %-2d  DEF %-2d       \u001B[33m | \u001B[0m" ;
+
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
@@ -194,34 +197,50 @@ public class GUI {
                     System.out.printf(BlankCardLine, "");
             }
             System.out.println();
-            //PRINT OUT BLANK LINE
+            //PRINT OUT ACTIVE/RESTING
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
-                if (card instanceof SpecialCreatureCard)
-                    System.out.printf(BlankSpecialCardLine, "");
-                else
+                if (card instanceof CreatureCard && ((CreatureCard) card).isActive()) {
+                    if (card instanceof SpecialCreatureCard)
+                        System.out.printf(BlankSpecialCardLine, "       \033[0;32mACTIVE\u001B[33m        ");
+                    if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
+                        System.out.printf(BlankCardLine, "       \033[0;32mACTIVE\u001B[0m        ");
+                }else {
+                    if (card instanceof SpecialCreatureCard)
+                        System.out.printf(BlankSpecialCardLine, "       \033[0;31mRESTING\u001B[33m       ");
+                    if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
+                        System.out.printf(BlankCardLine, "       \033[0;31mRESTING\u001B[0m       ");
+                }
+                if (card instanceof MagicCard)
                     System.out.printf(BlankCardLine, "");
             }
             System.out.println();
             //PRINT OUT STATS
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
-                if (card instanceof SpecialCreatureCard)
-                    System.out.printf(SpecialCreatureCardStatFormat, ((SpecialCreatureCard) card).getAttack(),((SpecialCreatureCard) card).getDefense(),((SpecialCreatureCard) card).getActivationCountdown());
                 if (card instanceof MagicCard)
                     System.out.printf(BlankCardLine, "");
-                if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
-                    System.out.printf(CreatureCardStatFormat, ((CreatureCard) card).getAttack(),((CreatureCard) card).getDefense(),((CreatureCard) card).getActivationCountdown());
+                if (card instanceof CreatureCard && ((CreatureCard) card).getActivationCountdown()>0) {
+                    if (card instanceof SpecialCreatureCard)
+                        System.out.printf(SpecialCreatureCardStatFormat, ((SpecialCreatureCard) card).getAttack(), ((SpecialCreatureCard) card).getDefense(), ((SpecialCreatureCard) card).getActivationCountdown());
+                    if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
+                        System.out.printf(CreatureCardStatFormat, ((CreatureCard) card).getAttack(), ((CreatureCard) card).getDefense(), ((CreatureCard) card).getActivationCountdown());
+                }else {
+                    if (card instanceof SpecialCreatureCard)
+                        System.out.printf(SpecialCreatureCardStatFormatRested, ((SpecialCreatureCard) card).getAttack(), ((SpecialCreatureCard) card).getDefense());
+                    if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
+                        System.out.printf(CreatureCardStatFormatRested, ((CreatureCard) card).getAttack(), ((CreatureCard) card).getDefense());
+                }
             }
             System.out.println();
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
-                    System.out.printf(FormatCard, "\u001B[33m----------------------- \u001B[0m");
+                    System.out.printf(FormatCard, "\u001B[33m--------Card #" + (i+1) + "-------- \u001B[0m");
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
-                    System.out.printf(FormatCard, "-----------------------");
+                    System.out.printf(FormatCard, "--------Card #" + (i+1) + "--------");
                 if (card instanceof MagicCard)
-                    System.out.printf(FormatCard, "-----------------------");
+                    System.out.printf(FormatCard, "--------Card #" + (i+1) + "--------");
             }
 
         }else{
