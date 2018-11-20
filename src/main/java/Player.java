@@ -1,7 +1,4 @@
-import cards.Card;
-import cards.CardFactory;
-import cards.CreatureCard;
-import cards.MagicCard;
+import cards.*;
 import data.CardDB;
 
 import java.util.ArrayList;
@@ -239,12 +236,19 @@ public class Player {
     public String playCard(int index) {
         if (index <= hand.size() && index > 0) {
             Card card = hand.get(index - 1);
-            if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
+            if (card instanceof CreatureCard && checkMana(card.getManaCost())&& !(card instanceof SpecialCreatureCard)) {
                 if (placeCardOnTable(index)) {
                     reduceMana(card.getManaCost());
                     return "PLAYED_CREATURECARD";
                 }
-            } else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
+            }
+            else if(card instanceof SpecialCreatureCard && checkMana(card.getManaCost())){
+                if (placeCardOnTable(index)) {
+                    reduceMana(card.getManaCost());
+                    return ((SpecialCreatureCard) card).trigger();
+                }
+            }
+            else if (card instanceof MagicCard && checkMana(card.getManaCost())) {
                 reduceMana(card.getManaCost());
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
