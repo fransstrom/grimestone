@@ -119,6 +119,7 @@ public class GameEngine {
             case "ATTACK":
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
+                sleep(1000);
                 break;
         }
     }
