@@ -89,7 +89,7 @@ public class GameEngine {
                     break;
                 case 2:
                     actionPhase();
-                    sleep(1500);
+                    sleep(2000);
                     break;
                 case 3:
                     getActivePlayer().passTurn(true);
@@ -97,7 +97,7 @@ public class GameEngine {
                     break;
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
-                    sleep(1000);
+                    sleep(2000);
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -114,13 +114,13 @@ public class GameEngine {
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().heal(healAmount);
                     System.out.println("\033[0;93mYou healed \033[0m" + effectComponents[2] + "\033[0;93m HP!\033[0m");
-                    sleep(1000);
+                    sleep(2000);
                 }
                 break;
             case "ATTACK":
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
-                sleep(1000);
+                sleep(2000);
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);
@@ -146,7 +146,7 @@ public class GameEngine {
             attack();
         } else {
             System.out.println("\033[1;93mYou have no cards you can attack with!\033[0m");
-            sleep(1000);
+            sleep(2000);
         }
     }
 
