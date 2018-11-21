@@ -21,6 +21,27 @@ public class GameEngine {
         this.highScoreDB = new HighScoreDB();
     }
 
+    public void run() throws SQLException, ClassNotFoundException {
+
+        int choice;
+        gui.printStartMenu();
+        do {
+            choice = inputProcessor.nextInt();
+            switch(choice) {
+                case 1:
+                    startGame();
+                    break;
+                case 2:
+                    System.out.println("Thanks for playing!");
+                    sleep(2000);
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }while (true);
+    }
+
     public boolean isGameOver() {
         return !player1.isAlive() || !player2.isAlive();
     }
