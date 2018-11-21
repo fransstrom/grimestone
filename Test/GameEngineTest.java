@@ -147,6 +147,24 @@ class GameEngineTest {
     }
 
     @Test
+    void resolvePlayerAttackEffect() {
+        player1.setActive(true);
+        player2.setHp(10);
+        player1.getTable().add(spyCreatureCard);
+        gameEngine.resolveEffect("ATTACK_PLAYER_5");
+        assertEquals(5,player2.getHp());
+    }
+
+    @Test
+    void resolvePlayerEffectAttackNegativeDamage() {
+        player1.setActive(true);
+        player2.setHp(10);
+        player1.getTable().add(spyCreatureCard);
+        gameEngine.resolveEffect("ATTACK_PLAYER_-5");
+        assertEquals(5,player2.getHp());
+    }
+
+    @Test
     void isGameOver() {
     }
 
