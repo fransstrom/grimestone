@@ -36,7 +36,7 @@ public class GUI {
         } else {
             num = Integer.toString(player.getHp());
         }
-        System.out.printf("| Player HP: " + num + " |");
+        System.out.printf("| \033[4;33m"+player.getName()+ "\033[0m HP: " + num + " |");
     }
 
     public void printManaBar(Player player){

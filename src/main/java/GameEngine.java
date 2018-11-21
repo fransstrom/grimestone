@@ -168,9 +168,7 @@ public class GameEngine {
     }
 
     public void switchActivePlayer() {
-
         getActivePlayer().passTurn(false);
-
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
     }
@@ -203,10 +201,10 @@ public class GameEngine {
     private void namePlayers() throws SQLException, ClassNotFoundException {
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
-        highScoreDB.addUserIfNew(player1.getName());
+   /*     highScoreDB.addUserIfNew(player1.getName());*/
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
-        highScoreDB.addUserIfNew(player2.getName());
+/*        highScoreDB.addUserIfNew(player2.getName());*/
 
 
     }
