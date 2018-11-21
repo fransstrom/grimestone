@@ -23,6 +23,7 @@ public class CardDB {
     private static ArrayList<MagicCard> magicCardConfigs = new ArrayList<>();
     static {
         magicCardConfigs.add(new MagicCard("Holy Fire", 3, new HealPlayerEffect(7)));
+        magicCardConfigs.add(new MagicCard("Whimsy Walrus",1, new Attack));
     }
 
     public static ArrayList<CreatureCard> getCreatureCardConfigs() {

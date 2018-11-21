@@ -70,6 +70,7 @@ public class GameEngine {
             highScoreDB.updateUser(player2.getName(), "losses");
         }
         highScoreDB.printLeaderboard();
+
     }
 
     public void playerChoicePhase() {
