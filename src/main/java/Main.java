@@ -14,6 +14,6 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
        GameEngine gameEngine = new GameEngine(new Player(), new Player(), new BattleLogic(), new InputProcessor());
-       gameEngine.startGame();
+       gameEngine.run();
     }
 }
