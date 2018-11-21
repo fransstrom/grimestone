@@ -117,6 +117,10 @@ public class GameEngine {
                     sleep(1000);
                 }
                 break;
+            case "ATTACK":
+                int damage = Math.abs(Integer.parseInt(effectComponents[2]));
+                getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
+                sleep(1000);
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);

@@ -328,8 +328,9 @@ class PlayerTest {
 
         @Test
         void specialCreatureCard() {
+           when(specialCreatureCard.trigger()).thenReturn("HEAL_PLAYER_5");
             assertEquals(3, player1.getHand().size());
-            assertEquals("PLAYED_CREATURECARD", player1.playCard(2));
+            assertEquals("HEAL_PLAYER_5", player1.playCard(2));
             assertEquals(2, player1.getHand().size());
         }
 
