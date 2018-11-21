@@ -213,7 +213,7 @@ void printGameOverMenu() {
 @Test
 void printStartMenu() {
     gui.printStartMenu();
-}
+}}
 
 /*
 @Test
