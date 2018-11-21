@@ -5,7 +5,7 @@ public class RushEffect implements IEffect {
     private String effectDescription;
 
     public RushEffect() {
-        this.effectDescription = "Rush attack!";
+        this.effectDescription = "Rush: instant attack";
     }
 
     @Override
