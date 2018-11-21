@@ -213,14 +213,21 @@ void printGameOverMenu() {
 @Test
 void printStartMenu() {
     gui.printStartMenu();
-}
+}}
 
+/*
 @Test
 void printCards() {
     spyPlayer.generateDeck();
     spyPlayer.drawInitialHand();
+    ArrayList<Card> test = spyPlayer.getHand();
+    when(gameEngine.getActivePlayer()).thenReturn(mockPlayer);
+    when(gameEngine.getActivePlayer().getTable()).thenReturn(test);
+    for (Card card: spyPlayer.getHand()) {
+        System.out.println(card.getName());
+    }
     gui.printCards(spyPlayer.getHand(), false);
     gui.printCards(spyPlayer.getHand(), true);
 
   }
-}
+}*/
