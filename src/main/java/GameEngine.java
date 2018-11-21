@@ -15,7 +15,7 @@ public class GameEngine {
     public GameEngine(Player p1, Player p2, BattleLogic battleLogic, InputProcessor inputProcessor) {
         player1 = p1;
         player2 = p2;
-        this.inputProcessor =  inputProcessor;
+        this.inputProcessor = inputProcessor;
         this.battleLogic = battleLogic;
         this.gui = new GUI(this);
         this.highScoreDB = new HighScoreDB();
@@ -56,15 +56,15 @@ public class GameEngine {
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
             switchActivePlayer();
+            printActivePlayerTurn();
         }
         //GAME OVER
         System.out.println("********************* GAME OVER *********************");
-        if(!player1.isAlive()){
+        if (!player1.isAlive()) {
             System.out.println(player1.getName() + " LOST!");
             highScoreDB.updateUser(player1.getName(), "losses");
             highScoreDB.updateUser(player2.getName(), "wins");
-        }
-        else{
+        } else {
             System.out.println(player2.getName() + " LOST!!");
             highScoreDB.updateUser(player1.getName(), "wins");
             highScoreDB.updateUser(player2.getName(), "losses");
@@ -76,7 +76,7 @@ public class GameEngine {
         int choice;
         int cardIndex;
 
-        while (!getActivePlayer().hasPassedTurn() && !isGameOver()){
+        while (!getActivePlayer().hasPassedTurn() && !isGameOver()) {
             String resolvePlay = "";
             gui.render();
             System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
@@ -113,9 +113,14 @@ public class GameEngine {
                 if (effectComponents[1].equals("PLAYER")) {
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().heal(healAmount);
-                    System.out.println("\033[0;93mYou healed \033[0m"+effectComponents[2]+"\033[0;93m HP!\033[0m");
+                    System.out.println("\033[0;93mYou healed \033[0m" + effectComponents[2] + "\033[0;93m HP!\033[0m");
                     sleep(1000);
                 }
+                break;
+            case "RUSH":
+                Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
+                ((CreatureCard) card).setActive(true);
+                break;
         }
     }
 
@@ -135,8 +140,7 @@ public class GameEngine {
             } while (pickedCard == null || !((CreatureCard) pickedCard).isActive());
             battleLogic.setAttackingCard(pickedCard);
             attack();
-        }
-        else{
+        } else {
             System.out.println("\033[1;93mYou have no cards you can attack with!\033[0m");
             sleep(1000);
         }
@@ -203,5 +207,9 @@ public class GameEngine {
 
     }
 
+    private void printActivePlayerTurn(){
+        System.out.printf("\033[1;93mSwitching from %s's turn to %s's turn\n \033[0m", getInactivePlayer().getName(), getActivePlayer().getName());
+        sleep(3000);
+    }
 }
 
