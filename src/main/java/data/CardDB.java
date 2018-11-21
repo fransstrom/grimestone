@@ -4,7 +4,7 @@ import cards.CreatureCard;
 import cards.MagicCard;
 import cards.SpecialCreatureCard;
 import cards.effects.HealPlayerEffect;
-
+import cards.effects.RushEffect;
 import java.util.ArrayList;
 
 public class CardDB {
