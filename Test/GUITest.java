@@ -219,6 +219,11 @@ void printStartMenu() {
 void printCards() {
     spyPlayer.generateDeck();
     spyPlayer.drawInitialHand();
+    ArrayList<Card> test = spyPlayer.getHand();
+    when(gameEngine.getActivePlayer().getTable()).thenReturn(test);
+    for (Card card: spyPlayer.getHand()) {
+        System.out.println(card.getName());
+    }
     gui.printCards(spyPlayer.getHand(), false);
     gui.printCards(spyPlayer.getHand(), true);
 
