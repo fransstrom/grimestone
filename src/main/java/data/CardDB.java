@@ -19,6 +19,7 @@ public class CardDB {
     private static ArrayList<SpecialCreatureCard> specialCreatureCardConfigs = new ArrayList<>();
     static {
         specialCreatureCardConfigs.add(new SpecialCreatureCard("Holy Dragon", 5, CreatureCard.Type.NEUTRAL, 3, 5, 5, 7, new HealPlayerEffect(5)));
+        specialCreatureCardConfigs.add(new SpecialCreatureCard("Wailing Banshee", 3, CreatureCard.Type.PSYCHIC, 1, 3, 2, 4, new RushEffect()));
     }
     private static ArrayList<MagicCard> magicCardConfigs = new ArrayList<>();
     static {
