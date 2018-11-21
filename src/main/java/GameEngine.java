@@ -56,6 +56,7 @@ public class GameEngine {
             getActivePlayer().setCardsOnTableToActive();
             playerChoicePhase();
             switchActivePlayer();
+            printActivePlayerTurn();
         }
         //GAME OVER
         System.out.println("********************* GAME OVER *********************");
@@ -120,6 +121,9 @@ public class GameEngine {
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
                 sleep(1000);
+            case "RUSH":
+                Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
+                ((CreatureCard) card).setActive(true);
                 break;
         }
     }
@@ -207,5 +211,9 @@ public class GameEngine {
 
     }
 
+    private void printActivePlayerTurn(){
+        System.out.printf("\033[1;93mSwitching from %s's turn to %s's turn\n \033[0m", getInactivePlayer().getName(), getActivePlayer().getName());
+        sleep(3000);
+    }
 }
 
