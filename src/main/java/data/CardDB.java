@@ -3,6 +3,7 @@ package data;
 import cards.CreatureCard;
 import cards.MagicCard;
 import cards.SpecialCreatureCard;
+import cards.effects.AttackPlayerEffect;
 import cards.effects.HealPlayerEffect;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class CardDB {
     private static ArrayList<SpecialCreatureCard> specialCreatureCardConfigs = new ArrayList<>();
     static {
         specialCreatureCardConfigs.add(new SpecialCreatureCard("Holy Dragon", 5, CreatureCard.Type.NEUTRAL, 3, 5, 5, 7, new HealPlayerEffect(5)));
+        specialCreatureCardConfigs.add(new SpecialCreatureCard( "Terror Rex", 3, CreatureCard.Type.NEUTRAL, 2, 4,4,6, new AttackPlayerEffect( 4 ) ));
     }
     private static ArrayList<MagicCard> magicCardConfigs = new ArrayList<>();
     static {
