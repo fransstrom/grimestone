@@ -2,6 +2,7 @@ import cards.Card;
 import cards.CreatureCard;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class GameEngine {
 
@@ -29,6 +30,7 @@ public class GameEngine {
             choice = inputProcessor.nextInt();
             switch(choice) {
                 case 1:
+                    namePlayers();
                     startGame();
                     break;
                 case 2:
@@ -65,7 +67,7 @@ public class GameEngine {
     }
 
     public void startGame() throws SQLException, ClassNotFoundException {
-        namePlayers();
+
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
@@ -221,15 +223,13 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-        System.out.println("Enter name for player one:");
+        inputProcessor=new InputProcessor();
+        System.out.println("Enter name for player two:");
         player1.setName(inputProcessor.nextLine());
-
    /*     highScoreDB.addUserIfNew(player1.getName());*/
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
 /*        highScoreDB.addUserIfNew(player2.getName());*/
-
-
 
     }
 
