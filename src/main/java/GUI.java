@@ -107,13 +107,9 @@ public class GUI {
 
     public void printCards(ArrayList<Card> cardList, boolean hidden) {
         if(cardList.size()==0) {
-            if (cardList.equals(gameEngine.getInactivePlayer().getHand())) {
-                System.out.printf("\n\n");
-            } else {
                 System.out.printf("\n\n\n\n\n\n\n\n\n");
-            }
         }
-        if(!hidden){
+        if(!hidden && cardList.size()>0){
             String FormatCard = " %-24s ";
 
             String BlankCardLine = "| %-21s | ";
@@ -260,7 +256,7 @@ public class GUI {
             }
 
 
-        }else{
+        }else if (hidden && cardList.size()>0){
             String FormatCard = " %-24s ";
             String BlankCardLine = "| %-21s | ";
             printSpaceBetweenCardsAndBoard(cardList);
