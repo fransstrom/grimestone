@@ -75,7 +75,7 @@ public class Player {
             graveyard.add(deck.get(0));
             deck.remove(0);
             System.out.println("\033[0;93mHand full, the card is moved straight to Graveyeard\n\033[0m");
-            sleep(1000);
+            sleep(2000);
             return false;
         } else {
             hand.add(deck.get(0));
@@ -160,7 +160,7 @@ public class Player {
             return true;
         } else {
             System.out.println("\033[0;93mNot enough mana!\n\033[0m");
-            sleep(1000);
+            sleep(2000);
             return false;
         }
     }
