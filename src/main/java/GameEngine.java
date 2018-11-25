@@ -67,7 +67,7 @@ public class GameEngine {
     }
 
     public void startGame() throws SQLException, ClassNotFoundException {
-
+        namePlayers();git
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
@@ -223,7 +223,7 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-        inputProcessor=new InputProcessor();
+
         System.out.println("Enter name for player two:");
         player1.setName(inputProcessor.nextLine());
    /*     highScoreDB.addUserIfNew(player1.getName());*/
