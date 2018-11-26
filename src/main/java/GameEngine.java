@@ -43,6 +43,17 @@ public class GameEngine {
         } while (true);
     }
 
+    public void gameIsOver() {
+
+        gui.printGameOverMenu();
+        waitToProceed();
+
+    }
+
+    public void waitToProceed() { 
+        inputProcessor.nextLine();
+    }
+
     public boolean isGameOver() {
         return !player1.isAlive() || !player2.isAlive();
     }
@@ -81,18 +92,7 @@ public class GameEngine {
             printActivePlayerTurn();
         }
         //GAME OVER
-        System.out.println("********************* GAME OVER *********************");
-        if (!player1.isAlive()) {
-            System.out.println(player1.getName() + " LOST!");
-            highScoreDB.updateUser(player1.getName(), "losses");
-            highScoreDB.updateUser(player2.getName(), "wins");
-        } else {
-            System.out.println(player2.getName() + " LOST!!");
-            highScoreDB.updateUser(player1.getName(), "wins");
-            highScoreDB.updateUser(player2.getName(), "losses");
-        }
-        highScoreDB.printLeaderboard();
-
+       gameIsOver();
     }
 
     public void playerChoicePhase() {
