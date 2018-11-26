@@ -21,6 +21,27 @@ public class GameEngine {
         this.highScoreDB = new HighScoreDB();
     }
 
+    public void run() throws SQLException, ClassNotFoundException {
+
+        int choice;
+        gui.printStartMenu();
+        do {
+            choice = inputProcessor.nextInt();
+            switch(choice) {
+                case 1:
+                    startGame();
+                    break;
+                case 2:
+                    System.out.println("Thanks for playing!");
+                    sleep(2000);
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }while (true);
+    }
+
     public boolean isGameOver() {
         return !player1.isAlive() || !player2.isAlive();
     }
@@ -70,6 +91,7 @@ public class GameEngine {
             highScoreDB.updateUser(player2.getName(), "losses");
         }
         highScoreDB.printLeaderboard();
+
     }
 
     public void playerChoicePhase() {
@@ -89,7 +111,7 @@ public class GameEngine {
                     break;
                 case 2:
                     actionPhase();
-                    sleep(1500);
+                    sleep(2000);
                     break;
                 case 3:
                     getActivePlayer().passTurn(true);
@@ -97,7 +119,7 @@ public class GameEngine {
                     break;
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
-                    sleep(1000);
+                    sleep(2000);
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -114,14 +136,14 @@ public class GameEngine {
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().heal(healAmount);
                     System.out.println("\033[0;93mYou healed \033[0m" + effectComponents[2] + "\033[0;93m HP!\033[0m");
-                    sleep(1000);
+                    sleep(2000);
                 }
                 break;
             case "ATTACK":
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
                 System.out.println("\033[0;93mCard attacked directly. Defending player loses \033[0m" + damage + "\033[0;93m HP!\033[0m");
-                sleep(1000);
+                sleep(2000);
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);
@@ -147,7 +169,7 @@ public class GameEngine {
             attack();
         } else {
             System.out.println("\033[1;93mYou have no cards you can attack with!\033[0m");
-            sleep(1000);
+            sleep(2000);
         }
     }
 
@@ -169,9 +191,7 @@ public class GameEngine {
     }
 
     public void switchActivePlayer() {
-
         getActivePlayer().passTurn(false);
-
         player1.setActive(!player1.isActive());
         player2.setActive(!player2.isActive());
     }
@@ -204,10 +224,12 @@ public class GameEngine {
     private void namePlayers() throws SQLException, ClassNotFoundException {
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
-       // highScoreDB.addUserIfNew(player1.getName());
+
+   /*     highScoreDB.addUserIfNew(player1.getName());*/
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
-       // highScoreDB.addUserIfNew(player2.getName());
+/*        highScoreDB.addUserIfNew(player2.getName());*/
+
 
 
     }

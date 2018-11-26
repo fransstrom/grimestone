@@ -15,18 +15,17 @@ public class GUI {
     }
 
     public void render() {
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------");
         printPlayerHud(gameEngine.getInactivePlayer());
-        System.out.printf("\n");
-        printPlayerCardsInHand(gameEngine.getInactivePlayer());
-        System.out.printf("\n\n");
-        printCardsOnTable();
-        System.out.printf("\n\n");
-        printPlayerCardsInHand(gameEngine.getActivePlayer());
-        System.out.printf("\n\n");
-        printPlayerHud(gameEngine.getActivePlayer());
-        System.out.printf("\n------------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
+        printPlayerCardsInHand(gameEngine.getInactivePlayer());
+        System.out.println();
+        printCardsOnTable();
+        System.out.println();
+        printPlayerCardsInHand(gameEngine.getActivePlayer());
+        System.out.println("\n");
+        printPlayerHud(gameEngine.getActivePlayer());
+        System.out.println("\n---------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void printPlayerHP(Player player) {
@@ -36,7 +35,7 @@ public class GUI {
         } else {
             num = Integer.toString(player.getHp());
         }
-        System.out.printf("| Player HP: " + num + " |");
+        System.out.printf("| \033[4;33m"+player.getName()+ "\033[0m HP: " + num + " |");
     }
 
     public void printManaBar(Player player){
@@ -100,20 +99,17 @@ public class GUI {
     public void printCardsOnTable() {
         ArrayList<Card> activePlayerTable = gameEngine.getActivePlayer().getTable();
         ArrayList<Card> inActivePlayerTable = gameEngine.getInactivePlayer().getTable();
-        //printSpaceBetweenCardsAndBoard(inActivePlayerTable);
         printCards(inActivePlayerTable, false);
         System.out.printf("\n\n");
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-        //printSpaceBetweenCardsAndBoard(activePlayerTable);
-        System.out.println();
         printCards(activePlayerTable, false);
     }
 
     public void printCards(ArrayList<Card> cardList, boolean hidden) {
-        if (cardList.size() == 0) {
-            //System.out.println();
+        if(cardList.size()==0) {
+                System.out.printf("\n\n\n\n\n\n\n\n\n");
         }
-        if(!hidden){
+        if(!hidden && cardList.size()>0){
             String FormatCard = " %-24s ";
 
             String BlankCardLine = "| %-21s | ";
@@ -137,7 +133,7 @@ public class GUI {
 
             String CreatureCardStatFormatRested = "| ATT %-2d  DEF %-2d       \u001B[0m | " ;
             String SpecialCreatureCardStatFormatRested = "\u001B[33m| ATT %-2d  DEF %-2d       \u001B[33m | \u001B[0m" ;
-
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
@@ -148,7 +144,7 @@ public class GUI {
                     System.out.printf(FormatCard, "\033[0;35m----------------------- \u001B[0m");
             }
             //PRINT OUT NAME LINE
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
@@ -159,7 +155,7 @@ public class GUI {
                     System.out.printf(NameFormatMagicCard, card.getName());
             }
             //PRINT OUT MANACOST LINE
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
@@ -170,7 +166,7 @@ public class GUI {
                     System.out.printf(ManaCostMagicFormat,  card.getManaCost(), "");
             }
             //PRINT OUT TYPE LINE
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
@@ -181,7 +177,7 @@ public class GUI {
                     System.out.printf(BlankMagicCardLine, "");
             }
             //PRINT OUT BLANK LINE
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
@@ -191,7 +187,7 @@ public class GUI {
                 else
                     System.out.printf(BlankCardLine, "");
             }
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             //PRINT OUT EFFECT TEXT
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
@@ -202,18 +198,18 @@ public class GUI {
                 if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
                     System.out.printf(BlankCardLine, "");
             }
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             //PRINT OUT ACTIVE/RESTING
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 // || cardList.equals(gameEngine.getInactivePlayer().getTable())
-                if (cardList.equals(gameEngine.getActivePlayer().getTable())){
-                if (card instanceof CreatureCard && ((CreatureCard) card).isActive() && ((CreatureCard) card).getActivationCountdown()==0) {
+                if (cardList.equals(gameEngine.getActivePlayer().getTable()) && ((CreatureCard) card).getActivationCountdown()==0){
+                if (card instanceof CreatureCard && ((CreatureCard) card).isActive()) {
                     if (card instanceof SpecialCreatureCard)
                         System.out.printf(BlankSpecialCardLine, "       \033[0;32mACTIVE\u001B[33m        ");
                     if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
                         System.out.printf(BlankCardLine, "       \033[0;32mACTIVE\u001B[0m        ");
-                }else if (card instanceof CreatureCard && ((CreatureCard) card).getActivationCountdown()==0) {
+                }else if (card instanceof CreatureCard) {
                     if (card instanceof SpecialCreatureCard)
                         System.out.printf(BlankSpecialCardLine, "       \033[0;31mRESTING\u001B[33m       ");
                     if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard))
@@ -228,7 +224,7 @@ public class GUI {
                         System.out.printf(BlankMagicCardLine, "");
                 }
             }
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             //PRINT OUT STATS
             for (int i=0; i<cardList.size(); i++) {
                 Card card = cardList.get(i);
@@ -248,7 +244,7 @@ public class GUI {
                     }
                 }
 
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 Card card = cardList.get(i);
                 if (card instanceof SpecialCreatureCard)
@@ -260,88 +256,68 @@ public class GUI {
             }
 
 
-        }else{
-            System.out.println();
+        }else if (hidden && cardList.size()>0){
             String FormatCard = " %-24s ";
             String BlankCardLine = "| %-21s | ";
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                     System.out.printf(FormatCard, "-----------------------");
             }
             for (int i=0; i<7;i++) {
                 System.out.println();
+                printSpaceBetweenHiddenCardsAndBoard(cardList);
                 //PRINT OUT BLANK LINE
                 for (int j = 0; j < cardList.size(); j++) {
                     if (i==3) {
                         System.out.printf(BlankCardLine, "       Card  " + (j+1));
-                    }else
-                    System.out.printf(BlankCardLine, "");
+                    }else {
+                        System.out.printf(BlankCardLine, "");
+                    }
                 }
             }
-            System.out.println();
+            printSpaceBetweenCardsAndBoard(cardList);
             for (int i=0; i<cardList.size(); i++){
                 System.out.printf(FormatCard, "-----------------------");
             }
         }
-        /*if (!hidden) {
-            int cardPlacement = 1;
-            for (Card card : cardList) {
-                if (card instanceof CreatureCard && !(card instanceof SpecialCreatureCard)) {
-                    if (!((CreatureCard) card).isActive()) {
-                        System.out.printf(" | #" + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + "\u001B[31m CD: 1\u001B[0m | ");
-                    } else {
-                        System.out.printf(" | #" + cardPlacement + " HP: " + ((CreatureCard) card).getHp() + " | ");
-                    }
-                }
-                else if(card instanceof MagicCard){
-                    if (((MagicCard) card).trigger().contains("HEAL")) {
-                        System.out.printf("\033[0;32m | #" + cardPlacement + " " + ((MagicCard) card).getText() + " | \u001B[0m");
-                    }else if(((MagicCard) card).trigger().contains("LIGHTNING")){
-                        System.out.printf("\033[0;35m | #" + cardPlacement + " " + ((MagicCard) card).getText() + " | \u001B[0m");
-                    }else if(((MagicCard) card).trigger().contains("FIRE")){
-                        System.out.printf("\033[1;31m | #" + cardPlacement + " " + ((MagicCard) card).getText() + " | \u001B[0m");
-                    }
-                }
-                else if(card instanceof SpecialCreatureCard){
-                    if (!((CreatureCard) card).isActive()){
-                        System.out.printf("\u001B[33m | #" + cardPlacement + " " + card.getName() + " HP: " + ((SpecialCreatureCard) card).getHp() + " \033[4;30m" + ((SpecialCreatureCard) card).getText()  + "\u001B[31m CD: " + ((SpecialCreatureCard) card).getActivationCountdown() + "\u001B[33m | \u001B[0m");
-                    }
-                }
-                if(card instanceof MagicCard){
-                    System.out.printf("\033[0;32m | Card " + cardPlacement + ((MagicCard) card).getText() + " | \u001B[0m");
-                }
-                cardPlacement++;
-            }
-        } else {
-            int cardPlacement = 1;
-            for (Card card : cardList) {
-                if (card instanceof CreatureCard) {
-                    System.out.printf(" |    Card " + cardPlacement + "    | ");
-                }
-                if(card instanceof MagicCard){
-                    System.out.printf(" |    Card " + cardPlacement + "    | ");
-                }
-                cardPlacement++;
-
-            }
-        }*/
     }
 
     public void printSpaceBetweenCardsAndBoard(ArrayList<Card> cardList) {
         switch (cardList.size()) {
             case 5:
-                System.out.printf("\n                  ");
+                System.out.printf("\n");
                 break;
             case 4:
-                System.out.printf("\n                           ");
+                System.out.printf("\n             ");
                 break;
             case 3:
-                System.out.printf("\n                                    ");
+                System.out.printf("\n                          ");
                 break;
             case 2:
-                System.out.printf("\n                                             ");
+                System.out.printf("\n                                       ");
                 break;
             case 1:
-                System.out.printf("\n                                                      ");
+                System.out.printf("\n                                                    ");
+                break;
+        }
+    }
+
+    public void printSpaceBetweenHiddenCardsAndBoard(ArrayList<Card> cardList) {
+        switch (cardList.size()) {
+            case 5:
+                System.out.printf("");
+                break;
+            case 4:
+                System.out.printf("             ");
+                break;
+            case 3:
+                System.out.printf("                          ");
+                break;
+            case 2:
+                System.out.printf("                                       ");
+                break;
+            case 1:
+                System.out.printf("                                                    ");
                 break;
         }
     }
