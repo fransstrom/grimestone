@@ -22,7 +22,10 @@ public class CardDB {
         creatureCardConfigs.add(new CreatureCard("Whimsy Walrus",1, CreatureCard.Type.WATER, 1 , 1, 2, 2));
 
         specialCreatureCardConfigs.add(new SpecialCreatureCard("Holy Dragon", 5, CreatureCard.Type.NEUTRAL, 3, 5, 5, 7, new HealPlayerEffect(5)));
-
+        specialCreatureCardConfigs.add(new SpecialCreatureCard( "Terror Rex", 3, CreatureCard.Type.NEUTRAL, 2, 4,4,6, new AttackPlayerEffect( 4 ) ));
+    }
+    private static ArrayList<MagicCard> magicCardConfigs = new ArrayList<>();
+    static {
         magicCardConfigs.add(new MagicCard("Holy Fire", 3, new HealPlayerEffect(7)));
         magicCardConfigs.add(new MagicCard("Blue Canon",5, new AttackPlayerEffect(5)));
 
