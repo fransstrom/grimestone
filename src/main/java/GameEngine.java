@@ -43,19 +43,11 @@ public class GameEngine {
         } while (true);
     }
 
-    public void gameIsOver() throws SQLException, ClassNotFoundException {
+    public void gameIsOver() {
 
-        String pressOneToContinue;
         gui.printGameOverMenu();
-        do {
-            pressOneToContinue = inputProcessor.nextLine();
-            switch (pressOneToContinue) {
-                case "1":
-                    break;
-                default:
-                    System.out.println("Press 1 to continue...");
-            }
-        } while (!pressOneToContinue.equals("1"));
+        inputProcessor.nextLine();
+
     }
 
     public boolean isGameOver() {
