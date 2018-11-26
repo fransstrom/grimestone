@@ -46,6 +46,17 @@ public class GameEngine {
         } while (true);
     }
 
+    public void gameIsOver() {
+
+        gui.printGameOverMenu();
+        waitToProceed();
+
+    }
+
+    public void waitToProceed() { 
+        inputProcessor.nextLine();
+    }
+
     public boolean isGameOver() {
         return !player1.isAlive() || !player2.isAlive();
     }
@@ -83,10 +94,9 @@ public class GameEngine {
             switchActivePlayer();
             printActivePlayerTurn();
         }
-        //GAME OVER
-            gui.printGameOverMenu();
-            highScoreDB.updateUser(player1.getName(), "losses");
-            highScoreDB.updateUser(player2.getName(), "wins");
+            highScoreDB.updateUser(player1.getName(), "wins");
+            highScoreDB.updateUser(player2.getName(), "losses");
+             gameIsOver();
     }
 
     public void playerChoicePhase() {
