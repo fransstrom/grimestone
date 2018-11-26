@@ -144,6 +144,7 @@ public class GameEngine {
             case "ATTACK":
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
+                System.out.println("\033[0;93mCard attacked directly. Defending player loses \033[0m" + damage + "\033[0;93m HP!\033[0m");
                 sleep(2000);
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
