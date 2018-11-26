@@ -330,6 +330,14 @@ public class GUI {
     }
 
     public void printGameOverMenu() {
+        String name;
+        if (gameEngine.getActivePlayer().isAlive()) {
+            name=gameEngine.getActivePlayer().getName();
+        } else {
+            name=gameEngine.getInactivePlayer().getName();
+        }
+        name+="           ";
+        String realName= name.substring(0,7);
         String gameOverMenuDesign = "------------------------------------------------------------------------------------------------------------------------------\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
@@ -337,9 +345,9 @@ public class GUI {
                 + "|                                                                                                                            |\n"
                 + "|                                                         Game over!                                                         |\n"
                 + "|                                                                                                                            |\n"
-                + "|                                                       1. Play Again                                                        |\n"
-                + "|                                                       2. Quit                                                              |\n"
+                + "|                                                        " + realName + " WIN                                                         |\n"
                 + "|                                                                                                                            |\n"
+                + "|                                                     Press 1 to continue...                                                 |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
@@ -359,8 +367,8 @@ public class GUI {
                 + "|                                                      * GRIME STONE! *                                                      |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                         1. Play                                                            |\n"
-                + "|                                                         2. Quit                                                            |\n"
-                + "|                                                                                                                            |\n"
+                + "|                                                         2. Highscore                                                       |\n"
+                + "|                                                         3. Quit                                                            |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"

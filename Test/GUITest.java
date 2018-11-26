@@ -207,6 +207,8 @@ class GUITest {
 
 @Test
 void printGameOverMenu() {
+        when(gameEngine.getActivePlayer().isAlive()).thenReturn(false);
+        when(gameEngine.getActivePlayer().getName()).thenReturn("KevinWWWW");
     gui.printGameOverMenu();
 }
 

@@ -25,14 +25,17 @@ public class GameEngine {
     public void run() throws SQLException, ClassNotFoundException {
 
         int choice;
-        gui.printStartMenu();
         do {
+            gui.printStartMenu();
             choice = inputProcessor.nextInt();
             switch (choice) {
                 case 1:
                     startGame();
                     break;
                 case 2:
+                    highScoreDB.printLeaderboard();
+                    break;
+                case 3:
                     System.out.println("Thanks for playing!");
                     sleep(2000);
                     System.exit(0);
@@ -81,18 +84,9 @@ public class GameEngine {
             printActivePlayerTurn();
         }
         //GAME OVER
-        System.out.println("********************* GAME OVER *********************");
-        if (!player1.isAlive()) {
-            System.out.println(player1.getName() + " LOST!");
+            gui.printGameOverMenu();
             highScoreDB.updateUser(player1.getName(), "losses");
             highScoreDB.updateUser(player2.getName(), "wins");
-        } else {
-            System.out.println(player2.getName() + " LOST!!");
-            highScoreDB.updateUser(player1.getName(), "wins");
-            highScoreDB.updateUser(player2.getName(), "losses");
-        }
-        highScoreDB.printLeaderboard();
-
     }
 
     public void playerChoicePhase() {
@@ -226,9 +220,11 @@ public class GameEngine {
         inputProcessor.nextLine();
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
-        /*     highScoreDB.addUserIfNew(player1.getName());*/
+        highScoreDB.addUserIfNew(player1.getName());
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
+        highScoreDB.addUserIfNew(player2.getName());
+
 
 
     }
