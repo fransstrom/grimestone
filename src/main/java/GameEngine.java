@@ -46,8 +46,12 @@ public class GameEngine {
     public void gameIsOver() {
 
         gui.printGameOverMenu();
-        inputProcessor.nextLine();
+        waitToProceed();
 
+    }
+
+    public void waitToProceed() { 
+        inputProcessor.nextLine();
     }
 
     public boolean isGameOver() {
