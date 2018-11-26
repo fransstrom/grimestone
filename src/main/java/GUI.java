@@ -29,13 +29,20 @@ public class GUI {
     }
 
     public void printPlayerHP(Player player) {
+        String NameFormat = "| \u001B[33m%-7s \u001B[0mHP %-2s |";
+        String PlayerName;
+        if (player.getName().length()<8){
+            PlayerName=player.getName();
+        }else{
+            PlayerName=player.getName().substring(0,7);
+        }
         String num = "00";
         if (player.getHp() < 9) {
             num = "0" + player.getHp();
         } else {
             num = Integer.toString(player.getHp());
         }
-        System.out.printf("| \033[4;33m"+player.getName()+ "\033[0m HP: " + num + " |");
+        System.out.printf(NameFormat ,PlayerName, num);
     }
 
     public void printManaBar(Player player){
