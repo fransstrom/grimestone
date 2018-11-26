@@ -46,8 +46,14 @@ public class GameEngine {
         } while (true);
     }
 
-    public void gameIsOver() {
-
+    public void gameIsOver() throws SQLException, ClassNotFoundException {
+        if (player1.isAlive()) {
+            highScoreDB.updateUser(player1.getName(), "wins");
+            highScoreDB.updateUser(player2.getName(), "losses");
+        }else{
+            highScoreDB.updateUser(player1.getName(), "losses");
+            highScoreDB.updateUser(player2.getName(), "wins");
+        }
         gui.printGameOverMenu();
         waitToProceed();
 
@@ -55,6 +61,8 @@ public class GameEngine {
 
     public void waitToProceed() { 
         inputProcessor.nextLine();
+        inputProcessor.nextLine();
+
     }
 
     public boolean isGameOver() {
@@ -94,9 +102,7 @@ public class GameEngine {
             switchActivePlayer();
             printActivePlayerTurn();
         }
-            highScoreDB.updateUser(player1.getName(), "wins");
-            highScoreDB.updateUser(player2.getName(), "losses");
-             gameIsOver();
+            gameIsOver();
     }
 
     public void playerChoicePhase() {

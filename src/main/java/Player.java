@@ -30,8 +30,6 @@ public class Player {
         this.table = new ArrayList<>();
         this.isActive = false;
         this.passTurn = false;
-        this.generateDeck();
-
     }
 
     public boolean isAlive() {
@@ -85,6 +83,12 @@ public class Player {
     }
 
     public void drawInitialHand() {
+        this.deck.clear();
+        this.table.clear();
+        this.hand.clear();
+        this.graveyard.clear();
+        this.generateDeck();
+
         for (int i = 0; i < initialAmountOfCardsInHand; i++) {
             this.hand.add(deck.get(deck.size() - 1));
             this.deck.remove((deck.size() - 1));
