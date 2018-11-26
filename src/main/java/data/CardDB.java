@@ -16,20 +16,25 @@ public class CardDB {
 
     static {
 
-        creatureCardConfigs.add(new CreatureCard("Mangry Hamster", 1, CreatureCard.Type.NEUTRAL, 1, 2, 1, 2));
-        creatureCardConfigs.add(new CreatureCard("Trippy Toad",1, CreatureCard.Type.GRASS, 1 , 1, 1, 3));
-        creatureCardConfigs.add(new CreatureCard("Spicy Lizard",1, CreatureCard.Type.FIRE, 1 , 1, 1, 3));
-        creatureCardConfigs.add(new CreatureCard("Whimsy Walrus",1, CreatureCard.Type.WATER, 1 , 1, 2, 2));
+        creatureCardConfigs.add(new CreatureCard("Mangry Hamster", 1, CreatureCard.Type.NEUTRAL, 1, 4, 1, 2));
+        creatureCardConfigs.add(new CreatureCard("Trippy Toad",1, CreatureCard.Type.GRASS, 1 , 2, 1, 3));
+        creatureCardConfigs.add(new CreatureCard("Spicy Lizard",1, CreatureCard.Type.FIRE, 1 , 2, 1, 3));
+        creatureCardConfigs.add(new CreatureCard("Whimsy Walrus",1, CreatureCard.Type.WATER, 1 , 2, 2, 2));
 
+
+        specialCreatureCardConfigs.add(new SpecialCreatureCard("Holy Dragon", 5, CreatureCard.Type.DRAGON, 3, 10, 5, 7, new HealPlayerEffect(5)));
         specialCreatureCardConfigs.add(new SpecialCreatureCard("Holy Dragon", 5, CreatureCard.Type.NEUTRAL, 3, 5, 5, 7, new HealPlayerEffect(5)));
         specialCreatureCardConfigs.add(new SpecialCreatureCard( "Terror Rex", 3, CreatureCard.Type.NEUTRAL, 2, 4,4,6, new AttackPlayerEffect( 4 ) ));
-    }
-    private static ArrayList<MagicCard> magicCardConfigs = new ArrayList<>();
-    static {
+      
+      
+      
         magicCardConfigs.add(new MagicCard("Holy Fire", 3, new HealPlayerEffect(7)));
         magicCardConfigs.add(new MagicCard("Blue Canon",5, new AttackPlayerEffect(5)));
-
     }
+
+
+
+    
 
     public static ArrayList<CreatureCard> getCreatureCardConfigs() {
         return creatureCardConfigs;

@@ -7,7 +7,7 @@ public class AttackPlayerEffect implements IEffect {
 
     public AttackPlayerEffect(int damage) {
         this.damage = damage;
-        this.effectDescription = "Attack enemy player for " + damage + " HP";
+        this.effectDescription = "Attack player " + damage + " DMG";
     }
 
     @Override
