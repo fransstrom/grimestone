@@ -221,6 +221,7 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
+        inputProcessor.nextLine();
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
 
@@ -228,8 +229,6 @@ public class GameEngine {
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
 /*        highScoreDB.addUserIfNew(player2.getName());*/
-
-
 
     }
 
