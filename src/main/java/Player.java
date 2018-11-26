@@ -60,6 +60,11 @@ public class Player {
     public boolean placeCardOnTable(int indexOfCard) {
 
         if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 || getTable().size() >= maxNumberOfCardsOnDisplay) {
+            if(getTable().size() >= maxNumberOfCardsOnDisplay){
+                System.out.println("\033[0;93mTable is full!\n\033[0m");
+                sleep(2000);
+            }
+
             return false;
         } else {
             this.table.add(hand.get(indexOfCard - 1));
@@ -75,7 +80,7 @@ public class Player {
             graveyard.add(deck.get(0));
             deck.remove(0);
             System.out.println("\033[0;93mHand full, the card is moved straight to Graveyeard\n\033[0m");
-            sleep(2000);
+            sleep(1);
             return false;
         } else {
             hand.add(deck.get(0));

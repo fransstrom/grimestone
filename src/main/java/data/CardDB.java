@@ -27,7 +27,7 @@ public class CardDB {
         specialCreatureCardConfigs.add(new SpecialCreatureCard( "Terror Rex", 3, CreatureCard.Type.NEUTRAL, 2, 4,4,6, new AttackPlayerEffect( 4 ) ));
       
       
-      
+
         magicCardConfigs.add(new MagicCard("Holy Fire", 3, new HealPlayerEffect(7)));
         magicCardConfigs.add(new MagicCard("Blue Canon",5, new AttackPlayerEffect(5)));
     }

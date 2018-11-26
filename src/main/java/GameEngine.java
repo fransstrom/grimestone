@@ -24,17 +24,17 @@ public class GameEngine {
 
     public void run() throws SQLException, ClassNotFoundException {
 
-        int choice;
+        String choice;
         gui.printStartMenu();
         do {
-            choice = inputProcessor.nextInt();
+            choice = inputProcessor.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     startGame();
                     break;
-                case 2:
+                case "2":
                     System.out.println("Thanks for playing!");
-                    sleep(2000);
+                    sleep(1);
                     System.exit(0);
                     break;
                 default:
@@ -96,31 +96,31 @@ public class GameEngine {
     }
 
     public void playerChoicePhase() {
-        int choice;
+        String choice;
         int cardIndex;
 
         while (!getActivePlayer().hasPassedTurn() && !isGameOver()) {
             String resolvePlay = "";
             gui.render();
             System.out.println("\033[1;31mYour turn!\n\033[0;93m1. Play a card\n2. Attack\n3. Pass\033[0m");
-            choice = inputProcessor.nextInt();
+            choice = inputProcessor.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     gui.printPickACardToPlay();
                     cardIndex = inputProcessor.nextInt();
                     resolvePlay = getActivePlayer().playCard(cardIndex);
                     break;
-                case 2:
+                case "2":
                     actionPhase();
-                    sleep(2000);
+                    sleep(1);
                     break;
-                case 3:
+                case "3":
                     getActivePlayer().passTurn(true);
                     gui.nextTurn();
                     break;
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
-                    sleep(2000);
+                    sleep(1);
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -137,14 +137,14 @@ public class GameEngine {
                     int healAmount = Math.abs(Integer.parseInt(effectComponents[2]));
                     getActivePlayer().heal(healAmount);
                     System.out.println("\033[0;93mYou healed \033[0m" + effectComponents[2] + "\033[0;93m HP!\033[0m");
-                    sleep(2000);
+                    sleep(1);
                 }
                 break;
             case "ATTACK":
                 int damage = Math.abs(Integer.parseInt(effectComponents[2]));
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
                 System.out.println("\033[0;93mCard attacked directly. Defending player loses \033[0m" + damage + "\033[0;93m HP!\033[0m");
-                sleep(2000);
+                sleep(1);
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);
@@ -170,7 +170,7 @@ public class GameEngine {
             attack();
         } else {
             System.out.println("\033[1;93mYou have no cards you can attack with!\033[0m");
-            sleep(2000);
+            sleep(1);
         }
     }
 
@@ -223,19 +223,21 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-        inputProcessor.nextLine();
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
-        /*     highScoreDB.addUserIfNew(player1.getName());*/
+
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
+
+        highScoreDB.addUserIfNew(player1.getName());
+        highScoreDB.addUserIfNew(player2.getName());
 
 
     }
 
     private void printActivePlayerTurn() {
         System.out.printf("\033[1;93mSwitching from %s's turn to %s's turn\n \033[0m", getInactivePlayer().getName(), getActivePlayer().getName());
-        sleep(3000);
+        sleep(1);
     }
 }
 
