@@ -28,7 +28,7 @@ public class GameEngine {
         gui.printStartMenu();
         do {
             choice = inputProcessor.nextInt();
-            switch(choice) {
+            switch (choice) {
                 case 1:
                     namePlayers();
                     startGame();
@@ -41,7 +41,7 @@ public class GameEngine {
                 default:
                     System.out.println("Invalid option");
             }
-        }while (true);
+        } while (true);
     }
 
     public boolean isGameOver() {
@@ -67,7 +67,7 @@ public class GameEngine {
     }
 
     public void startGame() throws SQLException, ClassNotFoundException {
-        namePlayers();git
+        namePlayers();
         player1.drawInitialHand();
         player2.drawInitialHand();
         randomGenerateFirstActivePlayer();
@@ -223,17 +223,17 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-
+        inputProcessor.nextLine();
         System.out.println("Enter name for player two:");
         player1.setName(inputProcessor.nextLine());
-   /*     highScoreDB.addUserIfNew(player1.getName());*/
+        /*     highScoreDB.addUserIfNew(player1.getName());*/
         System.out.println("Enter name for player two:");
         player2.setName(inputProcessor.nextLine());
-/*        highScoreDB.addUserIfNew(player2.getName());*/
+        /*        highScoreDB.addUserIfNew(player2.getName());*/
 
     }
 
-    private void printActivePlayerTurn(){
+    private void printActivePlayerTurn() {
         System.out.printf("\033[1;93mSwitching from %s's turn to %s's turn\n \033[0m", getInactivePlayer().getName(), getActivePlayer().getName());
         sleep(3000);
     }
