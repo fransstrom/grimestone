@@ -29,7 +29,7 @@ public class CardDB {
             
       
         magicCardConfigs.add(new MagicCard("Holy Fire", 3, new HealPlayerEffect(7)));
-        magicCardConfigs.add(new MagicCard("Blue Canon",5, new AttackPlayerEffect(5)));
+        magicCardConfigs.add(new MagicCard("Blue Canon",1, new AttackPlayerEffect(20)));
     }
 
 
