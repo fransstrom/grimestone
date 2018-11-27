@@ -81,8 +81,8 @@ public class GameEngine {
 
     public void startGame() throws SQLException, ClassNotFoundException {
         namePlayers();
-        player1.drawInitialHand();
-        player2.drawInitialHand();
+        player1.gameSetUp();
+        player2.gameSetUp();
         randomGenerateFirstActivePlayer();
 
         while (!isGameOver()) {
