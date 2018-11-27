@@ -275,5 +275,18 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void clearCardLists(){
+        this.deck.clear();
+        this.table.clear();
+        this.hand.clear();
+        this.graveyard.clear();
+    }
+
+    public void gameSetUp(){
+        clearCardLists();
+        generateDeck();
+        drawInitialHand();
+    }
 }
 
