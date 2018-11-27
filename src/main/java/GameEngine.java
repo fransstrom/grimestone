@@ -42,6 +42,7 @@ public class GameEngine {
                     break;
                 default:
                     System.out.println("Invalid option");
+                    break;
             }
         } while (true);
     }
@@ -126,6 +127,7 @@ public class GameEngine {
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
                     sleep(2000);
+                    break;
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -229,7 +231,6 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-        inputProcessor.nextLine();
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
         highScoreDB.addUserIfNew(player1.getName());
