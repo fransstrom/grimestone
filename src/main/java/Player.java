@@ -30,8 +30,6 @@ public class Player {
         this.table = new ArrayList<>();
         this.isActive = false;
         this.passTurn = false;
-        this.generateDeck();
-
     }
 
     public boolean isAlive() {
