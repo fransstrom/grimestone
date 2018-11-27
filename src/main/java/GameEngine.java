@@ -24,18 +24,18 @@ public class GameEngine {
 
     public void run() throws SQLException, ClassNotFoundException {
 
-        int choice;
+        String choice;
         do {
             gui.printStartMenu();
-            choice = inputProcessor.nextInt();
+            choice = inputProcessor.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     startGame();
                     break;
-                case 2:
+                case "2":
                     highScoreDB.printLeaderboard();
                     break;
-                case 3:
+                case "3":
                     System.out.println("Thanks for playing!");
                     sleep(2000);
                     System.exit(0);
@@ -54,6 +54,7 @@ public class GameEngine {
     }
 
     public void waitToProceed() { 
+        inputProcessor.nextLine();
         inputProcessor.nextLine();
     }
 
@@ -149,6 +150,7 @@ public class GameEngine {
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
                 System.out.println("\033[0;93mCard attacked directly. Defending player loses \033[0m" + damage + "\033[0;93m HP!\033[0m");
                 sleep(2000);
+                break;
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);
