@@ -189,7 +189,6 @@ class PlayerTest {
 
     @Test
     void generateDeck() {
-
         player1.getDeck().clear();
         assertTrue(player1.getDeck().isEmpty());
         player1.generateDeck();
