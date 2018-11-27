@@ -37,6 +37,7 @@ class PlayerTest {
 
     @Test
     void isAlive() {
+        player1.getDeck().add(creatureCard);
         assertTrue(player1.isAlive());
         player1.setHp(0);
         assertFalse(player1.isAlive());
@@ -75,8 +76,6 @@ class PlayerTest {
 
     @Test
     void noCardsLeftInDeckTest() {
-        assertFalse(player1.noCardsLeftInDeck());
-        player1.getDeck().clear();
         assertTrue(player1.noCardsLeftInDeck());
         player1.getDeck().add(card);
         assertFalse(player1.noCardsLeftInDeck());
@@ -134,6 +133,7 @@ class PlayerTest {
 
     @Test
     void drawCardWhenHandIsFull() {
+        player1.getDeck().add(creatureCard);
         for (int i = 0; i < 5; i++) {
             player1.getHand().add(creatureCard);
         }
@@ -146,7 +146,7 @@ class PlayerTest {
 
     @Test
     void drawCardWhenDeckIsNotEmpty() {
-        assertEquals(20, player1.getDeck().size());
+        player1.generateDeck();
         player1.drawCard();
         assertEquals(1, player1.getHand().size());
         assertEquals(19, player1.getDeck().size());
@@ -165,6 +165,7 @@ class PlayerTest {
 
     @Test
     void drawInitialHand() {
+        player1.generateDeck();
         assertEquals(20, player1.getDeck().size());
         assertEquals(0, player1.getHand().size());
         player1.drawInitialHand();
