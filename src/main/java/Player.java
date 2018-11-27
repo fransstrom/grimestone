@@ -59,9 +59,16 @@ public class Player {
 
     public boolean placeCardOnTable(int indexOfCard) {
 
-        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 || getTable().size() >= maxNumberOfCardsOnDisplay) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0) {
             return false;
-        } else {
+        }
+        else if (getTable().size() >= maxNumberOfCardsOnDisplay) {
+            System.out.println("Hand full, too many cards on table");
+            sleep(2000);
+            return false;
+        }
+
+        else {
             this.table.add(hand.get(indexOfCard - 1));
             hand.remove(indexOfCard - 1);
             return true;
