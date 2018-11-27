@@ -367,5 +367,18 @@ class PlayerTest {
         player1.reduceMana(1);
         assertEquals(0, player1.getMana());
     }
+
+    @Test
+    void clearCardLists(){
+        player1.getTable().add(creatureCard);
+        player1.getDeck().add(creatureCard);
+        player1.getGraveyard().add(creatureCard);
+        player1.getHand().add(creatureCard);
+        player1.clearCardLists();
+        assertEquals(0,player1.getTable().size());
+        assertEquals(0,player1.getDeck().size());
+        assertEquals(0,player1.getGraveyard().size());
+        assertEquals(0,player1.getHand().size());
+    }
 }
 
