@@ -40,8 +40,8 @@ class GameEngineTest {
         player1.setHp(0);
         when(inputProcessor.nextLine()).thenReturn("test");
         gameEngine.startGame();
-        verify(player1, times(1)).drawInitialHand();
-        verify(player2, times(1)).drawInitialHand();
+        verify(player1, times(1)).gameSetUp();
+        verify(player2, times(1)).gameSetUp();
     }
 
     @Test
