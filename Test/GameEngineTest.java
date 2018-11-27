@@ -36,15 +36,6 @@ class GameEngineTest {
     }
 
     @Test
-    void startGame() throws SQLException, ClassNotFoundException {
-        player1.setHp(0);
-        when(inputProcessor.nextLine()).thenReturn("test");
-        gameEngine.startGame();
-        verify(player1, times(1)).drawInitialHand();
-        verify(player2, times(1)).drawInitialHand();
-    }
-
-    @Test
     void attackWithCardsOnTable() {
         mocklist.add(spyCreatureCard);
         player1.setTable(mocklist);

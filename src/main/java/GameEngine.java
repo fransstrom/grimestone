@@ -24,24 +24,25 @@ public class GameEngine {
 
     public void run() throws SQLException, ClassNotFoundException {
 
-        int choice;
+        String choice;
         do {
             gui.printStartMenu();
-            choice = inputProcessor.nextInt();
+            choice = inputProcessor.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     startGame();
                     break;
-                case 2:
+                case "2":
                     highScoreDB.printLeaderboard();
                     break;
-                case 3:
+                case "3":
                     System.out.println("Thanks for playing!");
                     sleep(2000);
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option");
+                    break;
             }
         } while (true);
     }
@@ -54,6 +55,7 @@ public class GameEngine {
     }
 
     public void waitToProceed() { 
+        inputProcessor.nextLine();
         inputProcessor.nextLine();
     }
 
@@ -81,8 +83,8 @@ public class GameEngine {
 
     public void startGame() throws SQLException, ClassNotFoundException {
         namePlayers();
-        player1.drawInitialHand();
-        player2.drawInitialHand();
+        player1.gameSetUp();
+        player2.gameSetUp();
         randomGenerateFirstActivePlayer();
 
         while (!isGameOver()) {
@@ -125,6 +127,7 @@ public class GameEngine {
                 default:
                     System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
                     sleep(2000);
+                    break;
             }
             moveAllDeadCardsToGraveYard();
             resolveEffect(resolvePlay);
@@ -149,6 +152,7 @@ public class GameEngine {
                 getInactivePlayer().setHp(getInactivePlayer().getHp() - damage);
                 System.out.println("\033[0;93mCard attacked directly. Defending player loses \033[0m" + damage + "\033[0;93m HP!\033[0m");
                 sleep(2000);
+                break;
             case "RUSH":
                 Card card = getActivePlayer().getTable().get(getActivePlayer().getTable().size() - 1);
                 ((CreatureCard) card).setActive(true);
@@ -227,7 +231,6 @@ public class GameEngine {
     }
 
     private void namePlayers() throws SQLException, ClassNotFoundException {
-        inputProcessor.nextLine();
         System.out.println("Enter name for player one:");
         player1.setName(inputProcessor.nextLine());
         highScoreDB.addUserIfNew(player1.getName());

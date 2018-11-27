@@ -30,8 +30,6 @@ public class Player {
         this.table = new ArrayList<>();
         this.isActive = false;
         this.passTurn = false;
-        this.generateDeck();
-
     }
 
     public boolean isAlive() {
@@ -59,9 +57,15 @@ public class Player {
 
     public boolean placeCardOnTable(int indexOfCard) {
 
-        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 || getTable().size() >= maxNumberOfCardsOnDisplay) {
+        if (getHand().size() == 0 || indexOfCard > getHand().size() || indexOfCard < 0 ) {
             return false;
-        } else {
+        }
+        else if(getTable().size() >= maxNumberOfCardsOnDisplay){
+            System.out.println("\033[1;93mTable is full, you can't have more than 5 cards on the table!\033[0m");
+            sleep(2000);
+            return false;
+        }
+        else {
             this.table.add(hand.get(indexOfCard - 1));
             hand.remove(indexOfCard - 1);
             return true;
@@ -246,13 +250,14 @@ public class Player {
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
-            } else if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
+            } else if (!(card instanceof SpecialCreatureCard) && card instanceof CreatureCard && checkMana(card.getManaCost())) {
                 if (placeCardOnTable(index)) {
                     reduceMana(card.getManaCost());
                     return "PLAYED_CREATURECARD";
                 }
             }
         }
+        System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
         return "FAULTY_CHOICE";
     }
 
@@ -274,6 +279,22 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void clearCardLists(){
+        this.deck.clear();
+        this.table.clear();
+        this.hand.clear();
+        this.graveyard.clear();
+    }
+
+    public void gameSetUp(){
+        setHp(20);
+        setMana(0);
+        setMaxMana(0);
+        clearCardLists();
+        generateDeck();
+        drawInitialHand();
     }
 }
 
