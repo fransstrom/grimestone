@@ -244,13 +244,14 @@ public class Player {
                 graveyard.add(hand.get(index - 1));
                 hand.remove(index - 1);
                 return ((MagicCard) card).trigger();
-            } else if (card instanceof CreatureCard && checkMana(card.getManaCost())) {
+            } else if (!(card instanceof SpecialCreatureCard) && card instanceof CreatureCard && checkMana(card.getManaCost())) {
                 if (placeCardOnTable(index)) {
                     reduceMana(card.getManaCost());
                     return "PLAYED_CREATURECARD";
                 }
             }
         }
+        System.out.println("\033[0;101m\033[1;97mInvalid choice!\033[0m");
         return "FAULTY_CHOICE";
     }
 
@@ -282,6 +283,9 @@ public class Player {
     }
 
     public void gameSetUp(){
+        setHp(20);
+        setMana(0);
+        setMaxMana(0);
         clearCardLists();
         generateDeck();
         drawInitialHand();
