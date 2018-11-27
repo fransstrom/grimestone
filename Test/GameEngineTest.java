@@ -35,15 +35,6 @@ class GameEngineTest {
         gameEngine = new GameEngine(player1, player2, battleLogic, inputProcessor);
     }
 
-    /*@Test
-    void startGame() throws SQLException, ClassNotFoundException {
-        player1.setHp(0);
-        when(inputProcessor.nextLine()).thenReturn("1");
-        gameEngine.startGame();
-        verify(player1, times(1)).gameSetUp();
-        verify(player2, times(1)).gameSetUp();
-    }*/
-
     @Test
     void attackWithCardsOnTable() {
         mocklist.add(spyCreatureCard);
