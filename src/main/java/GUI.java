@@ -347,7 +347,7 @@ public class GUI {
                 + "|                                                                                                                            |\n"
                 + "|                                                        " + realName + " WIN                                                         |\n"
                 + "|                                                                                                                            |\n"
-                + "|                                                     Press 1 to continue...                                                 |\n"
+                + "|                                                    Press ENTER to continue...                                              |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
                 + "|                                                                                                                            |\n"
